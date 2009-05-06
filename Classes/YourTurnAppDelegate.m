@@ -13,20 +13,17 @@
 @implementation YourTurnAppDelegate
 
 @synthesize window;
-@synthesize tabBarController;
 @synthesize queueTableNavigationController;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
     [[YTQueue newInstance] load];
     
-    self.tabBarController = [[[UITabBarController alloc] initWithNibName:nil bundle:nil] autorelease];
     self.queueTableNavigationController = [[[UINavigationController alloc] init] autorelease];
     
     YTQueueTableViewController *queueTableViewController = [[[YTQueueTableViewController alloc] initWithNibName:@"YTQueueTableView" bundle:nil] autorelease];
 	//queueTableViewController.view.frame = [UIScreen mainScreen].applicationFrame;
 	[self.queueTableNavigationController pushViewController:queueTableViewController animated:NO];
-    [window addSubview:self.tabBarController.view];
     [window addSubview:self.queueTableNavigationController.view];
     [window makeKeyAndVisible];
 }
@@ -39,7 +36,6 @@
 - (void)dealloc
 {
 	[self.queueTableNavigationController release];
-    [self.tabBarController release];
     [window release];
     [super dealloc];
 }
