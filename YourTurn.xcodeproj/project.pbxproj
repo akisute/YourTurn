@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E13BD9D0FACB0D000345CF3 /* YTAttendee.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E13BD9C0FACB0D000345CF3 /* YTAttendee.m */; };
 		0E13BD9E0FACB0D000345CF3 /* YTAttendee.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E13BD9C0FACB0D000345CF3 /* YTAttendee.m */; };
+		0E4157F10FB9B3D200D8ED78 /* bell.aif in Resources */ = {isa = PBXBuildFile; fileRef = 0E4157F00FB9B3D200D8ED78 /* bell.aif */; };
 		0EC7C8560FB084E600CDD62D /* YTAddAttendeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7C8550FB084E600CDD62D /* YTAddAttendeeViewController.m */; };
 		0EC7C8570FB084E600CDD62D /* YTAddAttendeeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EC7C8550FB084E600CDD62D /* YTAddAttendeeViewController.m */; };
 		0EC7C85C0FB08BA200CDD62D /* YTAddAttendeeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EC7C85A0FB08BA200CDD62D /* YTAddAttendeeView.xib */; };
@@ -30,7 +31,6 @@
 		0ECF5C6F0FAB3B20000D2116 /* GTMSenTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF5C430FAB3A82000D2116 /* GTMSenTestCase.m */; };
 		0ECF5C960FAB3CE3000D2116 /* YTQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF5BF80FAB2BFB000D2116 /* YTQueue.m */; };
 		0ECF5C990FAB3D11000D2116 /* YTQueueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF5C980FAB3D11000D2116 /* YTQueueTest.m */; };
-		0EEFFE780FB1830800D86C0E /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0EEFFE770FB1830800D86C0E /* bell.mp3 */; };
 		0EEFFE9C0FB185A200D86C0E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EEFFE9B0FB185A200D86C0E /* AudioToolbox.framework */; };
 		1D3623260D0F684500981E51 /* YourTurnAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* YourTurnAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -43,6 +43,7 @@
 /* Begin PBXFileReference section */
 		0E13BD9B0FACB0D000345CF3 /* YTAttendee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTAttendee.h; sourceTree = "<group>"; };
 		0E13BD9C0FACB0D000345CF3 /* YTAttendee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTAttendee.m; sourceTree = "<group>"; };
+		0E4157F00FB9B3D200D8ED78 /* bell.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.aif; sourceTree = "<group>"; };
 		0EC7C8540FB084E600CDD62D /* YTAddAttendeeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTAddAttendeeViewController.h; sourceTree = "<group>"; };
 		0EC7C8550FB084E600CDD62D /* YTAddAttendeeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTAddAttendeeViewController.m; sourceTree = "<group>"; };
 		0EC7C85A0FB08BA200CDD62D /* YTAddAttendeeView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YTAddAttendeeView.xib; sourceTree = "<group>"; };
@@ -71,7 +72,6 @@
 		0ECF5C6C0FAB3B09000D2116 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		0ECF5C970FAB3D11000D2116 /* YTQueueTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTQueueTest.h; sourceTree = "<group>"; };
 		0ECF5C980FAB3D11000D2116 /* YTQueueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTQueueTest.m; sourceTree = "<group>"; };
-		0EEFFE770FB1830800D86C0E /* bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell.mp3; sourceTree = "<group>"; };
 		0EEFFE9B0FB185A200D86C0E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* YourTurnAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YourTurnAppDelegate.h; sourceTree = "<group>"; };
@@ -182,7 +182,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				0EEFFE770FB1830800D86C0E /* bell.mp3 */,
+				0E4157F00FB9B3D200D8ED78 /* bell.aif */,
 				0EC7C95F0FB138A300CDD62D /* icon.png */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
@@ -277,7 +277,7 @@
 				0EC7C85C0FB08BA200CDD62D /* YTAddAttendeeView.xib in Resources */,
 				0EC7C8CE0FB0941B00CDD62D /* YTYourTurnView.xib in Resources */,
 				0EC7C9610FB138A300CDD62D /* icon.png in Resources */,
-				0EEFFE780FB1830800D86C0E /* bell.mp3 in Resources */,
+				0E4157F10FB9B3D200D8ED78 /* bell.aif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

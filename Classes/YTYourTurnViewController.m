@@ -68,10 +68,12 @@
         [UIView commitAnimations];
         
         // Sounds
-        NSString *audioPath = [[NSBundle mainBundle] pathForResource:@"bell" ofType:@"mp3"];
+        NSString *audioPath = [[NSBundle mainBundle] pathForResource:@"bell" ofType:@"aif"];
         NSURL *audioURL = [NSURL fileURLWithPath:audioPath];
+        LOG(@"Opening the sound file %d", audioURL);
         SystemSoundID soundID;
-        AudioServicesCreateSystemSoundID((CFURLRef)audioURL, &soundID);
+        OSStatus status = AudioServicesCreateSystemSoundID((CFURLRef)audioURL, &soundID);
+        LOG(@"AudioServicesCreateSystemSoundID result=%d", status);
         AudioServicesPlaySystemSound(soundID);
     }
     else

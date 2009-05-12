@@ -8,10 +8,12 @@
 #import "YTQueue.h"
 #import "YTAttendee.h"
 
-#define _YTQUEUE_DATA_FILE_NAME @"queue.dat"
-
 
 static YTQueue *_instance;
+
+@interface YTQueue (Private)
+- (NSString *)pathForDataFile;
+@end
 
 @implementation YTQueue
 
@@ -123,12 +125,19 @@ static YTQueue *_instance;
         [buffer appendString:@"\n"];
     }
     LOG(@"Saving queue data string: %@", buffer);
-    [buffer writeToFile:_YTQUEUE_DATA_FILE_NAME atomically:YES encoding:NSUTF8StringEncoding error:NULL];
+    //[buffer writeToFile:_YTQUEUE_DATA_FILE_NAME atomically:YES encoding:NSUTF8StringEncoding error:NULL];
+    NSData *data = [buffer dataUsingEncoding:NSUTF8StringEncoding];
+    BOOL result = [[NSFileManager defaultManager] createFileAtPath:[self pathForDataFile] contents:data attributes:nil];
+    LOG(@"Saving finished. Result code is %d.", result);
 }
 
 - (void)load
 {
-    NSString *str = [NSString stringWithContentsOfFile:_YTQUEUE_DATA_FILE_NAME encoding:NSUTF8StringEncoding error:NULL];
+    BOOL isExist = [[NSFileManager defaultManager] fileExistsAtPath:[self pathForDataFile]];
+    LOG(@"Finding queue data from disk. Result code is %d.", isExist);
+    NSData *data = [[NSFileManager defaultManager] contentsAtPath:[self pathForDataFile]];
+    NSString *str = [[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] autorelease];
+    //NSString *str = [NSString stringWithContentsOfFile:_YTQUEUE_DATA_FILE_NAME encoding:NSUTF8StringEncoding error:NULL];
     LOG(@"Loading queue data string: %@", str);
     NSArray *array = [str componentsSeparatedByString:@"\n"];
     for (NSString *substr in array)
@@ -148,7 +157,14 @@ static YTQueue *_instance;
 
 - (void)clearSavedData
 {
-    [[NSFileManager defaultManager] removeItemAtPath:_YTQUEUE_DATA_FILE_NAME error:nil];
+    [[NSFileManager defaultManager] removeItemAtPath:[self pathForDataFile] error:nil];
+}
+
+#pragma mark Private method
+
+- (NSString *)pathForDataFile
+{
+    return [NSString stringWithFormat:@"%@/Documents/queue.dat", NSHomeDirectory()];
 }
 
 @end
