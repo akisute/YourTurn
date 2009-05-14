@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString *placeholder;
 @property (nonatomic, readonly) CGFloat height;
 
+// TODO: create a delegate-like system for callback when Return key is pressed
 - (IBAction)focus:(id)sender;
 
 @end

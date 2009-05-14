@@ -121,23 +121,39 @@
     if (flag)
     {
         // change view to an editable view
-        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-                                                                                                target:self
-                                                                                                action:@selector(addAttendee:)] autorelease];
+//        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
+//                                                                                                target:self
+//                                                                                                action:@selector(addAttendee:)] autorelease];
+        self.navigationItem.rightBarButtonItem = nil;
     }
     else
     {
         // change view to an noneditable view
-        // Do not show navigation button unless there's at least 1 person in the queue
-        if ([YTQueue instance].count > 0)
+        // Disable navigation button unless there's at least 2 person in the queue
+        if ([YTQueue instance].count > 1)
         {
-            self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
-                                                                                                    target:self
-                                                                                                    action:@selector(openYourTurnView:)] autorelease];
+//            self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
+//                                                                                                    target:self
+//                                                                                                    action:@selector(openYourTurnView:)] autorelease];
+            // TODO: button background color
+            // TODO: create a method to control states of this UISegmentControl.
+            NSArray *items = [NSArray arrayWithObjects:@"Add", @"YourTurn", nil];
+            UISegmentedControl *segmentedControl = [[[UISegmentedControl alloc] initWithItems:items] autorelease];
+            segmentedControl.selectedSegmentIndex = UISegmentedControlNoSegment;
+            segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+            segmentedControl.momentary = YES;
+            [segmentedControl addTarget:self action:@selector(segmentedControlClicked:) forControlEvents:UIControlEventValueChanged];
+            self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:segmentedControl] autorelease];
         }
         else
         {
-            self.navigationItem.rightBarButtonItem = nil;
+            NSArray *items = [NSArray arrayWithObjects:@"Add", nil];
+            UISegmentedControl *segmentedControl = [[[UISegmentedControl alloc] initWithItems:items] autorelease];
+            segmentedControl.selectedSegmentIndex = UISegmentedControlNoSegment;
+            segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
+            segmentedControl.momentary = YES;
+            [segmentedControl addTarget:self action:@selector(segmentedControlClicked:) forControlEvents:UIControlEventValueChanged];
+            self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:segmentedControl] autorelease];
         }
         [self.tableView reloadData];
     }
@@ -150,6 +166,24 @@
 }
 
 #pragma mark IBAction
+
+- (IBAction)segmentedControlClicked:(id)sender
+{
+    // Call appropriate action for clicked segment
+    UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
+    switch (segmentedControl.selectedSegmentIndex) {
+        case 0:
+            // Add button
+            [self addAttendee:sender];
+            break;
+        case 1:
+            // YourTurn button
+            [self openYourTurnView:sender];
+            break;
+        default:
+            break;
+    }
+}
 
 - (IBAction)addAttendee:(id)sender
 {

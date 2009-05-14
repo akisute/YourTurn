@@ -11,15 +11,12 @@
 #import "YTTextFieldCell.h"
 
 #define _SECTION_INPUT_NAME 0
-#define _CELL_DEFAULT @"_CELL_DEFAULT"
-#define _CELL_TEXTFIELD @"_CELL_TEXTFIELD"
 
 @interface YTAddAttendeeViewController (CellDefinition)
-- (YTTextFieldCell *)textFieldCellWithTableView:(UITableView *)tableView
-                                          label:(NSString *)label
-                                          value:(NSString *)value
-                                    placeholder:(NSString *)placeholder;
-- (UITableViewCell *)defaultCellWithTableView:(UITableView *)tableView;
+- (YTTextFieldCell *)textFieldCellWithLabel:(NSString *)label
+                                      value:(NSString *)value
+                                placeholder:(NSString *)placeholder;
+- (UITableViewCell *)defaultCellOfTableView:(UITableView *)tableView;
 @end
 
 
@@ -42,6 +39,10 @@
                                                                                             target:self
                                                                                             action:@selector(done:)] autorelease];
     self.title = @"Add attendee";
+    nameCell = [[self textFieldCellWithLabel:@"Name"
+                                       value:nil
+                                 placeholder:@"Required"] retain];
+    [nameCell focus:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -95,20 +96,15 @@
         case _SECTION_INPUT_NAME:
             switch (indexPath.row) {
                 case 0:
-                    cell = [self textFieldCellWithTableView:tableView
-                                                       label:@"Name"
-                                                       value:nil
-                                                 placeholder:@"Required"];
+                    cell = nameCell;
                     break;
                 default: // Any other rows
+                    cell = [self defaultCellOfTableView:tableView];
                     break;
             }
             break;
         default: // Any other sections
-            cell = [self defaultCellWithTableView:tableView];
-            cell.text = [NSString stringWithFormat:@"Test. section:%d, row:%d", indexPath.section, indexPath.row];
-            // No row selection allowed.
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell = [self defaultCellOfTableView:tableView];
             break;
     }
     return cell;
@@ -122,33 +118,24 @@
 
 #pragma mark Cell definition
 
-- (YTTextFieldCell *)textFieldCellWithTableView:(UITableView *)tableView
-                                          label:(NSString *)label
-                                          value:(NSString *)value
-                                    placeholder:(NSString *)placeholder
+- (YTTextFieldCell *)textFieldCellWithLabel:(NSString *)label
+                                      value:(NSString *)value
+                                placeholder:(NSString *)placeholder
 {
-    YTTextFieldCell *cell = (YTTextFieldCell *)[tableView dequeueReusableCellWithIdentifier:_CELL_TEXTFIELD];
-    if (cell == nil)
-    {
-        //TODO: fix this workaround
-        [nameCell release];
-        cell = [[[YTTextFieldCell alloc] initWithFrame:CGRectZero reuseIdentifier:_CELL_TEXTFIELD] autorelease];
-        nameCell = cell;
-        [nameCell retain];
-    }
+    YTTextFieldCell *cell = [[[YTTextFieldCell alloc] initWithFrame:CGRectZero reuseIdentifier:nil] autorelease];
     cell.label = label;
     cell.value = value;
     cell.placeholder = placeholder;
     return (YTTextFieldCell *)cell;
 }
 
-- (UITableViewCell *)defaultCellWithTableView:(UITableView *)tableView
+- (UITableViewCell *)defaultCellOfTableView:(UITableView *)tableView
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_CELL_DEFAULT];
-    if (cell == nil)
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    if (!cell)
     {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:_CELL_DEFAULT] autorelease];
-    }
+        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:@"Cell"] autorelease];
+    }    
     return cell;
 }
 

@@ -12,6 +12,7 @@
 
 }
 
+- (IBAction)segmentedControlClicked:(id)sender;
 - (IBAction)addAttendee:(id)sender;
 - (IBAction)openYourTurnView:(id)sender;
 
