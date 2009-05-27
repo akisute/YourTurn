@@ -18,7 +18,7 @@
 @property (nonatomic, retain) IBOutlet UILabel *displayLabel;
 @property (nonatomic, retain) IBOutlet UILabel *timerLabel;
 
-- (void)resetTimer;
+- (void)setTimerWithInterval:(NSTimeInterval)interval;
 - (void)timerFired;
 - (IBAction)endTurn:(id)sender;
 

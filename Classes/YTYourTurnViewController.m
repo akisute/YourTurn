@@ -10,6 +10,9 @@
 #import "YTQueue.h"
 #import "YTAttendee.h"
 
+#define TIME_INTERVAL_ANIMATION 1.0
+#define TIME_INTERVAL_TIMER 1.0
+
 
 @implementation YTYourTurnViewController
 
@@ -28,14 +31,12 @@
 
 - (void)viewDidLoad
 {
-    //TODO: reuse timer, only invalidate when timer is expired also repeats should be NO
-    time = 15;
-    timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
     self.title = @"";
     
     YTAttendee *attendee = [YTQueue instance].currentTurnAttendee;
     self.displayLabel.text = [NSString stringWithFormat:@"Current: %@", attendee.name];
-    self.timerLabel.text = [NSString stringWithFormat:@"%d", time];
+    
+    [self setTimerWithInterval:TIME_INTERVAL_TIMER];
     [super viewDidLoad];
 }
 
@@ -47,9 +48,25 @@
 {
     [displayLabel release];
     [timerLabel release];
-    [timer invalidate];
-    [timer release];
+    // timer is released when the view will disappear
+    // this invalidate will be never called...
+//    [timer invalidate];
+//    [timer release];
     [super dealloc];
+}
+
+#pragma mark UIViewController method
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    // invalidate the current timer
+    if (timer)
+    {
+        // timer is retained by NSRunLoop object, not by this ViewController
+        // thus timer should not be released
+        [timer invalidate];
+        timer = nil;
+    }
 }
 
 #pragma mark UIResponder method
@@ -74,16 +91,25 @@
 
 #pragma mark other methods
 
-- (void)resetTimer
+- (void)setTimerWithInterval:(NSTimeInterval)interval
 {
-//    if (timer)
-//    {
-//        [timer invalidate];
-//        [timer release];
-//        timer = nil;
-//    }
+    if (timer)
+    {
+        // set a new interval for current timer
+        [timer setFireDate:[NSDate dateWithTimeIntervalSinceNow:interval]];
+    }
+    else
+    {
+        // create a new timer with given interval
+        // timer is just assigned, not retained here
+        timer = [NSTimer scheduledTimerWithTimeInterval:interval
+                                                 target:self
+                                               selector:@selector(timerFired)
+                                               userInfo:nil
+                                                repeats:YES];
+    }
+    
     time = 15;
-//    timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timerFired) userInfo:nil repeats:YES];
     self.timerLabel.text = [NSString stringWithFormat:@"%d", time];
 }
 
@@ -108,13 +134,12 @@
     YTAttendee *attendee = queue.currentTurnAttendee;
     
     // Reset timer
-    [self resetTimer];
+    [self setTimerWithInterval:TIME_INTERVAL_ANIMATION + TIME_INTERVAL_TIMER];
     
     // Animations
     [UIView beginAnimations:@"endTurn" context:NULL];
-    [UIView setAnimationDuration:1.0];
-    self.title = [NSString stringWithFormat:@"%@'s Turn!", attendee.name];
-    self.displayLabel.text = [NSString stringWithFormat:@"%@'s Turn!", attendee.name];
+    [UIView setAnimationDuration:TIME_INTERVAL_ANIMATION];
+    self.displayLabel.text = [NSString stringWithFormat:@"Current: %@", attendee.name];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
     [UIView commitAnimations];
     
