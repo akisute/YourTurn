@@ -14,28 +14,30 @@
 #define TIME_INTERVAL_TIMER 1.0
 
 
+@interface YTYourTurnViewController (Private)
+/*! Loads current attendee from YTQueue and set up the view for it. */
+- (void)loadCurrentAttendee;
+@end
+
 @implementation YTYourTurnViewController
 
 @synthesize displayLabel;
 @synthesize timerLabel;
+@synthesize initialBackgroundColorRGBA;
+@synthesize endBackgroundColorRGBA;
 
 #pragma mark init, dealloc, memory management
-
-- (id)init
-{
-    if (self = [super init]) 
-    {
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
     self.title = @"";
-    
-    YTAttendee *attendee = [YTQueue instance].currentTurnAttendee;
-    self.displayLabel.text = [NSString stringWithFormat:@"Current: %@", attendee.name];
-    
+    // TODO: load this value from preferences or attendee data
+    allottedTime = 15;
+    initialBackgroundColorRGBA = malloc(4 * sizeof(CGFloat));
+    endBackgroundColorRGBA = malloc(4 * sizeof(CGFloat));
+    currentBackgroundColorRGBA = malloc(4 * sizeof(CGFloat));
+    deltaBackgroundColorRGBA = malloc(4 * sizeof(CGFloat));
+    [self loadCurrentAttendee];
     [self setTimerWithInterval:TIME_INTERVAL_TIMER];
     [super viewDidLoad];
 }
@@ -52,6 +54,10 @@
     // this invalidate will be never called...
 //    [timer invalidate];
 //    [timer release];
+    free(initialBackgroundColorRGBA);
+    free(endBackgroundColorRGBA);
+    free(currentBackgroundColorRGBA);
+    free(deltaBackgroundColorRGBA);
     [super dealloc];
 }
 
@@ -89,7 +95,7 @@
     }
 }
 
-#pragma mark other methods
+#pragma mark other public methods
 
 - (void)setTimerWithInterval:(NSTimeInterval)interval
 {
@@ -109,8 +115,16 @@
                                                 repeats:YES];
     }
     
-    time = 15;
+    time = allottedTime;
     self.timerLabel.text = [NSString stringWithFormat:@"%d", time];
+    currentBackgroundColorRGBA[0] = initialBackgroundColorRGBA[0];
+    currentBackgroundColorRGBA[1] = initialBackgroundColorRGBA[1];
+    currentBackgroundColorRGBA[2] = initialBackgroundColorRGBA[2];
+    currentBackgroundColorRGBA[3] = initialBackgroundColorRGBA[3];
+    self.view.backgroundColor = [UIColor colorWithRed:currentBackgroundColorRGBA[0]
+                                                green:currentBackgroundColorRGBA[1]
+                                                 blue:currentBackgroundColorRGBA[2]
+                                                alpha:currentBackgroundColorRGBA[3]];
 }
 
 - (void)timerFired
@@ -123,6 +137,14 @@
     else
     {
         self.timerLabel.text = [NSString stringWithFormat:@"%d", time];
+        currentBackgroundColorRGBA[0] = currentBackgroundColorRGBA[0] + deltaBackgroundColorRGBA[0];
+        currentBackgroundColorRGBA[1] = currentBackgroundColorRGBA[1] + deltaBackgroundColorRGBA[1];
+        currentBackgroundColorRGBA[2] = currentBackgroundColorRGBA[2] + deltaBackgroundColorRGBA[2];
+        currentBackgroundColorRGBA[3] = currentBackgroundColorRGBA[3] + deltaBackgroundColorRGBA[3];
+        self.view.backgroundColor = [UIColor colorWithRed:currentBackgroundColorRGBA[0]
+                                                    green:currentBackgroundColorRGBA[1]
+                                                     blue:currentBackgroundColorRGBA[2]
+                                                    alpha:currentBackgroundColorRGBA[3]];
     }
 }
 
@@ -131,15 +153,14 @@
     // End current turn
     YTQueue *queue = [YTQueue instance];
     [queue endCurrentTurn];
-    YTAttendee *attendee = queue.currentTurnAttendee;
     
-    // Reset timer
+    // Reset timer and attendee-related variables
+    [self loadCurrentAttendee];
     [self setTimerWithInterval:TIME_INTERVAL_ANIMATION + TIME_INTERVAL_TIMER];
     
     // Animations
     [UIView beginAnimations:@"endTurn" context:NULL];
     [UIView setAnimationDuration:TIME_INTERVAL_ANIMATION];
-    self.displayLabel.text = [NSString stringWithFormat:@"Current: %@", attendee.name];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
     [UIView commitAnimations];
     
@@ -151,6 +172,28 @@
     OSStatus status = AudioServicesCreateSystemSoundID((CFURLRef)audioURL, &soundID);
     LOG(@"AudioServicesCreateSystemSoundID result=%d", status);
     AudioServicesPlaySystemSound(soundID);
+}
+
+#pragma mark private methods
+
+- (void)loadCurrentAttendee
+{
+    YTQueue *queue = [YTQueue instance];
+    YTAttendee *attendee = queue.currentTurnAttendee;
+    self.displayLabel.text = [NSString stringWithFormat:@"Current: %@", attendee.name];
+    // TODO: set up background color
+    initialBackgroundColorRGBA[0] = 0.0;
+    initialBackgroundColorRGBA[1] = 1.0;
+    initialBackgroundColorRGBA[2] = 0.0;
+    initialBackgroundColorRGBA[3] = 1.0;
+    endBackgroundColorRGBA[0] = 1.0;
+    endBackgroundColorRGBA[1] = 0.0;
+    endBackgroundColorRGBA[2] = 0.0;
+    endBackgroundColorRGBA[3] = 1.0;
+    deltaBackgroundColorRGBA[0] = (endBackgroundColorRGBA[0] - initialBackgroundColorRGBA[0]) / allottedTime;
+    deltaBackgroundColorRGBA[1] = (endBackgroundColorRGBA[1] - initialBackgroundColorRGBA[1]) / allottedTime;
+    deltaBackgroundColorRGBA[2] = (endBackgroundColorRGBA[2] - initialBackgroundColorRGBA[2]) / allottedTime;
+    deltaBackgroundColorRGBA[3] = (endBackgroundColorRGBA[3] - initialBackgroundColorRGBA[3]) / allottedTime;
 }
 
 @end
