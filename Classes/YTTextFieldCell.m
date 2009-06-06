@@ -8,9 +8,19 @@
 #import "YTTextFieldCell.h"
 
 
+@interface NSObject (YTTextFieldCellDelegate)
+- (void)textFieldCellWillBeginEditing:(YTTextFieldCell *)aTextFieldCell;
+- (void)textFieldCellWillEndEditing:(YTTextFieldCell *)aTextFieldCell;
+- (void)textFieldCellWillReturn:(YTTextFieldCell *)aTextFieldCell;
+- (void)textFieldCellWillChangeCharacters:(YTTextFieldCell *)aTextFieldCell;
+@end
+
+
 @implementation YTTextFieldCell
 
 #pragma mark property
+
+@synthesize delegate;
 
 - (NSString *)label
 {
@@ -102,12 +112,38 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)aTextField
 {
+    if ([delegate respondsToSelector:@selector(textFieldCellWillBeginEditing:)])
+    {
+        [delegate textFieldCellWillBeginEditing:self];
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+    if ([delegate respondsToSelector:@selector(textFieldCellWillEndEditing:)])
+    {
+        [delegate textFieldCellWillEndEditing:self];
+    }
     return YES;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)aTextField
 {
     [aTextField resignFirstResponder];
+    if ([delegate respondsToSelector:@selector(textFieldCellWillReturn:)])
+    {
+        [delegate textFieldCellWillReturn:self];
+    }
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if ([delegate respondsToSelector:@selector(textFieldCellWillChangeCharacters:)])
+    {
+        [delegate textFieldCellWillChangeCharacters:self];
+    }
     return YES;
 }
 

@@ -9,28 +9,16 @@
 #import "YTQueue.h"
 #import "YTAttendee.h"
 #import "YTTextFieldCell.h"
+#import "YTTimePickerView.h"
 
 #define _SECTION_INPUT_NAME 0
-
-@interface YTAddAttendeeViewController (CellDefinition)
-- (YTTextFieldCell *)textFieldCellWithLabel:(NSString *)label
-                                      value:(NSString *)value
-                                placeholder:(NSString *)placeholder;
-- (UITableViewCell *)defaultCellOfTableView:(UITableView *)tableView;
-@end
+#define _SECTION_INPUT_TIME 1
+#define _USERDEFAULTS_TIMEPICKER_INITIALVALUE @"timePicker.initialValue"
 
 
 @implementation YTAddAttendeeViewController
 
 #pragma mark init, dealloc, memory management
-
-- (id)initWithStyle:(UITableViewStyle)style 
-{
-    if (self = [super initWithStyle:style]) 
-    {
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -38,11 +26,24 @@
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                             target:self
                                                                                             action:@selector(done:)] autorelease];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
     self.title = @"Add attendee";
-    nameCell = [[self textFieldCellWithLabel:@"Name"
-                                       value:nil
-                                 placeholder:@"Required"] retain];
+    
+    // Initialize name input cell
+    nameCell = [[YTTextFieldCell alloc] initWithFrame:CGRectZero reuseIdentifier:nil];
+    nameCell.label = @"Name";
+    nameCell.value = @"";
+    nameCell.placeholder = @"Required";
+    nameCell.delegate = self;
     [nameCell focus:self];
+    
+    // Initialize time picker with a previously selected value
+    timePicker = [[YTTimePickerView alloc] initWithFrame:CGRectZero];
+    NSInteger initialValue = [[NSUserDefaults standardUserDefaults] integerForKey:_USERDEFAULTS_TIMEPICKER_INITIALVALUE];
+    timePicker.time = (initialValue == 0) ? 300 : initialValue;
+    timePicker.timePickerViewDelegate = self;
+    [timePicker selectRowWithCurrentTime];
+    self.tableView.tableFooterView = timePicker;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,6 +52,7 @@
 
 - (void)dealloc
 {
+    [timePicker release];
     [nameCell release];
     [super dealloc];
 }
@@ -59,52 +61,96 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSInteger num = 0;
     switch (section)
     {
         case _SECTION_INPUT_NAME:
-            return 1;
+            num = 1;
+            break;
+        case _SECTION_INPUT_TIME:
             break;
         default:
-            return 0;
             break;
     }
+    return num;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+    NSString *string = nil;
     switch (section)
     {
         case _SECTION_INPUT_NAME:
-            return @"Attendee information";
+            string = @"Attendee information";
+            break;
+        case _SECTION_INPUT_TIME:
+            string = @"Allotted time";
             break;
         default:
-            return nil;
             break;
     }
+    return string;
 }
+
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+//{
+//    UIView *view = nil;
+//    UIDatePicker *datePicker = nil;
+//    switch (section)
+//    {
+//        case _SECTION_INPUT_NAME:
+//            break;
+//        case _SECTION_INPUT_TIME:
+//            datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
+//            datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+//            datePicker.enabled = YES;
+//            view = datePicker;
+//            break;
+//        default:
+//            break;
+//    }
+//    return view;
+//}
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+//{
+//    CGFloat height = 20.0;
+//    switch (section)
+//    {
+//        case _SECTION_INPUT_NAME:
+//            break;
+//        case _SECTION_INPUT_TIME:
+//            height = 300.0;
+//            break;
+//        default:
+//            break;
+//    }
+//    return height;
+//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Create an appropriate cell object with section and row.
-    UITableViewCell *cell;
+    UITableViewCell *cell = nil;
     switch (indexPath.section) {
         case _SECTION_INPUT_NAME:
             switch (indexPath.row) {
                 case 0:
                     cell = nameCell;
                     break;
-                default: // Any other rows
-                    cell = [self defaultCellOfTableView:tableView];
+                default:
+                    // Any other rows
                     break;
             }
             break;
-        default: // Any other sections
-            cell = [self defaultCellOfTableView:tableView];
+        case _SECTION_INPUT_TIME:
+            break;
+        default: 
+            // Any other sections
             break;
     }
     return cell;
@@ -116,44 +162,40 @@
     return nil;
 }
 
-#pragma mark Cell definition
+#pragma mark YTTextFieldCell and YTTimePickerView delegate
 
-- (YTTextFieldCell *)textFieldCellWithLabel:(NSString *)label
-                                      value:(NSString *)value
-                                placeholder:(NSString *)placeholder
+//- (void)textFieldCellWillBeginEditing:(YTTextFieldCell *)aTextFieldCell
+//{
+//    self.navigationItem.rightBarButtonItem.enabled =
+//    [[nameCell.value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length] != 0;
+//    
+//}
+
+- (void)textFieldCellWillEndEditing:(YTTextFieldCell *)aTextFieldCell
 {
-    YTTextFieldCell *cell = [[[YTTextFieldCell alloc] initWithFrame:CGRectZero reuseIdentifier:nil] autorelease];
-    cell.label = label;
-    cell.value = value;
-    cell.placeholder = placeholder;
-    return (YTTextFieldCell *)cell;
+    self.navigationItem.rightBarButtonItem.enabled =
+    [[nameCell.value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length] != 0;
+    
 }
 
-- (UITableViewCell *)defaultCellOfTableView:(UITableView *)tableView
+- (void)textFieldCellWillChangeCharacters:(YTTextFieldCell *)aTextFieldCell
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    if (!cell)
-    {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:@"Cell"] autorelease];
-    }    
-    return cell;
+    self.navigationItem.rightBarButtonItem.enabled =
+    [[nameCell.value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length] != 0;
 }
 
 #pragma mark IBAction
 
 - (IBAction)done:(id)sender
 {
-    // TODO: Disable the button while all required inputs are not filled
-    NSString *strName = nameCell.value;
-    if ([[strName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length] == 0)
-    {
-        // Temporary just ignoreing button action when validation is failed
-        return;
-    }
     // Create a new attendee object from inputted data and push it into the YTQueue
     YTAttendee *attendee = [[[YTAttendee alloc] init] autorelease];
-    attendee.name = strName;
+    attendee.name = nameCell.value;
+    attendee.allottedTime = timePicker.time;
     [[YTQueue instance] addAttendee:attendee];
+    
+    // Save current value of the time picker into user default
+    [[NSUserDefaults standardUserDefaults] setInteger:timePicker.time forKey:_USERDEFAULTS_TIMEPICKER_INITIALVALUE];
     
     [self.navigationController popViewControllerAnimated:YES];
 }

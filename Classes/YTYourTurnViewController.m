@@ -32,7 +32,6 @@
 {
     self.title = @"";
     // TODO: load this value from preferences or attendee data
-    allottedTime = 15;
     initialBackgroundColorRGBA = malloc(4 * sizeof(CGFloat));
     endBackgroundColorRGBA = malloc(4 * sizeof(CGFloat));
     currentBackgroundColorRGBA = malloc(4 * sizeof(CGFloat));
@@ -181,6 +180,7 @@
     YTQueue *queue = [YTQueue instance];
     YTAttendee *attendee = queue.currentTurnAttendee;
     self.displayLabel.text = [NSString stringWithFormat:@"Current: %@", attendee.name];
+    allottedTime = attendee.allottedTime;
     // TODO: set up background color
     initialBackgroundColorRGBA[0] = 0.0;
     initialBackgroundColorRGBA[1] = 1.0;

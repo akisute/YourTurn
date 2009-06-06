@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface YTQueueTableCurrentTurnCell : UITableViewCell {
+@interface YTQueueTableAddAttendeeCell : UITableViewCell {
 
 }
 

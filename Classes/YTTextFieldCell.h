@@ -9,16 +9,20 @@
 
 
 @interface YTTextFieldCell : UITableViewCell<UITextFieldDelegate> {
+    id delegate;
     UILabel *label;
     UITextField *textField;
 }
 
+@property (nonatomic, assign) id delegate;
 @property (nonatomic, retain) NSString *label;
 @property (nonatomic, retain) NSString *value;
 @property (nonatomic, retain) NSString *placeholder;
 @property (nonatomic, readonly) CGFloat height;
 
-// TODO: create a delegate-like system for callback when Return key is pressed
 - (IBAction)focus:(id)sender;
 
 @end
+
+// TODO: delegate declaration
+// TODO: use delegate for addattendeeviewcontroller

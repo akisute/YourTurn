@@ -8,9 +8,11 @@
 #import <UIKit/UIKit.h>
 
 @class YTTextFieldCell;
+@class YTTimePickerView;
 
 @interface YTAddAttendeeViewController : UITableViewController {
     YTTextFieldCell *nameCell;
+    YTTimePickerView *timePicker;
 }
 
 - (IBAction)done:(id)sender;

@@ -63,8 +63,9 @@
         cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
     }
 
+    // TODO: use custom table cell to display
     YTAttendee *attendee = [[YTQueue instance] attendeeAtIndex:indexPath.row];
-    cell.text = [NSString stringWithFormat:@"%d, %@", indexPath.row+1, attendee.name];
+    cell.text = [NSString stringWithFormat:@"%d, %@  - %d sec", indexPath.row+1, attendee.name, attendee.allottedTime];
     
     // No row selection allowed.
     cell.selectionStyle = UITableViewCellSelectionStyleNone;

@@ -10,9 +10,11 @@
 
 @interface YTAttendee : NSObject {
     NSString *name;
+    NSInteger allottedTime; // in seconds
 }
 
 @property (nonatomic, retain) NSString *name;
+@property (nonatomic) NSInteger allottedTime;
 
 - (id)initWithDataString:(NSString *)dataString;
 - (NSString *)dataString;

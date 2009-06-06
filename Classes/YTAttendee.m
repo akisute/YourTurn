@@ -11,16 +11,20 @@
 @implementation YTAttendee
 
 @synthesize name;
+@synthesize allottedTime;
 
+// TODO: json format, initWithJSON:jsonString
 - (id)initWithDataString:(NSString *)dataString
 {
     if (self = [super init])
     {
         NSArray *array = [dataString componentsSeparatedByString:@","];
-        if ([array count] == 2)
+        if ([array count] == 3)
         {
             NSString *strName = [array objectAtIndex:0];
+            NSString *strAllottedTime = [array objectAtIndex:1];
             self.name = [strName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+            self.allottedTime = [[strAllottedTime stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] integerValue];
         }
         else
         {
@@ -35,11 +39,11 @@
 {
     // dataString format is like this:
     // -------------------------------
-    //   Masashi Ono,
-    //   akisute,
-    //   abesix bakasu,
+    //   Masashi Ono, 180, 
+    //   akisute, 100, 
+    //   abesix bakasu, 300,
     // -------------------------------
-    NSString *dataString = [NSString stringWithFormat:@"%@, ", self.name];
+    NSString *dataString = [NSString stringWithFormat:@"%@, %d, ", self.name, self.allottedTime];
     return dataString;
 }
 @end

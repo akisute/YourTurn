@@ -5,10 +5,10 @@
 //  Created by Masashi Ono on 09/05/06.
 //
 
-#import "YTQueueTableCurrentTurnCell.h"
+#import "YTQueueTableAddAttendeeCell.h"
 
 
-@implementation YTQueueTableCurrentTurnCell
+@implementation YTQueueTableAddAttendeeCell
 
 # pragma mark init, dealloc, memory management
 
@@ -17,6 +17,10 @@
     if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier])
     {
         // Initialization code
+        // TODO: initialize code for addattendee cell
+//        self.text = @"Add new attendee";
+//        self.textAlignment = ;
+//        self.font = [UIFont systemFontSize];
     }
     return self;
 }
