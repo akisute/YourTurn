@@ -14,16 +14,16 @@
     NSTimer *timer;
     int allottedTime;
     int time;
-    CGFloat *initialBackgroundColorRGBA; // [r, g, b, a]  0.0~1.0
-    CGFloat *endBackgroundColorRGBA;     // [r, g, b, a]  0.0~1.0
-    CGFloat *currentBackgroundColorRGBA; // [r, g, b, a]  0.0~1.0
-    CGFloat *deltaBackgroundColorRGBA;   // [r, g, b, a]  0.0~1.0
+    CGFloat *initialBackgroundColorHSBA; // [hue, satulation, brightness, alpha]  0.0~1.0
+    CGFloat *endBackgroundColorHSBA;     // [hue, satulation, brightness, alpha]  0.0~1.0
+    CGFloat *currentBackgroundColorHSBA; // [hue, satulation, brightness, alpha]  0.0~1.0
+    CGFloat *deltaBackgroundColorHSBA;   // [hue, satulation, brightness, alpha]  0.0~1.0
 }
 
 @property (nonatomic, retain) IBOutlet UILabel *displayLabel;
 @property (nonatomic, retain) IBOutlet UILabel *timerLabel;
-@property (nonatomic) CGFloat *initialBackgroundColorRGBA;
-@property (nonatomic) CGFloat *endBackgroundColorRGBA;
+@property (nonatomic) CGFloat *initialBackgroundColorHSBA;
+@property (nonatomic) CGFloat *endBackgroundColorHSBA;
 
 - (void)setTimerWithInterval:(NSTimeInterval)interval;
 - (void)timerFired;

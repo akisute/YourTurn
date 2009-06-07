@@ -145,7 +145,7 @@
         self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
                                                                                                 target:self
                                                                                                 action:@selector(openYourTurnView:)] autorelease];
-        self.navigationItem.rightBarButtonItem.enabled = [YTQueue instance].count > 1;
+        self.navigationItem.rightBarButtonItem.enabled = [YTQueue instance].count > 0;
     }
     [self.tableView reloadData];
 }
@@ -153,7 +153,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     // Reload the data whenever the table view will appear
-    self.navigationItem.rightBarButtonItem.enabled = [YTQueue instance].count > 1;
+    self.navigationItem.rightBarButtonItem.enabled = [YTQueue instance].count > 0;
     [self.tableView reloadData];
 }
 

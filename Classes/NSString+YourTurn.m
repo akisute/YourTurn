@@ -79,11 +79,11 @@
     NSInteger second = (allottedTime % 3600 % 60);
     if (hour > 0)
     {
-        return [NSString stringWithFormat:@"%d:%d:%d", hour, minute, second];
+        return [NSString stringWithFormat:@"%d:%02d:%02d", hour, minute, second];
     }
     else if (minute > 0)
     {
-        return [NSString stringWithFormat:@"%d:%d", minute, second];
+        return [NSString stringWithFormat:@"%d:%02d", minute, second];
     }
     else
     {
