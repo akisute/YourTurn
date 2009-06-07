@@ -24,5 +24,9 @@
 
 @end
 
-// TODO: delegate declaration
-// TODO: use delegate for addattendeeviewcontroller
+@interface NSObject (YTTextFieldCellDelegate)
+- (void)textFieldCellWillBeginEditing:(YTTextFieldCell *)aTextFieldCell;
+- (void)textFieldCellWillEndEditing:(YTTextFieldCell *)aTextFieldCell;
+- (void)textFieldCellWillReturn:(YTTextFieldCell *)aTextFieldCell;
+- (void)textFieldCellWillChangeCharacters:(YTTextFieldCell *)aTextFieldCell;
+@end

@@ -9,6 +9,7 @@
 #import "YTYourTurnViewController.h"
 #import "YTQueue.h"
 #import "YTAttendee.h"
+#import "NSString+YourTurn.h"
 
 #define TIME_INTERVAL_ANIMATION 1.0
 #define TIME_INTERVAL_TIMER 1.0
@@ -115,7 +116,7 @@
     }
     
     time = allottedTime;
-    self.timerLabel.text = [NSString stringWithFormat:@"%d", time];
+    self.timerLabel.text = [NSString stringColonFormatsWithAllottedTime:time];
     currentBackgroundColorRGBA[0] = initialBackgroundColorRGBA[0];
     currentBackgroundColorRGBA[1] = initialBackgroundColorRGBA[1];
     currentBackgroundColorRGBA[2] = initialBackgroundColorRGBA[2];
@@ -135,7 +136,7 @@
     }
     else
     {
-        self.timerLabel.text = [NSString stringWithFormat:@"%d", time];
+        self.timerLabel.text = [NSString stringColonFormatsWithAllottedTime:time];
         currentBackgroundColorRGBA[0] = currentBackgroundColorRGBA[0] + deltaBackgroundColorRGBA[0];
         currentBackgroundColorRGBA[1] = currentBackgroundColorRGBA[1] + deltaBackgroundColorRGBA[1];
         currentBackgroundColorRGBA[2] = currentBackgroundColorRGBA[2] + deltaBackgroundColorRGBA[2];

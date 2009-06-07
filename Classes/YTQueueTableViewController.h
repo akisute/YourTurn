@@ -9,7 +9,6 @@
 
 
 @interface YTQueueTableViewController : UITableViewController {
-
 }
 
 - (IBAction)segmentedControlClicked:(id)sender;

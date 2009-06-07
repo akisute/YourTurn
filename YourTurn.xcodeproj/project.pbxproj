@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0E13BD9D0FACB0D000345CF3 /* YTAttendee.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E13BD9C0FACB0D000345CF3 /* YTAttendee.m */; };
 		0E13BD9E0FACB0D000345CF3 /* YTAttendee.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E13BD9C0FACB0D000345CF3 /* YTAttendee.m */; };
+		0E2C796A0FDBC2980067159E /* NSString+YourTurn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C79690FDBC2980067159E /* NSString+YourTurn.m */; };
+		0E2C796B0FDBC2980067159E /* NSString+YourTurn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C79690FDBC2980067159E /* NSString+YourTurn.m */; };
 		0E4157F10FB9B3D200D8ED78 /* bell.aif in Resources */ = {isa = PBXBuildFile; fileRef = 0E4157F00FB9B3D200D8ED78 /* bell.aif */; };
 		0EAD3B0A0FD9494900E72715 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD3AFE0FD9494900E72715 /* SBJsonWriter.m */; };
 		0EAD3B0B0FD9494900E72715 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD3B000FD9494900E72715 /* SBJsonParser.m */; };
@@ -56,6 +58,8 @@
 /* Begin PBXFileReference section */
 		0E13BD9B0FACB0D000345CF3 /* YTAttendee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTAttendee.h; sourceTree = "<group>"; };
 		0E13BD9C0FACB0D000345CF3 /* YTAttendee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTAttendee.m; sourceTree = "<group>"; };
+		0E2C79680FDBC2980067159E /* NSString+YourTurn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+YourTurn.h"; sourceTree = "<group>"; };
+		0E2C79690FDBC2980067159E /* NSString+YourTurn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+YourTurn.m"; sourceTree = "<group>"; };
 		0E4157F00FB9B3D200D8ED78 /* bell.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.aif; sourceTree = "<group>"; };
 		0EAD3AFD0FD9494900E72715 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		0EAD3AFE0FD9494900E72715 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
@@ -149,6 +153,8 @@
 				0EC7C8C70FB0940B00CDD62D /* YTYourTurnViewController.m */,
 				0ECF5B820FAB14BD000D2116 /* YTQueueTableViewController.h */,
 				0ECF5B830FAB14BD000D2116 /* YTQueueTableViewController.m */,
+				0E2C79680FDBC2980067159E /* NSString+YourTurn.h */,
+				0E2C79690FDBC2980067159E /* NSString+YourTurn.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -388,6 +394,7 @@
 				0EAD3B130FD9494900E72715 /* SBJSON.m in Sources */,
 				0EAD3B140FD9494900E72715 /* NSString+SBJSON.m in Sources */,
 				0EAD3B150FD9494900E72715 /* NSObject+SBJSON.m in Sources */,
+				0E2C796B0FDBC2980067159E /* NSString+YourTurn.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +419,7 @@
 				0EAD3B0E0FD9494900E72715 /* NSString+SBJSON.m in Sources */,
 				0EAD3B0F0FD9494900E72715 /* NSObject+SBJSON.m in Sources */,
 				0EAD3B5D0FD94D6300E72715 /* YTTimePickerView.m in Sources */,
+				0E2C796A0FDBC2980067159E /* NSString+YourTurn.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

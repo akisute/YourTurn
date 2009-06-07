@@ -19,3 +19,7 @@
 - (void)selectRowWithCurrentTime;
 
 @end
+
+@interface NSObject (YTTimePickerViewDelegate)
+- (void)pickerView:(YTTimePickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component;
+@end

@@ -8,14 +8,6 @@
 #import "YTTextFieldCell.h"
 
 
-@interface NSObject (YTTextFieldCellDelegate)
-- (void)textFieldCellWillBeginEditing:(YTTextFieldCell *)aTextFieldCell;
-- (void)textFieldCellWillEndEditing:(YTTextFieldCell *)aTextFieldCell;
-- (void)textFieldCellWillReturn:(YTTextFieldCell *)aTextFieldCell;
-- (void)textFieldCellWillChangeCharacters:(YTTextFieldCell *)aTextFieldCell;
-@end
-
-
 @implementation YTTextFieldCell
 
 #pragma mark property

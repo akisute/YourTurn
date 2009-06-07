@@ -8,32 +8,25 @@
 #import "YTQueueTableViewController.h"
 #import "YTQueue.h"
 #import "YTAttendee.h"
+#import "YTQueueTableCell.h"
+#import "YTQueueTableAddAttendeeCell.h"
 #import "YTAddAttendeeViewController.h"
 #import "YTYourTurnViewController.h"
+
+#define _CELL_ATTENDEE @"YTQueueTableCell"
+#define _CELL_ADD @"YTQueueTableAddAttendeeCell"
 
 
 @implementation YTQueueTableViewController
 
 #pragma mark init, dealloc, memory management
 
-- (id)initWithStyle:(UITableViewStyle)style 
-{
-    if (self = [super initWithStyle:style]) 
-    {
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
+    [super viewDidLoad];
     self.navigationItem.leftBarButtonItem = [self editButtonItem];
     self.editing = NO;
     self.title = @"Attendees";
-    [super viewDidLoad];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
 }
 
 - (void)dealloc
@@ -50,43 +43,67 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [YTQueue instance].count;
+    if (self.editing)
+    {
+        // attendees only
+        return [YTQueue instance].count;
+    }
+    else
+    {
+        // all attendees + "add" cell
+        return [YTQueue instance].count + 1;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil)
-    {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
-    }
-
-    // TODO: use custom table cell to display
-    YTAttendee *attendee = [[YTQueue instance] attendeeAtIndex:indexPath.row];
-    cell.text = [NSString stringWithFormat:@"%d, %@  - %d sec", indexPath.row+1, attendee.name, attendee.allottedTime];
+    YTQueueTableCell *tableCell = nil;
+    YTQueueTableAddAttendeeCell *addCell = nil;
     
-    // No row selection allowed.
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
+    if (indexPath.row < [YTQueue instance].count)
+    {
+        tableCell = (YTQueueTableCell *)[tableView dequeueReusableCellWithIdentifier:_CELL_ATTENDEE];
+        if (tableCell == nil)
+        {
+            tableCell = [[[YTQueueTableCell alloc] initWithFrame:CGRectZero reuseIdentifier:_CELL_ATTENDEE] autorelease];
+        }
+        YTAttendee *attendee = [[YTQueue instance] attendeeAtIndex:indexPath.row];
+        [tableCell setLabelsWithIndex:indexPath.row andAttendee:attendee];
+        return tableCell;
+    }
+    else if (indexPath.row == [YTQueue instance].count)
+    {
+        addCell = (YTQueueTableAddAttendeeCell *)[tableView dequeueReusableCellWithIdentifier:_CELL_ADD];
+        if (addCell == nil)
+        {
+            addCell = [[[YTQueueTableAddAttendeeCell alloc] initWithFrame:CGRectZero reuseIdentifier:_CELL_ADD] autorelease];
+        }
+        return addCell;
+    }
+    else
+    {
+        return nil;
+    }
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // No row selection allowed.
-    return nil;
+    return 72.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [super tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath];
+    // Open up an AddAttendeeView if "add atendee" cell is touched
+    if (indexPath.row == [YTQueue instance].count)
+    {
+        [self addAttendee:self];
+    }
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+    // The "add" cell should not be edited. Others are allowed to edit.
+    return indexPath.row != [YTQueue instance].count;
 }
  
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -121,49 +138,30 @@
     [super setEditing:flag animated:animated];
     if (flag)
     {
-        // change view to an editable view
-//        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd
-//                                                                                                target:self
-//                                                                                                action:@selector(addAttendee:)] autorelease];
-        self.navigationItem.rightBarButtonItem = nil;
+        self.navigationItem.rightBarButtonItem = nil;        
     }
     else
     {
-        // change view to an noneditable view
-        // Disable navigation button unless there's at least 2 person in the queue
-        if ([YTQueue instance].count > 1)
-        {
-//            self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
-//                                                                                                    target:self
-//                                                                                                    action:@selector(openYourTurnView:)] autorelease];
-            // TODO: button background color
-            // TODO: create a method to control states of this UISegmentControl.
-            NSArray *items = [NSArray arrayWithObjects:@"Add", @"YourTurn", nil];
-            UISegmentedControl *segmentedControl = [[[UISegmentedControl alloc] initWithItems:items] autorelease];
-            segmentedControl.selectedSegmentIndex = UISegmentedControlNoSegment;
-            segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-            segmentedControl.momentary = YES;
-            [segmentedControl addTarget:self action:@selector(segmentedControlClicked:) forControlEvents:UIControlEventValueChanged];
-            self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:segmentedControl] autorelease];
-        }
-        else
-        {
-            NSArray *items = [NSArray arrayWithObjects:@"Add", nil];
-            UISegmentedControl *segmentedControl = [[[UISegmentedControl alloc] initWithItems:items] autorelease];
-            segmentedControl.selectedSegmentIndex = UISegmentedControlNoSegment;
-            segmentedControl.segmentedControlStyle = UISegmentedControlStyleBar;
-            segmentedControl.momentary = YES;
-            [segmentedControl addTarget:self action:@selector(segmentedControlClicked:) forControlEvents:UIControlEventValueChanged];
-            self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:segmentedControl] autorelease];
-        }
-        [self.tableView reloadData];
+        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
+                                                                                                target:self
+                                                                                                action:@selector(openYourTurnView:)] autorelease];
+        self.navigationItem.rightBarButtonItem.enabled = [YTQueue instance].count > 1;
     }
+    [self.tableView reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    // Reload the data whenever the controlled view will appear
+    // Reload the data whenever the table view will appear
+    self.navigationItem.rightBarButtonItem.enabled = [YTQueue instance].count > 1;
     [self.tableView reloadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    // Unselect any selections
+	NSIndexPath *tableSelection = [self.tableView indexPathForSelectedRow];
+	[self.tableView deselectRowAtIndexPath:tableSelection animated:YES];
 }
 
 #pragma mark IBAction
