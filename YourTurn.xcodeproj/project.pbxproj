@@ -480,6 +480,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Masashi Ono (STE72RV5MY)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -488,6 +489,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = YourTurn;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC433380-C270-4BBF-9D4D-82493006AAB6";
 			};
 			name = Debug;
 		};
@@ -495,11 +497,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Masashi Ono";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = YourTurn_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = YourTurn;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "43485AA0-CC6F-45F9-8026-AFA9D8DE51F5";
 			};
 			name = Release;
 		};

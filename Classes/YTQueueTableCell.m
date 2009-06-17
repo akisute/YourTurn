@@ -27,6 +27,7 @@
         self.nameLabel.font = [UIFont boldSystemFontOfSize:26.0];
         self.indexLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
         self.indexLabel.font = [UIFont systemFontOfSize:16.0];
+        self.indexLabel.textColor = [UIColor colorWithHue:0.33 saturation:1.0 brightness:0.5 alpha:1.0];
         self.timeLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
         self.timeLabel.font = [UIFont fontWithName:@"Courier New" size:16.0];
         self.timeLabel.textAlignment = UITextAlignmentRight;
@@ -59,6 +60,11 @@
     self.indexLabel.frame = CGRectMake(10.0, 2.0, 40.0, 20.0);
     self.nameLabel.frame = CGRectMake(40.0, 0, bounds.size.width, 72.0 - 1.0); // Leave a space for sparator
     self.timeLabel.frame = CGRectMake(bounds.size.width - 140.0, 50.0, 120.0, 22.0 - 1.0); // Leave a space for sparator
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [super setEditing:editing animated:animated];
 }
 
 #pragma mark other method
