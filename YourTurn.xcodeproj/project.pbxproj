@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E13BD9D0FACB0D000345CF3 /* YTAttendee.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E13BD9C0FACB0D000345CF3 /* YTAttendee.m */; };
 		0E13BD9E0FACB0D000345CF3 /* YTAttendee.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E13BD9C0FACB0D000345CF3 /* YTAttendee.m */; };
+		0E1E0F180FEC75D500335047 /* YTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1E0F170FEC75D500335047 /* YTMainViewController.m */; };
 		0E2C796A0FDBC2980067159E /* NSString+YourTurn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C79690FDBC2980067159E /* NSString+YourTurn.m */; };
 		0E2C796B0FDBC2980067159E /* NSString+YourTurn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C79690FDBC2980067159E /* NSString+YourTurn.m */; };
 		0E4157F10FB9B3D200D8ED78 /* bell.aif in Resources */ = {isa = PBXBuildFile; fileRef = 0E4157F00FB9B3D200D8ED78 /* bell.aif */; };
@@ -58,6 +59,8 @@
 /* Begin PBXFileReference section */
 		0E13BD9B0FACB0D000345CF3 /* YTAttendee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTAttendee.h; sourceTree = "<group>"; };
 		0E13BD9C0FACB0D000345CF3 /* YTAttendee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTAttendee.m; sourceTree = "<group>"; };
+		0E1E0F160FEC75D500335047 /* YTMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTMainViewController.h; sourceTree = "<group>"; };
+		0E1E0F170FEC75D500335047 /* YTMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTMainViewController.m; sourceTree = "<group>"; };
 		0E2C79680FDBC2980067159E /* NSString+YourTurn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+YourTurn.h"; sourceTree = "<group>"; };
 		0E2C79690FDBC2980067159E /* NSString+YourTurn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+YourTurn.m"; sourceTree = "<group>"; };
 		0E4157F00FB9B3D200D8ED78 /* bell.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.aif; sourceTree = "<group>"; };
@@ -143,20 +146,30 @@
 			isa = PBXGroup;
 			children = (
 				0EAD3B210FD949AF00E72715 /* Views */,
+				0E1E0F130FEC75A400335047 /* Controllers */,
 				0EAD3B200FD9499800E72715 /* Models */,
 				0EAD3AF60FD948F500E72715 /* JSON */,
 				1D3623240D0F684500981E51 /* YourTurnAppDelegate.h */,
 				1D3623250D0F684500981E51 /* YourTurnAppDelegate.m */,
+				0E2C79680FDBC2980067159E /* NSString+YourTurn.h */,
+				0E2C79690FDBC2980067159E /* NSString+YourTurn.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		0E1E0F130FEC75A400335047 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
 				0EC7C8540FB084E600CDD62D /* YTAddAttendeeViewController.h */,
 				0EC7C8550FB084E600CDD62D /* YTAddAttendeeViewController.m */,
 				0EC7C8C60FB0940B00CDD62D /* YTYourTurnViewController.h */,
 				0EC7C8C70FB0940B00CDD62D /* YTYourTurnViewController.m */,
 				0ECF5B820FAB14BD000D2116 /* YTQueueTableViewController.h */,
 				0ECF5B830FAB14BD000D2116 /* YTQueueTableViewController.m */,
-				0E2C79680FDBC2980067159E /* NSString+YourTurn.h */,
-				0E2C79690FDBC2980067159E /* NSString+YourTurn.m */,
+				0E1E0F160FEC75D500335047 /* YTMainViewController.h */,
+				0E1E0F170FEC75D500335047 /* YTMainViewController.m */,
 			);
-			path = Classes;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		0EAD3AF60FD948F500E72715 /* JSON */ = {
@@ -420,6 +433,7 @@
 				0EAD3B0F0FD9494900E72715 /* NSObject+SBJSON.m in Sources */,
 				0EAD3B5D0FD94D6300E72715 /* YTTimePickerView.m in Sources */,
 				0E2C796A0FDBC2980067159E /* NSString+YourTurn.m in Sources */,
+				0E1E0F180FEC75D500335047 /* YTMainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

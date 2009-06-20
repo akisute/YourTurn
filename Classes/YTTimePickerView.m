@@ -2,7 +2,9 @@
 //  YTTimePickerView.m
 //  YourTurn
 //
-//  Created by Masashi Ono on 09/06/05.
+//  Created by Masashi Ono on 09/06/20.
+//  Copyright (c) 2009, Masashi Ono
+//  All rights reserved.
 //
 
 #import "YTTimePickerView.h"

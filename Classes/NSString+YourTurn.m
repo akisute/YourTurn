@@ -2,7 +2,9 @@
 //  NSString+YTAttendee.m
 //  YourTurn
 //
-//  Created by Masashi Ono on 09/06/07.
+//  Created by Masashi Ono on 09/06/20.
+//  Copyright (c) 2009, Masashi Ono
+//  All rights reserved.
 //
 
 #import "NSString+YourTurn.h"
