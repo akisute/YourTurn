@@ -26,7 +26,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.leftBarButtonItem = [self editButtonItem];
+    self.navigationItem.rightBarButtonItem = [self editButtonItem];
     self.editing = NO;
     self.title = @"Attendees";
 }
@@ -34,6 +34,22 @@
 - (void)dealloc
 {
     [super dealloc];
+}
+
+#pragma mark ViewController methods
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    // Reload the data whenever the table view will appear
+    //    self.navigationItem.rightBarButtonItem.enabled = [YTQueue instance].count > 0;
+    [self.tableView reloadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    // Unselect any selections
+	NSIndexPath *tableSelection = [self.tableView indexPathForSelectedRow];
+	[self.tableView deselectRowAtIndexPath:tableSelection animated:YES];
 }
 
 #pragma mark Table view methods
@@ -70,7 +86,7 @@
             tableCell = [[[YTQueueTableCell alloc] initWithFrame:CGRectZero reuseIdentifier:_CELL_ATTENDEE] autorelease];
         }
         YTAttendee *attendee = [[YTQueue instance] attendeeAtIndex:indexPath.row];
-        [tableCell setLabelsWithIndex:indexPath.row andAttendee:attendee];
+        [tableCell setLabelsWithIndex:indexPath.row+1 andAttendee:attendee];
         return tableCell;
     }
     else if (indexPath.row == [YTQueue instance].count)
@@ -144,53 +160,21 @@
 {
     // setEditing is called when user presses "Edit" button.
     [super setEditing:flag animated:animated];
-    if (flag)
-    {
-        self.navigationItem.rightBarButtonItem = nil;        
-    }
-    else
-    {
-        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
-                                                                                                target:self
-                                                                                                action:@selector(openYourTurnView:)] autorelease];
-        self.navigationItem.rightBarButtonItem.enabled = [YTQueue instance].count > 0;
-    }
+//    if (flag)
+//    {
+//        self.navigationItem.rightBarButtonItem = nil;        
+//    }
+//    else
+//    {
+//        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
+//                                                                                                target:self
+//                                                                                                action:@selector(openYourTurnView:)] autorelease];
+//        self.navigationItem.rightBarButtonItem.enabled = [YTQueue instance].count > 0;
+//    }
     [self.tableView reloadData];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    // Reload the data whenever the table view will appear
-    self.navigationItem.rightBarButtonItem.enabled = [YTQueue instance].count > 0;
-    [self.tableView reloadData];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    // Unselect any selections
-	NSIndexPath *tableSelection = [self.tableView indexPathForSelectedRow];
-	[self.tableView deselectRowAtIndexPath:tableSelection animated:YES];
 }
 
 #pragma mark IBAction
-
-- (IBAction)segmentedControlClicked:(id)sender
-{
-    // Call appropriate action for clicked segment
-    UISegmentedControl *segmentedControl = (UISegmentedControl *)sender;
-    switch (segmentedControl.selectedSegmentIndex) {
-        case 0:
-            // Add button
-            [self addAttendee:sender];
-            break;
-        case 1:
-            // YourTurn button
-            [self openYourTurnView:sender];
-            break;
-        default:
-            break;
-    }
-}
 
 - (IBAction)addAttendee:(id)sender
 {

@@ -8,25 +8,27 @@
 //
 
 #import "YourTurnAppDelegate.h"
-#import "YTQueueTableViewController.h";
+//#import "YTQueueTableViewController.h"
+#import "YTMainViewController.h"
 #import "YTQueue.h"
 
 
 @implementation YourTurnAppDelegate
 
 @synthesize window;
-@synthesize queueTableNavigationController;
+@synthesize navigationController;
 
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
     [[YTQueue newInstance] load];
     
-    self.queueTableNavigationController = [[[UINavigationController alloc] init] autorelease];
-    
-    YTQueueTableViewController *queueTableViewController = [[[YTQueueTableViewController alloc] initWithNibName:@"YTQueueTableView" bundle:nil] autorelease];
-	//queueTableViewController.view.frame = [UIScreen mainScreen].applicationFrame;
-	[self.queueTableNavigationController pushViewController:queueTableViewController animated:NO];
-    [window addSubview:self.queueTableNavigationController.view];
+    self.navigationController = [[[UINavigationController alloc] init] autorelease];
+//    YTQueueTableViewController *queueTableViewController = [[[YTQueueTableViewController alloc] initWithNibName:@"YTQueueTableView"
+//                                                                                                         bundle:nil] autorelease];
+    YTMainViewController *mainViewController = [[[YTMainViewController alloc] initWithNibName:@"YTMainView"
+                                                                                       bundle:nil] autorelease];
+	[self.navigationController pushViewController:mainViewController animated:NO];
+    [window addSubview:self.navigationController.view];
     [window makeKeyAndVisible];
 }
 
@@ -37,7 +39,7 @@
 
 - (void)dealloc
 {
-	[self.queueTableNavigationController release];
+	[self.navigationController release];
     [window release];
     [super dealloc];
 }

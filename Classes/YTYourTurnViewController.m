@@ -185,7 +185,7 @@
     YTQueue *queue = [YTQueue instance];
     YTAttendee *attendee = queue.currentTurnAttendee;
     self.title = attendee.name;
-    self.displayLabel.text = [NSString stringWithFormat:@"Current: %@", attendee.name];
+    self.displayLabel.text = attendee.name;
     allottedTime = attendee.allottedTime;
     initialBackgroundColorHSBA[0] = 0.33;
     initialBackgroundColorHSBA[1] = 0.5;

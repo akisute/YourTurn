@@ -12,11 +12,11 @@
 
 @interface YourTurnAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
-    UINavigationController *queueTableNavigationController;
+    UINavigationController *navigationController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet UINavigationController *queueTableNavigationController;
+@property (nonatomic, retain) IBOutlet UINavigationController *navigationController;
 
 @end
 

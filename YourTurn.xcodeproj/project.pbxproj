@@ -13,6 +13,7 @@
 		0E2C796A0FDBC2980067159E /* NSString+YourTurn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C79690FDBC2980067159E /* NSString+YourTurn.m */; };
 		0E2C796B0FDBC2980067159E /* NSString+YourTurn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C79690FDBC2980067159E /* NSString+YourTurn.m */; };
 		0E4157F10FB9B3D200D8ED78 /* bell.aif in Resources */ = {isa = PBXBuildFile; fileRef = 0E4157F00FB9B3D200D8ED78 /* bell.aif */; };
+		0E7998970FED67D800108688 /* YTMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E7998960FED67D800108688 /* YTMainView.xib */; };
 		0EAD3B0A0FD9494900E72715 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD3AFE0FD9494900E72715 /* SBJsonWriter.m */; };
 		0EAD3B0B0FD9494900E72715 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD3B000FD9494900E72715 /* SBJsonParser.m */; };
 		0EAD3B0C0FD9494900E72715 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD3B020FD9494900E72715 /* SBJsonBase.m */; };
@@ -64,6 +65,7 @@
 		0E2C79680FDBC2980067159E /* NSString+YourTurn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+YourTurn.h"; sourceTree = "<group>"; };
 		0E2C79690FDBC2980067159E /* NSString+YourTurn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+YourTurn.m"; sourceTree = "<group>"; };
 		0E4157F00FB9B3D200D8ED78 /* bell.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.aif; sourceTree = "<group>"; };
+		0E7998960FED67D800108688 /* YTMainView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YTMainView.xib; sourceTree = "<group>"; };
 		0EAD3AFD0FD9494900E72715 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		0EAD3AFE0FD9494900E72715 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		0EAD3AFF0FD9494900E72715 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
@@ -275,6 +277,7 @@
 				0ECF5B870FAB14FB000D2116 /* YTQueueTableView.xib */,
 				0EC7C85A0FB08BA200CDD62D /* YTAddAttendeeView.xib */,
 				0EC7C8CC0FB0941B00CDD62D /* YTYourTurnView.xib */,
+				0E7998960FED67D800108688 /* YTMainView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -364,6 +367,7 @@
 				0EC7C8CE0FB0941B00CDD62D /* YTYourTurnView.xib in Resources */,
 				0EC7C9610FB138A300CDD62D /* icon.png in Resources */,
 				0E4157F10FB9B3D200D8ED78 /* bell.aif in Resources */,
+				0E7998970FED67D800108688 /* YTMainView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

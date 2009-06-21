@@ -8,172 +8,256 @@
 //
 
 #import "YTMainViewController.h"
+#import "YTQueueTableViewController.h"
+#import "YTYourTurnViewController.h"
+#import "YTAttendee.h"
+#import "YTQueue.h"
+
+#define _SECTION_ATTENDEE 0
+#define _SECTION_SETTINGS 1
+#define _SECTION_GO 2
+#define _CELL_STANDARD @"Cell"
+#define _CELL_GO @"YTGoCell"
 
 
 @implementation YTMainViewController
 
-/*
-- (id)initWithStyle:(UITableViewStyle)style
-{
-    // Override initWithStyle: if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
-    if (self = [super initWithStyle:style])
-    {
-    }
-    return self;
-}
-*/
+#pragma mark init, dealloc, memory management
 
-/*
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    self.title = @"YourTurn";
+    UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:infoButton] autorelease];
 }
-*/
-
-/*
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-}
-*/
-/*
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
-*/
-/*
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-}
-*/
-/*
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:animated];
-}
-*/
-
-/*
-// Override to allow orientations other than the default portrait orientation.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-*/
-
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload
-{
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
-}
-
-
-#pragma mark Table view methods
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-
-// Customize the number of rows in the table view.
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 0;
-}
-
-
-// Customize the appearance of table view cells.
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil)
-    {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-    
-    // Set up the cell...
-    
-    return cell;
-}
-
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Navigation logic may go here. Create and push another view controller.
-    // AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
-    // [self.navigationController pushViewController:anotherViewController];
-    // [anotherViewController release];
-}
-
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete)
-    {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:YES];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert)
-    {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 
 - (void)dealloc
 {
     [super dealloc];
 }
 
+#pragma mark ViewController methods
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self.tableView reloadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    // Unselect any selections
+	NSIndexPath *tableSelection = [self.tableView indexPathForSelectedRow];
+	[self.tableView deselectRowAtIndexPath:tableSelection animated:YES];
+}
+
+#pragma mark Table view methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 3;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    switch (section) {
+        case _SECTION_ATTENDEE:
+            return 1;
+        case _SECTION_SETTINGS:
+            return 1;
+        case _SECTION_GO:
+            return 1;
+        default:
+            return 0;
+    }
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = nil;
+    switch (indexPath.section) {
+        case _SECTION_ATTENDEE:
+        case _SECTION_SETTINGS:
+            cell = [tableView dequeueReusableCellWithIdentifier:_CELL_STANDARD];
+            if (cell == nil)
+            {
+                // FIXME: initWithFrame:reuseIdentifier is deprecated in OS 3.0. use initWithStyle instead.
+                cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero
+                                               reuseIdentifier:_CELL_STANDARD] autorelease];
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            }
+            break;
+        case _SECTION_GO:
+            cell = [tableView dequeueReusableCellWithIdentifier:_CELL_GO];
+            if (cell == nil)
+            {
+                cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero
+                                               reuseIdentifier:_CELL_GO] autorelease];
+                cell.textAlignment = UITextAlignmentCenter;
+                cell.accessoryType = UITableViewCellAccessoryNone;
+            }
+            if ([YTQueue instance].currentTurnAttendee)
+            {
+                // FIXME: cell.textColor is deprecated in OS 3.0. Use textLabel instead
+                cell.textColor = [UIColor blueColor];
+                cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+            }
+            else
+            {
+                // FIXME: cell.textColor is deprecated in OS 3.0. Use textLabel instead
+                cell.textColor = [UIColor grayColor];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+            break;
+        default:
+            break;
+    }
+    
+    switch (indexPath.section) {
+        case _SECTION_ATTENDEE:
+            cell.text = [NSString stringWithFormat:@"Manage attendees (%d)", [YTQueue instance].count];
+            break;
+        case _SECTION_SETTINGS:
+            cell.text = @"Settings";
+            break;
+        case _SECTION_GO:
+            cell.text = @"Start session";
+            break;
+        default:
+            break;
+    }
+    
+    return cell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+    label.font = [UIFont boldSystemFontOfSize:15.0];
+    label.textColor = [UIColor colorWithHue:0.136 saturation:0.68 brightness:0.42 alpha:1.0];
+    label.shadowColor = [UIColor colorWithHue:0.125 saturation:0.85 brightness:0.90 alpha:0.5];
+    label.shadowOffset = CGSizeMake(1.0, 1.0);
+    label.backgroundColor = [UIColor clearColor];
+    switch (section) {
+        case _SECTION_ATTENDEE:
+            label.text = @"  1. Setup attendees of the session";
+            break;
+        case _SECTION_SETTINGS:
+            label.text = @"  2. Configure the session";
+            break;
+        case _SECTION_GO:
+            label.text = @"  3. Let's begin!";
+            break;
+        default:
+            break;
+    }
+    return label;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
+    label.font = [UIFont systemFontOfSize:14.0];
+    label.textAlignment = UITextAlignmentCenter;
+    label.backgroundColor = [UIColor clearColor];
+    label.lineBreakMode = UILineBreakModeWordWrap;
+    label.numberOfLines = 0;
+    NSString *str = nil;
+    
+    switch (section) {
+        case _SECTION_ATTENDEE:
+//            switch ([YTQueue instance].count) {
+//                case 0:
+//                    str = @"Add some attendees to start the session.";
+//                    break;
+//                case 1:
+//                    str = [NSString stringWithFormat:@"Currently %d person is attended.", [YTQueue instance].count];
+//                    break;
+//                default:
+//                    str = [NSString stringWithFormat:@"Currently %d persons are attended.", [YTQueue instance].count];
+//                    break;
+//            }
+//            label.text = str;
+            break;
+        case _SECTION_SETTINGS:
+            break;
+        case _SECTION_GO:
+            if ([YTQueue instance].currentTurnAttendee)
+            {
+                str = [NSString stringWithFormat:@"Next person: %@", [YTQueue instance].currentTurnAttendee.name];
+            }
+            else
+            {
+                str = @"You must have at least 1 person to start the session.";
+            }
+            label.text = str;
+            break;
+        default:
+            break;
+    }
+    return label;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    switch (section) {
+        case _SECTION_ATTENDEE:
+            return 48.0;
+        case _SECTION_SETTINGS:
+            return 48.0;
+        case _SECTION_GO:
+            return 48.0;
+        default:
+            return 0.0;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    switch (section) {
+        case _SECTION_ATTENDEE:
+            return 0.0;
+        case _SECTION_SETTINGS:
+            return 0.0;
+        case _SECTION_GO:
+            return 64.0;
+        default:
+            return 0.0;
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIViewController *viewController = nil;
+    switch (indexPath.section) {
+        case _SECTION_ATTENDEE:
+            viewController = [[[YTQueueTableViewController alloc] initWithNibName:@"YTQueueTableView"
+                                                                           bundle:nil] autorelease];
+            [self.navigationController pushViewController:viewController animated:YES];
+            break;
+        case _SECTION_SETTINGS:
+            // TODO: create settings view controller
+//            viewController = [[[YTSettingsViewController alloc] initWithNibName:@"YTSettingsView"
+//                                                                           bundle:nil] autorelease];
+            // [self.navigationController pushViewController:viewController animated:YES];
+            break;
+        case _SECTION_GO:
+            if ([YTQueue instance].currentTurnAttendee)
+            {
+                viewController = [[[YTYourTurnViewController alloc] initWithNibName:@"YTYourTurnView"
+                                                                             bundle:nil] autorelease];
+                [self.navigationController pushViewController:viewController animated:YES];
+            }
+            break;
+        default:
+            break;
+    }
+}
 
 @end
 
