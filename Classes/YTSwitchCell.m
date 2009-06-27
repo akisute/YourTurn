@@ -42,6 +42,7 @@
     if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier])
     {
         label = [[UILabel alloc] initWithFrame:CGRectZero];
+        label.font = [UIFont boldSystemFontOfSize:16.0];
         [self addSubview:label];
         uiSwitch = [[UISwitch alloc] initWithFrame:CGRectZero];
         [self addSubview:uiSwitch];
@@ -59,8 +60,8 @@
 
 - (void)layoutSubviews
 {
-    label.frame = CGRectMake(25, 12, 115, 24);
-    uiSwitch.frame = CGRectMake(120, 12, 180, 24);
+    label.frame = CGRectMake(25, 12, 200, 24);
+    uiSwitch.frame = CGRectMake(206, 10, 89, 27);
 }
 
 @end

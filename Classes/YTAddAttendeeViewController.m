@@ -42,7 +42,7 @@
     
     // Initialize time picker with a previously selected value
     timePicker = [[YTTimePickerView alloc] initWithFrame:CGRectZero];
-    NSInteger initialValue = [[NSUserDefaults standardUserDefaults] integerForKey:_USERDEFAULTS_TIMEPICKER_INITIALVALUE];
+    NSInteger initialValue = [[NSUserDefaults standardUserDefaults] integerForKey:USERDEFAULTS_TIMEPICKER_INITIALVALUE_KEY];
     timePicker.time = (initialValue == 0) ? 300 : initialValue;
     timePicker.timePickerViewDelegate = self;
     [timePicker selectRowWithCurrentTime];
@@ -138,7 +138,7 @@
     [[YTQueue instance] addAttendee:attendee];
     
     // Save current value of the time picker into user default
-    [[NSUserDefaults standardUserDefaults] setInteger:timePicker.time forKey:_USERDEFAULTS_TIMEPICKER_INITIALVALUE];
+    [[NSUserDefaults standardUserDefaults] setInteger:timePicker.time forKey:USERDEFAULTS_TIMEPICKER_INITIALVALUE_KEY];
     
     [self.navigationController popViewControllerAnimated:YES];
 }

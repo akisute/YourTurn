@@ -28,6 +28,18 @@ static YTQueue *_instance;
     return ([queue count] == 0) ? nil : [queue objectAtIndex:0];
 }
 
+- (YTAttendee *)nextTurnAttendee
+{
+    switch ([queue count]) {
+        case 0:
+            return nil;
+        case 1:
+            return [queue objectAtIndex:0];
+        default:
+            return [queue objectAtIndex:1];
+    }
+}
+
 - (NSUInteger)count
 {
     return [queue count];

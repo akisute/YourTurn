@@ -12,49 +12,6 @@
 
 @implementation NSString (YourTurn)
 
-//+ (NSString *)stringWithAllottedTime:(NSInteger)allottedTime format:(enum YTAllottedTimeFormat)format
-//{
-//    NSInteger hour = (NSInteger)(allottedTime / 3600);
-//    NSInteger minute = (NSInteger)(allottedTime % 3600 / 60);
-//    NSInteger second = (allottedTime % 3600 % 60);
-//    if (hour > 0)
-//    {
-//        switch (format) {
-//        case YTAllottedTimeHMS:
-//            return [NSString stringWithFormat:@"%dh %dm %ds", hour, minute, second];
-//        case YTAllottedTimeColon:
-//            return [NSString stringWithFormat:@"%d:%d:%d", hour, minute, second];
-//        default:
-//            // return the raw value
-//            return [[NSNumber numberWithInteger:allottedTime] stringValue];
-//        }
-//    }
-//    else if (minute > 0)
-//    {
-//        switch (format) {
-//        case YTAllottedTimeHMS:
-//            return [NSString stringWithFormat:@"%dm %ds", minute, second];
-//        case YTAllottedTimeColon:
-//            return [NSString stringWithFormat:@"%d:%d", minute, second];
-//        default:
-//            // return the raw value
-//            return [[NSNumber numberWithInteger:allottedTime] stringValue];
-//        }
-//    }
-//    else
-//    {
-//        switch (format) {
-//        case YTAllottedTimeHMS:
-//            return [NSString stringWithFormat:@"%ds", second];
-//        case YTAllottedTimeColon:
-//            return [[NSNumber numberWithInteger:second] stringValue];
-//        default:
-//            // return the raw value
-//            return [[NSNumber numberWithInteger:allottedTime] stringValue];
-//        }
-//    }
-//}
-
 + (NSString *)stringHMSFormatWithAllottedTime:(NSInteger)allottedTime
 {
     NSInteger hour = (NSInteger)(allottedTime / 3600);
@@ -74,7 +31,7 @@
     }
 }
 
-+ (NSString *)stringColonFormatsWithAllottedTime:(NSInteger)allottedTime
++ (NSString *)stringColonFormatWithAllottedTime:(NSInteger)allottedTime
 {
     NSInteger hour = (NSInteger)(allottedTime / 3600);
     NSInteger minute = (NSInteger)(allottedTime % 3600 / 60);

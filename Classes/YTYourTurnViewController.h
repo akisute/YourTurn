@@ -16,6 +16,7 @@
     NSTimer *timer;
     int allottedTime;
     int time;
+    BOOL intermission;
     CGFloat *initialBackgroundColorHSBA; // [hue, satulation, brightness, alpha]  0.0~1.0
     CGFloat *endBackgroundColorHSBA;     // [hue, satulation, brightness, alpha]  0.0~1.0
     CGFloat *currentBackgroundColorHSBA; // [hue, satulation, brightness, alpha]  0.0~1.0

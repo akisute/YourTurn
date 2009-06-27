@@ -9,12 +9,24 @@
 
 #import <Foundation/Foundation.h>
 
-#define _USERDEFAULTS_VERSION_KEY @"userDefaults.version"
-#define _USERDEFAULTS_VERSION_VALUE 1
-#define _USERDEFAULTS_TIMEPICKER_INITIALVALUE @"timePicker.initialValue"
+// Increment USERDEFAULTS_VERSION_VALUE when you add, modify, or remove any
+// NSUserDefaults value for this application.
+#define USERDEFAULTS_VERSION_VALUE 1
+#define USERDEFAULTS_VERSION_KEY @"userDefaults.version"
+#define USERDEFAULTS_TIMEPICKER_INITIALVALUE_KEY @"timePicker.initialValue"
+#define USERDEFAULTS_TIMEPICKER_INITIALVALUE_DEFAULT 300
+#define USERDEFAULTS_SOUND_TURNEND_KEY @"sound.turnEnd"
+#define USERDEFAULTS_SOUND_TURNEND_DEFAULT @"bell"
+#define USERDEFAULTS_INTERMISSION_ENABLED_KEY @"intermission.enabled"
+#define USERDEFAULTS_INTERMISSION_ENABLED_DEFAULT NO
+#define USERDEFAULTS_INTERMISSION_DURATION_KEY @"intermission.duration"
+#define USERDEFAULTS_INTERMISSION_DURATION_DEFAULT 60
 
 @interface YTUserDefaults : NSObject {
-
 }
+
++ (void)setupDefaultValueForCurrentVersion;
++ (void)clearAndSetupDefaultValueForCurrentVersion;
++ (BOOL)isCurrentVersionUserDefaults;
 
 @end

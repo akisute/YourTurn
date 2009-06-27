@@ -17,6 +17,8 @@
 		0EA9D8000FF4F6FF00F1D50E /* YTSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9D7FF0FF4F6FF00F1D50E /* YTSelectionCell.m */; };
 		0EA9D8050FF4F75100F1D50E /* YTSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9D8040FF4F75100F1D50E /* YTSwitchCell.m */; };
 		0EA9D94E0FF5A64E00F1D50E /* YTUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9D94D0FF5A64E00F1D50E /* YTUserDefaults.m */; };
+		0EA9DA260FF5F5EA00F1D50E /* YTSetSoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9DA250FF5F5EA00F1D50E /* YTSetSoundViewController.m */; };
+		0EA9DA290FF5F72000F1D50E /* YTSetIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9DA280FF5F72000F1D50E /* YTSetIntervalViewController.m */; };
 		0EAD3B0A0FD9494900E72715 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD3AFE0FD9494900E72715 /* SBJsonWriter.m */; };
 		0EAD3B0B0FD9494900E72715 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD3B000FD9494900E72715 /* SBJsonParser.m */; };
 		0EAD3B0C0FD9494900E72715 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD3B020FD9494900E72715 /* SBJsonBase.m */; };
@@ -80,6 +82,10 @@
 		0EA9D8D70FF5A09E00F1D50E /* YTCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTCustomCell.h; sourceTree = "<group>"; };
 		0EA9D94C0FF5A64E00F1D50E /* YTUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTUserDefaults.h; sourceTree = "<group>"; };
 		0EA9D94D0FF5A64E00F1D50E /* YTUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTUserDefaults.m; sourceTree = "<group>"; };
+		0EA9DA240FF5F5EA00F1D50E /* YTSetSoundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSetSoundViewController.h; sourceTree = "<group>"; };
+		0EA9DA250FF5F5EA00F1D50E /* YTSetSoundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSetSoundViewController.m; sourceTree = "<group>"; };
+		0EA9DA270FF5F72000F1D50E /* YTSetIntervalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSetIntervalViewController.h; sourceTree = "<group>"; };
+		0EA9DA280FF5F72000F1D50E /* YTSetIntervalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSetIntervalViewController.m; sourceTree = "<group>"; };
 		0EAD3AFD0FD9494900E72715 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		0EAD3AFE0FD9494900E72715 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		0EAD3AFF0FD9494900E72715 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
@@ -190,6 +196,10 @@
 				0E1E0F170FEC75D500335047 /* YTMainViewController.m */,
 				0EA9D7F20FF4B86E00F1D50E /* YTSettingsViewController.h */,
 				0EA9D7F30FF4B86E00F1D50E /* YTSettingsViewController.m */,
+				0EA9DA240FF5F5EA00F1D50E /* YTSetSoundViewController.h */,
+				0EA9DA250FF5F5EA00F1D50E /* YTSetSoundViewController.m */,
+				0EA9DA270FF5F72000F1D50E /* YTSetIntervalViewController.h */,
+				0EA9DA280FF5F72000F1D50E /* YTSetIntervalViewController.m */,
 				0EDF02D40FF043070055F1D6 /* YTAboutViewController.h */,
 				0EDF02D50FF043070055F1D6 /* YTAboutViewController.m */,
 			);
@@ -474,6 +484,8 @@
 				0EA9D8000FF4F6FF00F1D50E /* YTSelectionCell.m in Sources */,
 				0EA9D8050FF4F75100F1D50E /* YTSwitchCell.m in Sources */,
 				0EA9D94E0FF5A64E00F1D50E /* YTUserDefaults.m in Sources */,
+				0EA9DA260FF5F5EA00F1D50E /* YTSetSoundViewController.m in Sources */,
+				0EA9DA290FF5F72000F1D50E /* YTSetIntervalViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

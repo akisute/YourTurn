@@ -16,6 +16,7 @@
 }
 
 @property (nonatomic, readonly) YTAttendee *currentTurnAttendee;
+@property (nonatomic, readonly) YTAttendee *nextTurnAttendee;
 @property (nonatomic, readonly) NSUInteger count;
 
 + (YTQueue *)instance;
