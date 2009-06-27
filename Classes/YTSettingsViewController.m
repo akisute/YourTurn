@@ -86,7 +86,7 @@
     switch (indexPath.row) {
         case _CELL_INTERMISSION_SETTINGS:
             enabled = [defaults boolForKey:USERDEFAULTS_INTERMISSION_ENABLED_KEY];
-            string = (enabled) ? [NSString stringHMSFormatWithAllottedTime:[defaults integerForKey:USERDEFAULTS_INTERMISSION_DURATION_KEY]] : @"NO";
+            string = (enabled) ? [NSString stringHMSFormatWithAllottedTime:[defaults integerForKey:USERDEFAULTS_INTERMISSION_DURATION_KEY]] : @"OFF";
             intermissionSettingsCell.label = @"Intermission";
             intermissionSettingsCell.selectionLabel = string;
             return intermissionSettingsCell;

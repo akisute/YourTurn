@@ -11,6 +11,7 @@
 #import "YTYourTurnViewController.h"
 #import "YTQueue.h"
 #import "YTAttendee.h"
+#import "YTSound.h"
 #import "YTUserDefaults.h"
 #import "NSString+YourTurn.h"
 
@@ -178,13 +179,10 @@
     [UIView commitAnimations];
     
     // Sounds
-    NSString *audioPath = [[NSBundle mainBundle] pathForResource:@"bell" ofType:@"aif"];
-    NSURL *audioURL = [NSURL fileURLWithPath:audioPath];
-    LOG(@"Opening the sound file %d", audioURL);
-    SystemSoundID soundID;
-    OSStatus status = AudioServicesCreateSystemSoundID((CFURLRef)audioURL, &soundID);
-    LOG(@"AudioServicesCreateSystemSoundID result=%d", status);
-    AudioServicesPlaySystemSound(soundID);
+    YTSound *sound = [[[YTSound alloc] initWithId:@"bell"
+                                         fileName:@"bell"
+                                    fileExtension:@"aif"] autorelease];
+    [sound play];
 }
 
 #pragma mark private methods
