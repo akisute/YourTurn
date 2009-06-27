@@ -9,6 +9,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define _USERDEFAULTS_VERSION_KEY @"userDefaults.version"
+#define _USERDEFAULTS_VERSION_VALUE 1
 #define _USERDEFAULTS_TIMEPICKER_INITIALVALUE @"timePicker.initialValue"
 
 @interface YTUserDefaults : NSObject {

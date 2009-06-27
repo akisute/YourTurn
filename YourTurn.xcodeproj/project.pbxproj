@@ -13,7 +13,6 @@
 		0E2C796A0FDBC2980067159E /* NSString+YourTurn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C79690FDBC2980067159E /* NSString+YourTurn.m */; };
 		0E2C796B0FDBC2980067159E /* NSString+YourTurn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C79690FDBC2980067159E /* NSString+YourTurn.m */; };
 		0E4157F10FB9B3D200D8ED78 /* bell.aif in Resources */ = {isa = PBXBuildFile; fileRef = 0E4157F00FB9B3D200D8ED78 /* bell.aif */; };
-		0E7998970FED67D800108688 /* YTMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E7998960FED67D800108688 /* YTMainView.xib */; };
 		0EA9D7F40FF4B86E00F1D50E /* YTSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9D7F30FF4B86E00F1D50E /* YTSettingsViewController.m */; };
 		0EA9D8000FF4F6FF00F1D50E /* YTSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9D7FF0FF4F6FF00F1D50E /* YTSelectionCell.m */; };
 		0EA9D8050FF4F75100F1D50E /* YTSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9D8040FF4F75100F1D50E /* YTSwitchCell.m */; };
@@ -54,7 +53,6 @@
 		0ECF5C990FAB3D11000D2116 /* YTQueueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF5C980FAB3D11000D2116 /* YTQueueTest.m */; };
 		0ED089A10FF193B900C2FF7C /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ED089A00FF193B900C2FF7C /* Entitlements.plist */; };
 		0EDF02D70FF043070055F1D6 /* YTAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF02D50FF043070055F1D6 /* YTAboutViewController.m */; };
-		0EDF02D80FF043070055F1D6 /* YTAboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EDF02D60FF043070055F1D6 /* YTAboutView.xib */; };
 		0EDF02DE0FF044230055F1D6 /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = 0EDF02DD0FF044230055F1D6 /* about.html */; };
 		0EEFFE9C0FB185A200D86C0E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EEFFE9B0FB185A200D86C0E /* AudioToolbox.framework */; };
 		1D3623260D0F684500981E51 /* YourTurnAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* YourTurnAppDelegate.m */; };
@@ -73,7 +71,6 @@
 		0E2C79680FDBC2980067159E /* NSString+YourTurn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+YourTurn.h"; sourceTree = "<group>"; };
 		0E2C79690FDBC2980067159E /* NSString+YourTurn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+YourTurn.m"; sourceTree = "<group>"; };
 		0E4157F00FB9B3D200D8ED78 /* bell.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.aif; sourceTree = "<group>"; };
-		0E7998960FED67D800108688 /* YTMainView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YTMainView.xib; sourceTree = "<group>"; };
 		0EA9D7F20FF4B86E00F1D50E /* YTSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSettingsViewController.h; sourceTree = "<group>"; };
 		0EA9D7F30FF4B86E00F1D50E /* YTSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSettingsViewController.m; sourceTree = "<group>"; };
 		0EA9D7FE0FF4F6FF00F1D50E /* YTSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSelectionCell.h; sourceTree = "<group>"; };
@@ -129,7 +126,6 @@
 		0ED089A00FF193B900C2FF7C /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		0EDF02D40FF043070055F1D6 /* YTAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTAboutViewController.h; sourceTree = "<group>"; };
 		0EDF02D50FF043070055F1D6 /* YTAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTAboutViewController.m; sourceTree = "<group>"; };
-		0EDF02D60FF043070055F1D6 /* YTAboutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = YTAboutView.xib; path = Classes/YTAboutView.xib; sourceTree = "<group>"; };
 		0EDF02DD0FF044230055F1D6 /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
 		0EEFFE9B0FB185A200D86C0E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -312,8 +308,6 @@
 				0ECF5B870FAB14FB000D2116 /* YTQueueTableView.xib */,
 				0EC7C85A0FB08BA200CDD62D /* YTAddAttendeeView.xib */,
 				0EC7C8CC0FB0941B00CDD62D /* YTYourTurnView.xib */,
-				0E7998960FED67D800108688 /* YTMainView.xib */,
-				0EDF02D60FF043070055F1D6 /* YTAboutView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -403,8 +397,6 @@
 				0EC7C8CE0FB0941B00CDD62D /* YTYourTurnView.xib in Resources */,
 				0EC7C9610FB138A300CDD62D /* icon.png in Resources */,
 				0E4157F10FB9B3D200D8ED78 /* bell.aif in Resources */,
-				0E7998970FED67D800108688 /* YTMainView.xib in Resources */,
-				0EDF02D80FF043070055F1D6 /* YTAboutView.xib in Resources */,
 				0EDF02DE0FF044230055F1D6 /* about.html in Resources */,
 				0ED089A10FF193B900C2FF7C /* Entitlements.plist in Resources */,
 			);

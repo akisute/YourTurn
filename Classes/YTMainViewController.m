@@ -256,7 +256,7 @@
 
 -(IBAction)openAboutView
 {
-    UIViewController *viewController = [[[YTAboutViewController alloc] initWithNibName:@"YTAboutView"
+    UIViewController *viewController = [[[YTAboutViewController alloc] initWithNibName:nil
                                                                                 bundle:nil] autorelease];
     [self.navigationController pushViewController:viewController animated:YES];
 }

@@ -11,6 +11,7 @@
 
 
 @interface YTAboutViewController : UIViewController<UIWebViewDelegate> {
+    UIWebView *webView;
 }
 
 @end
