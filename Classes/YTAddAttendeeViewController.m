@@ -10,12 +10,12 @@
 #import "YTAddAttendeeViewController.h"
 #import "YTQueue.h"
 #import "YTAttendee.h"
+#import "YTUserDefaults.h"
 #import "YTTextFieldCell.h"
 #import "YTTimePickerView.h"
 
 #define _SECTION_INPUT_NAME 0
 #define _SECTION_INPUT_TIME 1
-#define _USERDEFAULTS_TIMEPICKER_INITIALVALUE @"timePicker.initialValue"
 
 
 @implementation YTAddAttendeeViewController
@@ -25,6 +25,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.scrollEnabled = NO;
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                             target:self
                                                                                             action:@selector(done:)] autorelease];
@@ -48,10 +49,6 @@
     self.tableView.tableFooterView = timePicker;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 - (void)dealloc
 {
     [timePicker release];
@@ -68,94 +65,45 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSInteger num = 0;
     switch (section)
     {
         case _SECTION_INPUT_NAME:
-            num = 1;
-            break;
+            return 1;
         case _SECTION_INPUT_TIME:
-            break;
+            return 0;
         default:
-            break;
+            return 0;
     }
-    return num;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    NSString *string = nil;
     switch (section)
     {
         case _SECTION_INPUT_NAME:
-            string = @"Attendee information";
-            break;
+            return @"Attendee information";
         case _SECTION_INPUT_TIME:
-            string = @"Allotted time";
-            break;
+            return @"Allotted time";
         default:
-            break;
+            return nil;
     }
-    return string;
 }
-
-//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
-//{
-//    UIView *view = nil;
-//    UIDatePicker *datePicker = nil;
-//    switch (section)
-//    {
-//        case _SECTION_INPUT_NAME:
-//            break;
-//        case _SECTION_INPUT_TIME:
-//            datePicker = [[UIDatePicker alloc] initWithFrame:CGRectZero];
-//            datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-//            datePicker.enabled = YES;
-//            view = datePicker;
-//            break;
-//        default:
-//            break;
-//    }
-//    return view;
-//}
-
-//- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-//{
-//    CGFloat height = 20.0;
-//    switch (section)
-//    {
-//        case _SECTION_INPUT_NAME:
-//            break;
-//        case _SECTION_INPUT_TIME:
-//            height = 300.0;
-//            break;
-//        default:
-//            break;
-//    }
-//    return height;
-//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = nil;
     switch (indexPath.section) {
         case _SECTION_INPUT_NAME:
             switch (indexPath.row) {
                 case 0:
-                    cell = nameCell;
-                    break;
+                    return nameCell;
                 default:
-                    // Any other rows
-                    break;
+                    return nil;
             }
-            break;
         case _SECTION_INPUT_TIME:
-            break;
+            return nil;
         default: 
-            // Any other sections
-            break;
+            return nil;
     }
-    return cell;
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -165,13 +113,6 @@
 }
 
 #pragma mark YTTextFieldCell and YTTimePickerView delegate
-
-//- (void)textFieldCellWillBeginEditing:(YTTextFieldCell *)aTextFieldCell
-//{
-//    self.navigationItem.rightBarButtonItem.enabled =
-//    [[nameCell.value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length] != 0;
-//    
-//}
 
 - (void)textFieldCellWillEndEditing:(YTTextFieldCell *)aTextFieldCell
 {

@@ -10,25 +10,37 @@
 #import "YTMainViewController.h"
 #import "YTQueueTableViewController.h"
 #import "YTYourTurnViewController.h"
+#import "YTSettingsViewController.h"
+#import "YTAboutViewController.h"
 #import "YTAttendee.h"
 #import "YTQueue.h"
 
 #define _SECTION_ATTENDEE 0
 #define _SECTION_SETTINGS 1
 #define _SECTION_GO 2
-#define _CELL_STANDARD @"Cell"
-#define _CELL_GO @"YTGoCell"
+#define _REUSE_IDENTIFIER_STANDARD @"Cell"
+#define _REUSE_IDENTIFIER_GO @"Go"
 
 
 @implementation YTMainViewController
 
 #pragma mark init, dealloc, memory management
 
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    if (self = [super initWithStyle:style])
+    {
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.scrollEnabled = NO;
     self.title = @"YourTurn";
     UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
+    [infoButton addTarget:self action:@selector(openAboutView) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:infoButton] autorelease];
 }
 
@@ -38,11 +50,6 @@
 }
 
 #pragma mark ViewController methods
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return NO;
-}
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -83,21 +90,21 @@
     switch (indexPath.section) {
         case _SECTION_ATTENDEE:
         case _SECTION_SETTINGS:
-            cell = [tableView dequeueReusableCellWithIdentifier:_CELL_STANDARD];
+            cell = [tableView dequeueReusableCellWithIdentifier:_REUSE_IDENTIFIER_STANDARD];
             if (cell == nil)
             {
                 // FIXME: initWithFrame:reuseIdentifier is deprecated in OS 3.0. use initWithStyle instead.
                 cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero
-                                               reuseIdentifier:_CELL_STANDARD] autorelease];
+                                               reuseIdentifier:_REUSE_IDENTIFIER_STANDARD] autorelease];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
             break;
         case _SECTION_GO:
-            cell = [tableView dequeueReusableCellWithIdentifier:_CELL_GO];
+            cell = [tableView dequeueReusableCellWithIdentifier:_REUSE_IDENTIFIER_GO];
             if (cell == nil)
             {
                 cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero
-                                               reuseIdentifier:_CELL_GO] autorelease];
+                                               reuseIdentifier:_REUSE_IDENTIFIER_GO] autorelease];
                 cell.textAlignment = UITextAlignmentCenter;
                 cell.accessoryType = UITableViewCellAccessoryNone;
             }
@@ -171,18 +178,6 @@
     
     switch (section) {
         case _SECTION_ATTENDEE:
-//            switch ([YTQueue instance].count) {
-//                case 0:
-//                    str = @"Add some attendees to start the session.";
-//                    break;
-//                case 1:
-//                    str = [NSString stringWithFormat:@"Currently %d person is attended.", [YTQueue instance].count];
-//                    break;
-//                default:
-//                    str = [NSString stringWithFormat:@"Currently %d persons are attended.", [YTQueue instance].count];
-//                    break;
-//            }
-//            label.text = str;
             break;
         case _SECTION_SETTINGS:
             break;
@@ -241,10 +236,8 @@
             [self.navigationController pushViewController:viewController animated:YES];
             break;
         case _SECTION_SETTINGS:
-            // TODO: create settings view controller
-//            viewController = [[[YTSettingsViewController alloc] initWithNibName:@"YTSettingsView"
-//                                                                           bundle:nil] autorelease];
-            // [self.navigationController pushViewController:viewController animated:YES];
+            viewController = [[[YTSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+            [self.navigationController pushViewController:viewController animated:YES];
             break;
         case _SECTION_GO:
             if ([YTQueue instance].currentTurnAttendee)
@@ -257,6 +250,15 @@
         default:
             break;
     }
+}
+
+#pragma mark IBAction
+
+-(IBAction)openAboutView
+{
+    UIViewController *viewController = [[[YTAboutViewController alloc] initWithNibName:@"YTAboutView"
+                                                                                bundle:nil] autorelease];
+    [self.navigationController pushViewController:viewController animated:YES];
 }
 
 @end

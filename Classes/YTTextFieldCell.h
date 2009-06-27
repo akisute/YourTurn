@@ -8,9 +8,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YTCustomCell.h"
 
 
-@interface YTTextFieldCell : UITableViewCell<UITextFieldDelegate> {
+@interface YTTextFieldCell : UITableViewCell<UITextFieldDelegate, YTCustomCell> {
     id delegate;
     UILabel *label;
     UITextField *textField;
@@ -20,7 +21,6 @@
 @property (nonatomic, retain) NSString *label;
 @property (nonatomic, retain) NSString *value;
 @property (nonatomic, retain) NSString *placeholder;
-@property (nonatomic, readonly) CGFloat height;
 
 - (IBAction)focus:(id)sender;
 

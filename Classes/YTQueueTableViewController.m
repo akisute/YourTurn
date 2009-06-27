@@ -15,8 +15,8 @@
 #import "YTAddAttendeeViewController.h"
 #import "YTYourTurnViewController.h"
 
-#define _CELL_ATTENDEE @"YTQueueTableCell"
-#define _CELL_ADD @"YTQueueTableAddAttendeeCell"
+#define _REUSE_IDENTIFIER_ATTENDEE @"YTQueueTableCell"
+#define _REUSE_IDENTIFIER_ADD @"YTQueueTableAddAttendeeCell"
 
 
 @implementation YTQueueTableViewController
@@ -41,7 +41,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     // Reload the data whenever the table view will appear
-    //    self.navigationItem.rightBarButtonItem.enabled = [YTQueue instance].count > 0;
     [self.tableView reloadData];
 }
 
@@ -80,10 +79,11 @@
     
     if (indexPath.row < [YTQueue instance].count)
     {
-        tableCell = (YTQueueTableCell *)[tableView dequeueReusableCellWithIdentifier:_CELL_ATTENDEE];
+        tableCell = (YTQueueTableCell *)[tableView dequeueReusableCellWithIdentifier:_REUSE_IDENTIFIER_ATTENDEE];
         if (tableCell == nil)
         {
-            tableCell = [[[YTQueueTableCell alloc] initWithFrame:CGRectZero reuseIdentifier:_CELL_ATTENDEE] autorelease];
+            tableCell = [[[YTQueueTableCell alloc] initWithFrame:CGRectZero
+                                                 reuseIdentifier:_REUSE_IDENTIFIER_ATTENDEE] autorelease];
         }
         YTAttendee *attendee = [[YTQueue instance] attendeeAtIndex:indexPath.row];
         [tableCell setLabelsWithIndex:indexPath.row+1 andAttendee:attendee];
@@ -91,10 +91,11 @@
     }
     else if (indexPath.row == [YTQueue instance].count)
     {
-        addCell = (YTQueueTableAddAttendeeCell *)[tableView dequeueReusableCellWithIdentifier:_CELL_ADD];
+        addCell = (YTQueueTableAddAttendeeCell *)[tableView dequeueReusableCellWithIdentifier:_REUSE_IDENTIFIER_ADD];
         if (addCell == nil)
         {
-            addCell = [[[YTQueueTableAddAttendeeCell alloc] initWithFrame:CGRectZero reuseIdentifier:_CELL_ADD] autorelease];
+            addCell = [[[YTQueueTableAddAttendeeCell alloc] initWithFrame:CGRectZero
+                                                          reuseIdentifier:_REUSE_IDENTIFIER_ADD] autorelease];
         }
         return addCell;
     }
@@ -106,7 +107,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 72.0;
+    // Use YTCustomCell.height to calculate height of cells
+    UITableViewCell<YTCustomCell> *cell = [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    return cell.height;
+//    return 72.0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -122,10 +126,6 @@
 {
     // The "add" cell should not be edited. Others are allowed to edit.
     return indexPath.row != [YTQueue instance].count;
-}
-
-- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
-{
 }
 
 - (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
@@ -146,13 +146,11 @@
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the item to be re-orderable.
-//    return YES;
     return indexPath.row != [YTQueue instance].count;
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
-    LOG(@"moveRowAtIndexPath:%d toIndexPath:%d", fromIndexPath.row, toIndexPath.row);
     [[YTQueue instance] moveAttendeeAtIndex:fromIndexPath.row toIndex:toIndexPath.row];
 }
 
@@ -160,17 +158,6 @@
 {
     // setEditing is called when user presses "Edit" button.
     [super setEditing:flag animated:animated];
-//    if (flag)
-//    {
-//        self.navigationItem.rightBarButtonItem = nil;        
-//    }
-//    else
-//    {
-//        self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
-//                                                                                                target:self
-//                                                                                                action:@selector(openYourTurnView:)] autorelease];
-//        self.navigationItem.rightBarButtonItem.enabled = [YTQueue instance].count > 0;
-//    }
     [self.tableView reloadData];
 }
 

@@ -1,5 +1,5 @@
 //
-//  YTMainViewController.h
+//  YTAboutViewController.h
 //  YourTurn
 //
 //  Created by Masashi Ono on 09/06/20.
@@ -10,9 +10,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface YTMainViewController : UITableViewController {
+@interface YTAboutViewController : UIViewController<UIWebViewDelegate> {
 }
-
--(IBAction)openAboutView;
 
 @end

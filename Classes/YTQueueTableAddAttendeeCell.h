@@ -8,12 +8,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YTCustomCell.h"
 
 
-@interface YTQueueTableAddAttendeeCell : UITableViewCell {
+@interface YTQueueTableAddAttendeeCell : UITableViewCell<YTCustomCell> {
     IBOutlet UILabel *message;
 }
-
-@property (nonatomic, retain) IBOutlet UILabel *message;
 
 @end

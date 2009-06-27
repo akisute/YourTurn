@@ -59,6 +59,7 @@
     {
         // Create label
         label = [[UILabel alloc] initWithFrame:CGRectZero];
+        label.font = [UIFont boldSystemFontOfSize:16.0];
         label.textAlignment = UITextAlignmentLeft;
         [self addSubview:label];
         
@@ -93,13 +94,6 @@
 {
     label.frame = CGRectMake(25, 12, 115, 24);
     textField.frame = CGRectMake(120, 12, 180, 24);
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-    
-    // Configure the view for the selected state
 }
 
 # pragma mark UITextField method

@@ -8,18 +8,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "YTCustomCell.h"
 
 @class YTAttendee;
 
-@interface YTQueueTableCell : UITableViewCell {
+@interface YTQueueTableCell : UITableViewCell<YTCustomCell> {
     IBOutlet UILabel *nameLabel;
     IBOutlet UILabel *indexLabel;
     IBOutlet UILabel *timeLabel;
 }
-
-@property (nonatomic, retain) IBOutlet UILabel *nameLabel;
-@property (nonatomic, retain) IBOutlet UILabel *indexLabel;
-@property (nonatomic, retain) IBOutlet UILabel *timeLabel;
 
 - (void)setLabelsWithIndex:(NSUInteger)index andAttendee:(YTAttendee *)attendee;
 

@@ -14,6 +14,10 @@
 		0E2C796B0FDBC2980067159E /* NSString+YourTurn.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2C79690FDBC2980067159E /* NSString+YourTurn.m */; };
 		0E4157F10FB9B3D200D8ED78 /* bell.aif in Resources */ = {isa = PBXBuildFile; fileRef = 0E4157F00FB9B3D200D8ED78 /* bell.aif */; };
 		0E7998970FED67D800108688 /* YTMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E7998960FED67D800108688 /* YTMainView.xib */; };
+		0EA9D7F40FF4B86E00F1D50E /* YTSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9D7F30FF4B86E00F1D50E /* YTSettingsViewController.m */; };
+		0EA9D8000FF4F6FF00F1D50E /* YTSelectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9D7FF0FF4F6FF00F1D50E /* YTSelectionCell.m */; };
+		0EA9D8050FF4F75100F1D50E /* YTSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9D8040FF4F75100F1D50E /* YTSwitchCell.m */; };
+		0EA9D94E0FF5A64E00F1D50E /* YTUserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9D94D0FF5A64E00F1D50E /* YTUserDefaults.m */; };
 		0EAD3B0A0FD9494900E72715 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD3AFE0FD9494900E72715 /* SBJsonWriter.m */; };
 		0EAD3B0B0FD9494900E72715 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD3B000FD9494900E72715 /* SBJsonParser.m */; };
 		0EAD3B0C0FD9494900E72715 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD3B020FD9494900E72715 /* SBJsonBase.m */; };
@@ -48,6 +52,10 @@
 		0ECF5C6F0FAB3B20000D2116 /* GTMSenTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF5C430FAB3A82000D2116 /* GTMSenTestCase.m */; };
 		0ECF5C960FAB3CE3000D2116 /* YTQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF5BF80FAB2BFB000D2116 /* YTQueue.m */; };
 		0ECF5C990FAB3D11000D2116 /* YTQueueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF5C980FAB3D11000D2116 /* YTQueueTest.m */; };
+		0ED089A10FF193B900C2FF7C /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ED089A00FF193B900C2FF7C /* Entitlements.plist */; };
+		0EDF02D70FF043070055F1D6 /* YTAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF02D50FF043070055F1D6 /* YTAboutViewController.m */; };
+		0EDF02D80FF043070055F1D6 /* YTAboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EDF02D60FF043070055F1D6 /* YTAboutView.xib */; };
+		0EDF02DE0FF044230055F1D6 /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = 0EDF02DD0FF044230055F1D6 /* about.html */; };
 		0EEFFE9C0FB185A200D86C0E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EEFFE9B0FB185A200D86C0E /* AudioToolbox.framework */; };
 		1D3623260D0F684500981E51 /* YourTurnAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* YourTurnAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -66,6 +74,15 @@
 		0E2C79690FDBC2980067159E /* NSString+YourTurn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+YourTurn.m"; sourceTree = "<group>"; };
 		0E4157F00FB9B3D200D8ED78 /* bell.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = bell.aif; sourceTree = "<group>"; };
 		0E7998960FED67D800108688 /* YTMainView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = YTMainView.xib; sourceTree = "<group>"; };
+		0EA9D7F20FF4B86E00F1D50E /* YTSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSettingsViewController.h; sourceTree = "<group>"; };
+		0EA9D7F30FF4B86E00F1D50E /* YTSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSettingsViewController.m; sourceTree = "<group>"; };
+		0EA9D7FE0FF4F6FF00F1D50E /* YTSelectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSelectionCell.h; sourceTree = "<group>"; };
+		0EA9D7FF0FF4F6FF00F1D50E /* YTSelectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSelectionCell.m; sourceTree = "<group>"; };
+		0EA9D8030FF4F75100F1D50E /* YTSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSwitchCell.h; sourceTree = "<group>"; };
+		0EA9D8040FF4F75100F1D50E /* YTSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSwitchCell.m; sourceTree = "<group>"; };
+		0EA9D8D70FF5A09E00F1D50E /* YTCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTCustomCell.h; sourceTree = "<group>"; };
+		0EA9D94C0FF5A64E00F1D50E /* YTUserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTUserDefaults.h; sourceTree = "<group>"; };
+		0EA9D94D0FF5A64E00F1D50E /* YTUserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTUserDefaults.m; sourceTree = "<group>"; };
 		0EAD3AFD0FD9494900E72715 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		0EAD3AFE0FD9494900E72715 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		0EAD3AFF0FD9494900E72715 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
@@ -109,6 +126,11 @@
 		0ECF5C6C0FAB3B09000D2116 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		0ECF5C970FAB3D11000D2116 /* YTQueueTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTQueueTest.h; sourceTree = "<group>"; };
 		0ECF5C980FAB3D11000D2116 /* YTQueueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTQueueTest.m; sourceTree = "<group>"; };
+		0ED089A00FF193B900C2FF7C /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		0EDF02D40FF043070055F1D6 /* YTAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTAboutViewController.h; sourceTree = "<group>"; };
+		0EDF02D50FF043070055F1D6 /* YTAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTAboutViewController.m; sourceTree = "<group>"; };
+		0EDF02D60FF043070055F1D6 /* YTAboutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = YTAboutView.xib; path = Classes/YTAboutView.xib; sourceTree = "<group>"; };
+		0EDF02DD0FF044230055F1D6 /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
 		0EEFFE9B0FB185A200D86C0E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = /System/Library/Frameworks/AudioToolbox.framework; sourceTree = "<absolute>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* YourTurnAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YourTurnAppDelegate.h; sourceTree = "<group>"; };
@@ -170,6 +192,10 @@
 				0ECF5B830FAB14BD000D2116 /* YTQueueTableViewController.m */,
 				0E1E0F160FEC75D500335047 /* YTMainViewController.h */,
 				0E1E0F170FEC75D500335047 /* YTMainViewController.m */,
+				0EA9D7F20FF4B86E00F1D50E /* YTSettingsViewController.h */,
+				0EA9D7F30FF4B86E00F1D50E /* YTSettingsViewController.m */,
+				0EDF02D40FF043070055F1D6 /* YTAboutViewController.h */,
+				0EDF02D50FF043070055F1D6 /* YTAboutViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -201,6 +227,8 @@
 				0E13BD9C0FACB0D000345CF3 /* YTAttendee.m */,
 				0ECF5BF70FAB2BFB000D2116 /* YTQueue.h */,
 				0ECF5BF80FAB2BFB000D2116 /* YTQueue.m */,
+				0EA9D94C0FF5A64E00F1D50E /* YTUserDefaults.h */,
+				0EA9D94D0FF5A64E00F1D50E /* YTUserDefaults.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -208,12 +236,17 @@
 		0EAD3B210FD949AF00E72715 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0EA9D8D70FF5A09E00F1D50E /* YTCustomCell.h */,
 				0EC7C90A0FB0984B00CDD62D /* YTQueueTableAddAttendeeCell.h */,
 				0EC7C90B0FB0984B00CDD62D /* YTQueueTableAddAttendeeCell.m */,
 				0EC7C9040FB097D100CDD62D /* YTQueueTableCell.h */,
 				0EC7C9050FB097D100CDD62D /* YTQueueTableCell.m */,
 				0EC7C9560FB1254400CDD62D /* YTTextFieldCell.h */,
 				0EC7C9570FB1254400CDD62D /* YTTextFieldCell.m */,
+				0EA9D7FE0FF4F6FF00F1D50E /* YTSelectionCell.h */,
+				0EA9D7FF0FF4F6FF00F1D50E /* YTSelectionCell.m */,
+				0EA9D8030FF4F75100F1D50E /* YTSwitchCell.h */,
+				0EA9D8040FF4F75100F1D50E /* YTSwitchCell.m */,
 				0EAD3B5B0FD94D6300E72715 /* YTTimePickerView.h */,
 				0EAD3B5C0FD94D6300E72715 /* YTTimePickerView.m */,
 			);
@@ -253,7 +286,6 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
-				0ECF5C650FAB3AD0000D2116 /* Unit Test-Info.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -270,14 +302,18 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0EDF02DD0FF044230055F1D6 /* about.html */,
 				0E4157F00FB9B3D200D8ED78 /* bell.aif */,
 				0EC7C95F0FB138A300CDD62D /* icon.png */,
-				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* Info.plist */,
+				0ECF5C650FAB3AD0000D2116 /* Unit Test-Info.plist */,
+				0ED089A00FF193B900C2FF7C /* Entitlements.plist */,
+				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				0ECF5B870FAB14FB000D2116 /* YTQueueTableView.xib */,
 				0EC7C85A0FB08BA200CDD62D /* YTAddAttendeeView.xib */,
 				0EC7C8CC0FB0941B00CDD62D /* YTYourTurnView.xib */,
 				0E7998960FED67D800108688 /* YTMainView.xib */,
+				0EDF02D60FF043070055F1D6 /* YTAboutView.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -368,6 +404,9 @@
 				0EC7C9610FB138A300CDD62D /* icon.png in Resources */,
 				0E4157F10FB9B3D200D8ED78 /* bell.aif in Resources */,
 				0E7998970FED67D800108688 /* YTMainView.xib in Resources */,
+				0EDF02D80FF043070055F1D6 /* YTAboutView.xib in Resources */,
+				0EDF02DE0FF044230055F1D6 /* about.html in Resources */,
+				0ED089A10FF193B900C2FF7C /* Entitlements.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +477,11 @@
 				0EAD3B5D0FD94D6300E72715 /* YTTimePickerView.m in Sources */,
 				0E2C796A0FDBC2980067159E /* NSString+YourTurn.m in Sources */,
 				0E1E0F180FEC75D500335047 /* YTMainViewController.m in Sources */,
+				0EDF02D70FF043070055F1D6 /* YTAboutViewController.m in Sources */,
+				0EA9D7F40FF4B86E00F1D50E /* YTSettingsViewController.m in Sources */,
+				0EA9D8000FF4F6FF00F1D50E /* YTSelectionCell.m in Sources */,
+				0EA9D8050FF4F75100F1D50E /* YTSwitchCell.m in Sources */,
+				0EA9D94E0FF5A64E00F1D50E /* YTUserDefaults.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,6 +538,59 @@
 			};
 			name = Release;
 		};
+		0ED089B00FF1946900C2FF7C /* Distrbution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos2.2.1;
+			};
+			name = Distrbution;
+		};
+		0ED089B10FF1946900C2FF7C /* Distrbution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Masashi Ono";
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = YourTurn_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				PRODUCT_NAME = YourTurn;
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "5A7B6418-3578-4F90-973E-09E4208AEDAD";
+			};
+			name = Distrbution;
+		};
+		0ED089B20FF1946900C2FF7C /* Distrbution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/UIKit.framework/Headers/UIKit.h";
+				INFOPLIST_FILE = "Unit Test-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Unit Test";
+				SDKROOT = iphoneos2.2.1;
+				ZERO_LINK = NO;
+			};
+			name = Distrbution;
+		};
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -507,7 +604,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = YourTurn;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "EC433380-C270-4BBF-9D4D-82493006AAB6";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "378FD983-D6DA-4027-89B0-3B2DFF931E54";
 			};
 			name = Debug;
 		};
@@ -515,13 +612,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Masashi Ono";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = YourTurn_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
 				PRODUCT_NAME = YourTurn;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "43485AA0-CC6F-45F9-8026-AFA9D8DE51F5";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "B88FA81C-4871-4BF2-9380-CC5D5F182DEA";
 			};
 			name = Release;
 		};
@@ -561,6 +659,7 @@
 			buildConfigurations = (
 				0ECF5C660FAB3AD0000D2116 /* Debug */,
 				0ECF5C670FAB3AD0000D2116 /* Release */,
+				0ED089B20FF1946900C2FF7C /* Distrbution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -570,6 +669,7 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+				0ED089B10FF1946900C2FF7C /* Distrbution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -579,6 +679,7 @@
 			buildConfigurations = (
 				C01FCF4F08A954540054247B /* Debug */,
 				C01FCF5008A954540054247B /* Release */,
+				0ED089B00FF1946900C2FF7C /* Distrbution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

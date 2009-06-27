@@ -15,9 +15,10 @@
 
 #pragma mark properties
 
-@synthesize nameLabel;
-@synthesize indexLabel;
-@synthesize timeLabel;
+- (CGFloat)height
+{
+    return 72.0;
+}
 
 # pragma mark init, dealloc, memory management
 
@@ -25,23 +26,18 @@
 {
     if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier])
     {
-        self.nameLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
-        self.nameLabel.font = [UIFont boldSystemFontOfSize:26.0];
-        self.indexLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
-        self.indexLabel.font = [UIFont systemFontOfSize:16.0];
-        self.indexLabel.textColor = [UIColor colorWithHue:0.33 saturation:1.0 brightness:0.5 alpha:1.0];
-        self.timeLabel = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
-        self.timeLabel.font = [UIFont fontWithName:@"Courier New" size:16.0];
-        self.timeLabel.textAlignment = UITextAlignmentRight;
-//        self.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
-//        self.backgroundView.backgroundColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.94 alpha:1.0];
+        nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        nameLabel.font = [UIFont boldSystemFontOfSize:26.0];
+        indexLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        indexLabel.font = [UIFont systemFontOfSize:16.0];
+        indexLabel.textColor = [UIColor colorWithHue:0.33 saturation:1.0 brightness:0.5 alpha:1.0];
+        timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        timeLabel.font = [UIFont fontWithName:@"Courier New" size:16.0];
+        timeLabel.textAlignment = UITextAlignmentRight;
 
-//        [self addSubview:self.nameLabel];
-//        [self addSubview:self.indexLabel];
-//        [self addSubview:self.timeLabel];
-        [self.contentView addSubview:self.nameLabel];
-        [self.contentView addSubview:self.indexLabel];
-        [self.contentView addSubview:self.timeLabel];
+        [self.contentView addSubview:nameLabel];
+        [self.contentView addSubview:indexLabel];
+        [self.contentView addSubview:timeLabel];
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
@@ -50,6 +46,9 @@
 - (void)dealloc
 {
     // Do not release attendee since it's not retained
+    [nameLabel release];
+    [indexLabel release];
+    [timeLabel release];
     [super dealloc];
 }
 
@@ -59,23 +58,18 @@
 {
     [super layoutSubviews];
     CGRect bounds = self.contentView.bounds;
-    self.indexLabel.frame = CGRectMake(10.0, 2.0, 40.0, 20.0);
-    self.nameLabel.frame = CGRectMake(40.0, 0, bounds.size.width, 72.0 - 1.0); // Leave a space for sparator
-    self.timeLabel.frame = CGRectMake(bounds.size.width - 140.0, 50.0, 120.0, 22.0 - 1.0); // Leave a space for sparator
-}
-
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated
-{
-    [super setEditing:editing animated:animated];
+    indexLabel.frame = CGRectMake(10.0, 2.0, 40.0, 20.0);
+    nameLabel.frame = CGRectMake(40.0, 0, bounds.size.width, 72.0 - 1.0); // Leave a space for sparator
+    timeLabel.frame = CGRectMake(bounds.size.width - 140.0, 50.0, 120.0, 22.0 - 1.0); // Leave a space for sparator
 }
 
 #pragma mark other method
 
 - (void)setLabelsWithIndex:(NSUInteger)index andAttendee:(YTAttendee *)attendee
 {
-    self.nameLabel.text = attendee.name;
-    self.indexLabel.text = [NSString stringWithFormat:@"# %d", index];
-    self.timeLabel.text = [NSString stringHMSFormatWithAllottedTime:attendee.allottedTime];
+    nameLabel.text = attendee.name;
+    indexLabel.text = [NSString stringWithFormat:@"# %d", index];
+    timeLabel.text = [NSString stringHMSFormatWithAllottedTime:attendee.allottedTime];
     [self setNeedsDisplay];
 }
 
