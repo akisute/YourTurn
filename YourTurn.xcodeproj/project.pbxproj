@@ -20,6 +20,7 @@
 		0EA9DA260FF5F5EA00F1D50E /* YTSetSoundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9DA250FF5F5EA00F1D50E /* YTSetSoundViewController.m */; };
 		0EA9DA290FF5F72000F1D50E /* YTSetIntervalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9DA280FF5F72000F1D50E /* YTSetIntervalViewController.m */; };
 		0EA9DBC20FF6684100F1D50E /* YTSound.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9DBC10FF6684100F1D50E /* YTSound.m */; };
+		0EA9DC150FF66DCF00F1D50E /* YTSoundTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EA9DC140FF66DCF00F1D50E /* YTSoundTypes.m */; };
 		0EAD3B0A0FD9494900E72715 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD3AFE0FD9494900E72715 /* SBJsonWriter.m */; };
 		0EAD3B0B0FD9494900E72715 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD3B000FD9494900E72715 /* SBJsonParser.m */; };
 		0EAD3B0C0FD9494900E72715 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAD3B020FD9494900E72715 /* SBJsonBase.m */; };
@@ -89,6 +90,8 @@
 		0EA9DA280FF5F72000F1D50E /* YTSetIntervalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSetIntervalViewController.m; sourceTree = "<group>"; };
 		0EA9DBC00FF6684100F1D50E /* YTSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSound.h; sourceTree = "<group>"; };
 		0EA9DBC10FF6684100F1D50E /* YTSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSound.m; sourceTree = "<group>"; };
+		0EA9DC130FF66DCF00F1D50E /* YTSoundTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSoundTypes.h; sourceTree = "<group>"; };
+		0EA9DC140FF66DCF00F1D50E /* YTSoundTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSoundTypes.m; sourceTree = "<group>"; };
 		0EAD3AFD0FD9494900E72715 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
 		0EAD3AFE0FD9494900E72715 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
 		0EAD3AFF0FD9494900E72715 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
@@ -238,6 +241,8 @@
 				0ECF5BF80FAB2BFB000D2116 /* YTQueue.m */,
 				0EA9DBC00FF6684100F1D50E /* YTSound.h */,
 				0EA9DBC10FF6684100F1D50E /* YTSound.m */,
+				0EA9DC130FF66DCF00F1D50E /* YTSoundTypes.h */,
+				0EA9DC140FF66DCF00F1D50E /* YTSoundTypes.m */,
 				0EA9D94C0FF5A64E00F1D50E /* YTUserDefaults.h */,
 				0EA9D94D0FF5A64E00F1D50E /* YTUserDefaults.m */,
 			);
@@ -492,6 +497,7 @@
 				0EA9DA260FF5F5EA00F1D50E /* YTSetSoundViewController.m in Sources */,
 				0EA9DA290FF5F72000F1D50E /* YTSetIntervalViewController.m in Sources */,
 				0EA9DBC20FF6684100F1D50E /* YTSound.m in Sources */,
+				0EA9DC150FF66DCF00F1D50E /* YTSoundTypes.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

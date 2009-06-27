@@ -10,6 +10,7 @@
 #import "YourTurnAppDelegate.h"
 #import "YTMainViewController.h"
 #import "YTQueue.h"
+#import "YTSoundTypes.h"
 #import "YTUserDefaults.h"
 
 
@@ -18,6 +19,7 @@
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
     [[YTQueue newInstance] load];
+    [[YTSoundTypes newInstance] load];
     [YTUserDefaults setupDefaultValueForCurrentVersion];
     
     navigationController = [[UINavigationController alloc] init];

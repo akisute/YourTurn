@@ -12,6 +12,7 @@
 #import "YTQueue.h"
 #import "YTAttendee.h"
 #import "YTSound.h"
+#import "YTSoundTypes.h"
 #import "YTUserDefaults.h"
 #import "NSString+YourTurn.h"
 
@@ -158,8 +159,9 @@
 
 - (IBAction)endTurn:(id)sender
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     // End current turn and reset timer + attendee-related variables
-    BOOL intermissionEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:USERDEFAULTS_INTERMISSION_ENABLED_KEY];
+    BOOL intermissionEnabled = [defaults boolForKey:USERDEFAULTS_INTERMISSION_ENABLED_KEY];
     if (intermissionEnabled && !intermission)
     {
         [self loadIntermission];
@@ -179,9 +181,10 @@
     [UIView commitAnimations];
     
     // Sounds
-    YTSound *sound = [[[YTSound alloc] initWithId:@"bell"
-                                         fileName:@"bell"
-                                    fileExtension:@"aif"] autorelease];
+//    YTSound *sound = [[[YTSound alloc] initWithId:@"bell"
+//                                         fileName:@"bell"
+//                                    fileExtension:@"aif"] autorelease];
+    YTSound *sound = [[YTSoundTypes instance] soundForId:[defaults stringForKey:USERDEFAULTS_SOUND_TURNEND_KEY]];
     [sound play];
 }
 

@@ -8,7 +8,11 @@
 //
 
 #import "YTSetSoundViewController.h"
+#import "YTSound.h"
+#import "YTSoundTypes.h"
+#import "YTUserDefaults.h"
 
+#define _CELL_STANDARD @"Cell"
 
 @implementation YTSetSoundViewController
 
@@ -41,7 +45,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 3;
+    return [YTSoundTypes instance].count;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -51,24 +55,34 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:_CELL_STANDARD];
     if (cell == nil)
     {
-        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:_CELL_STANDARD] autorelease];
     }
-    cell.text = @"bell";
+    NSString *currentSoundId = [[NSUserDefaults standardUserDefaults] stringForKey:USERDEFAULTS_SOUND_TURNEND_KEY];
+    YTSound *sound = [[YTSoundTypes instance] soundForIndex:indexPath.row];
+    cell.text = sound.fileId;
+    if ([sound.fileId isEqualToString:currentSoundId])
+    {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Navigation logic may go here. Create and push another view controller.
-    // AnotherViewController *anotherViewController = [[AnotherViewController alloc] initWithNibName:@"AnotherView" bundle:nil];
-    // [self.navigationController pushViewController:anotherViewController];
-    // [anotherViewController release];
+    YTSound *sound = [[YTSoundTypes instance] soundForIndex:indexPath.row];
+    [[NSUserDefaults standardUserDefaults] setObject:sound.fileId forKey:USERDEFAULTS_SOUND_TURNEND_KEY];
+    [tableView reloadData];
+    
+    // Unselect any selections
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 @end

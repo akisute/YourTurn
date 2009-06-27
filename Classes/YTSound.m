@@ -20,9 +20,9 @@
 {
     if (self = [super init])
     {
-        fileId = aFileId;
-        fileName = aFileName;
-        fileExtension = aFileExtension;
+        fileId = [aFileId retain];
+        fileName = [aFileName retain];
+        fileExtension = [aFileExtension retain];
         NSString *audioPath = [[NSBundle mainBundle] pathForResource:fileName ofType:fileExtension];
         NSURL *audioURL = [NSURL fileURLWithPath:audioPath];
         LOG(@"Creating the sound object from file: %d", audioURL);
