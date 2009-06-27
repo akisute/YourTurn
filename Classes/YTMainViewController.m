@@ -17,9 +17,9 @@
 
 #define _SECTION_ATTENDEE 0
 #define _SECTION_SETTINGS 1
-#define _SECTION_GO 2
+#define _SECTION_START 2
 #define _REUSE_IDENTIFIER_STANDARD @"Cell"
-#define _REUSE_IDENTIFIER_GO @"Go"
+#define _REUSE_IDENTIFIER_START @"Start"
 
 
 @implementation YTMainViewController
@@ -30,6 +30,20 @@
 {
     if (self = [super initWithStyle:style])
     {
+        // FIXME: initWithFrame:reuseIdentifier is deprecated in OS 3.0. use initWithStyle instead.
+        // FIXME: cell.textColor is deprecated in OS 3.0. Use textLabel.textColor instead
+        manageAttendeesCell = [[UITableViewCell alloc] initWithFrame:CGRectZero
+                                                     reuseIdentifier:_REUSE_IDENTIFIER_STANDARD];
+        manageAttendeesCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        settingsCell = [[UITableViewCell alloc] initWithFrame:CGRectZero
+                                              reuseIdentifier:_REUSE_IDENTIFIER_STANDARD];
+        settingsCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        settingsCell.text = @"Settings";
+        startCell = [[UITableViewCell alloc] initWithFrame:CGRectZero
+                                                 reuseIdentifier:_REUSE_IDENTIFIER_START];
+        startCell.textAlignment = UITextAlignmentCenter;
+        startCell.accessoryType = UITableViewCellAccessoryNone;
+        startCell.text = @"Start session";
     }
     return self;
 }
@@ -46,6 +60,9 @@
 
 - (void)dealloc
 {
+    [manageAttendeesCell release];
+    [settingsCell release];
+    [startCell release];
     [super dealloc];
 }
 
@@ -77,7 +94,7 @@
             return 1;
         case _SECTION_SETTINGS:
             return 1;
-        case _SECTION_GO:
+        case _SECTION_START:
             return 1;
         default:
             return 0;
@@ -86,60 +103,28 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = nil;
     switch (indexPath.section) {
         case _SECTION_ATTENDEE:
+            manageAttendeesCell.text = [NSString stringWithFormat:@"Manage attendees (%d)", [YTQueue instance].count];
+            return manageAttendeesCell;
         case _SECTION_SETTINGS:
-            cell = [tableView dequeueReusableCellWithIdentifier:_REUSE_IDENTIFIER_STANDARD];
-            if (cell == nil)
-            {
-                // FIXME: initWithFrame:reuseIdentifier is deprecated in OS 3.0. use initWithStyle instead.
-                cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero
-                                               reuseIdentifier:_REUSE_IDENTIFIER_STANDARD] autorelease];
-                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            }
-            break;
-        case _SECTION_GO:
-            cell = [tableView dequeueReusableCellWithIdentifier:_REUSE_IDENTIFIER_GO];
-            if (cell == nil)
-            {
-                cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero
-                                               reuseIdentifier:_REUSE_IDENTIFIER_GO] autorelease];
-                cell.textAlignment = UITextAlignmentCenter;
-                cell.accessoryType = UITableViewCellAccessoryNone;
-            }
+            return settingsCell;
+        case _SECTION_START:
+            // FIXME: cell.textColor is deprecated in OS 3.0. Use textLabel instead
             if ([YTQueue instance].currentTurnAttendee)
             {
-                // FIXME: cell.textColor is deprecated in OS 3.0. Use textLabel instead
-                cell.textColor = [UIColor blueColor];
-                cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+                startCell.textColor = [UIColor blueColor];
+                startCell.selectionStyle = UITableViewCellSelectionStyleBlue;
             }
             else
             {
-                // FIXME: cell.textColor is deprecated in OS 3.0. Use textLabel instead
-                cell.textColor = [UIColor grayColor];
-                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                startCell.textColor = [UIColor grayColor];
+                startCell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
-            break;
+            return startCell;
         default:
-            break;
+            return nil;
     }
-    
-    switch (indexPath.section) {
-        case _SECTION_ATTENDEE:
-            cell.text = [NSString stringWithFormat:@"Manage attendees (%d)", [YTQueue instance].count];
-            break;
-        case _SECTION_SETTINGS:
-            cell.text = @"Settings";
-            break;
-        case _SECTION_GO:
-            cell.text = @"Start session";
-            break;
-        default:
-            break;
-    }
-    
-    return cell;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -157,7 +142,7 @@
         case _SECTION_SETTINGS:
             label.text = @"  2. Configure the session";
             break;
-        case _SECTION_GO:
+        case _SECTION_START:
             label.text = @"  3. Let's begin!";
             break;
         default:
@@ -181,7 +166,7 @@
             break;
         case _SECTION_SETTINGS:
             break;
-        case _SECTION_GO:
+        case _SECTION_START:
             if ([YTQueue instance].currentTurnAttendee)
             {
                 str = [NSString stringWithFormat:@"Next person: %@", [YTQueue instance].currentTurnAttendee.name];
@@ -205,7 +190,7 @@
             return 48.0;
         case _SECTION_SETTINGS:
             return 48.0;
-        case _SECTION_GO:
+        case _SECTION_START:
             return 48.0;
         default:
             return 0.0;
@@ -219,7 +204,7 @@
             return 0.0;
         case _SECTION_SETTINGS:
             return 0.0;
-        case _SECTION_GO:
+        case _SECTION_START:
             return 64.0;
         default:
             return 0.0;
@@ -239,7 +224,7 @@
             viewController = [[[YTSettingsViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
             [self.navigationController pushViewController:viewController animated:YES];
             break;
-        case _SECTION_GO:
+        case _SECTION_START:
             if ([YTQueue instance].currentTurnAttendee)
             {
                 viewController = [[[YTYourTurnViewController alloc] initWithNibName:@"YTYourTurnView"

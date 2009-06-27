@@ -128,6 +128,11 @@
     return indexPath.row != [YTQueue instance].count;
 }
 
+- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    // Do nothing, but this method is required to swipe-to-delete correctly.
+}
+
 - (void)tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.tableView reloadData];

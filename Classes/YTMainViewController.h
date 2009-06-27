@@ -11,6 +11,9 @@
 
 
 @interface YTMainViewController : UITableViewController {
+    UITableViewCell *manageAttendeesCell;
+    UITableViewCell *settingsCell;
+    UITableViewCell *startCell;
 }
 
 -(IBAction)openAboutView;
