@@ -59,10 +59,6 @@
 {
     [displayLabel release];
     [timerLabel release];
-    // timer is released when the view will disappear
-    // this invalidate will be never called...
-//    [timer invalidate];
-//    [timer release];
     free(initialBackgroundColorHSBA);
     free(endBackgroundColorHSBA);
     free(currentBackgroundColorHSBA);
@@ -72,13 +68,21 @@
 
 #pragma mark UIViewController method
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // disable idle timer while session is going
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
+    // enable idle timer again since session is finished
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
     // invalidate the current timer
     if (timer)
     {
-        // timer is retained by NSRunLoop object, not by this ViewController
-        // thus timer should not be released
         [timer invalidate];
         timer = nil;
     }
@@ -181,9 +185,6 @@
     [UIView commitAnimations];
     
     // Sounds
-//    YTSound *sound = [[[YTSound alloc] initWithId:@"bell"
-//                                         fileName:@"bell"
-//                                    fileExtension:@"aif"] autorelease];
     YTSound *sound = [[YTSoundTypes instance] soundForId:[defaults stringForKey:USERDEFAULTS_SOUND_TURNEND_KEY]];
     [sound play];
 }
