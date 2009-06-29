@@ -28,7 +28,7 @@
     [super viewDidLoad];
     self.navigationItem.rightBarButtonItem = [self editButtonItem];
     self.editing = NO;
-    self.title = @"Attendees";
+    self.title = NSLocalizedString(@"Attendees", @"Title of the attendees queue table view");
 }
 
 - (void)dealloc

@@ -38,12 +38,12 @@
         settingsCell = [[UITableViewCell alloc] initWithFrame:CGRectZero
                                               reuseIdentifier:_REUSE_IDENTIFIER_STANDARD];
         settingsCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        settingsCell.text = @"Settings";
+        settingsCell.text = NSLocalizedString(@"Settings", @"Cell text of the main view");
         startCell = [[UITableViewCell alloc] initWithFrame:CGRectZero
                                                  reuseIdentifier:_REUSE_IDENTIFIER_START];
         startCell.textAlignment = UITextAlignmentCenter;
         startCell.accessoryType = UITableViewCellAccessoryNone;
-        startCell.text = @"Start session";
+        startCell.text = NSLocalizedString(@"Start session", @"Cell text of the main view");
     }
     return self;
 }
@@ -52,7 +52,7 @@
 {
     [super viewDidLoad];
     self.tableView.scrollEnabled = NO;
-    self.title = @"YourTurn";
+    self.title = NSLocalizedString(@"YourTurn", @"Application name. DO NOT TRANSLATE");
     UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     [infoButton addTarget:self action:@selector(openAboutView) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithCustomView:infoButton] autorelease];
@@ -105,7 +105,9 @@
 {
     switch (indexPath.section) {
         case _SECTION_ATTENDEE:
-            manageAttendeesCell.text = [NSString stringWithFormat:@"Manage attendees (%d)", [YTQueue instance].count];
+            manageAttendeesCell.text = [NSString stringWithFormat:NSLocalizedString(@"Manage attendees (%d)",
+                                                                                    @"Cell text of the main view"),
+                                        [YTQueue instance].count];
             return manageAttendeesCell;
         case _SECTION_SETTINGS:
             return settingsCell;
@@ -137,13 +139,16 @@
     label.backgroundColor = [UIColor clearColor];
     switch (section) {
         case _SECTION_ATTENDEE:
-            label.text = @"  1. Setup attendees of the session";
+            label.text = NSLocalizedString(@"  1. Setup attendees of the session",
+                                           @"Section name of the main view");
             break;
         case _SECTION_SETTINGS:
-            label.text = @"  2. Configure the session";
+            label.text = NSLocalizedString(@"  2. Configure the session",
+                                           @"Section name of the main view");
             break;
         case _SECTION_START:
-            label.text = @"  3. Let's begin!";
+            label.text = NSLocalizedString(@"  3. Let's begin!",
+                                           @"Section name of the main view");
             break;
         default:
             break;
@@ -169,11 +174,14 @@
         case _SECTION_START:
             if ([YTQueue instance].currentTurnAttendee)
             {
-                str = [NSString stringWithFormat:@"Next person: %@", [YTQueue instance].currentTurnAttendee.name];
+                str = [NSString stringWithFormat:NSLocalizedString(@"Next person: %@",
+                                                                   @"Footer message of the main view"),
+                       [YTQueue instance].currentTurnAttendee.name];
             }
             else
             {
-                str = @"You must have at least 1 person to start the session.";
+                str = NSLocalizedString(@"You must have at least 1 person to start the session.",
+                                        @"Footer message of the main view");
             }
             label.text = str;
             break;

@@ -19,15 +19,21 @@
     NSInteger second = (allottedTime % 3600 % 60);
     if (hour > 0)
     {
-        return [NSString stringWithFormat:@"%dh %dm %ds", hour, minute, second];
+        return [NSString stringWithFormat:NSLocalizedString(@"%dh %dm %ds", @"Time format string (HMS)"),
+                hour,
+                minute,
+                second];
     }
     else if (minute > 0)
     {
-        return [NSString stringWithFormat:@"%dm %ds", minute, second];
+        return [NSString stringWithFormat:NSLocalizedString(@"%dm %ds", @"Time format string (HMS)"),
+                minute,
+                second];
     }
     else
     {
-        return [NSString stringWithFormat:@"%ds", second];
+        return [NSString stringWithFormat:NSLocalizedString(@"%ds", @"Time format string (HMS)"),
+                second];
     }
 }
 
@@ -38,11 +44,16 @@
     NSInteger second = (allottedTime % 3600 % 60);
     if (hour > 0)
     {
-        return [NSString stringWithFormat:@"%d:%02d:%02d", hour, minute, second];
+        return [NSString stringWithFormat:NSLocalizedString(@"%d:%02d:%02d", @"Time format string (Colon)"),
+                hour,
+                minute,
+                second];
     }
     else if (minute > 0)
     {
-        return [NSString stringWithFormat:@"%d:%02d", minute, second];
+        return [NSString stringWithFormat:NSLocalizedString(@"%d:%02d", @"Time format string (Colon)"),
+                minute,
+                second];
     }
     else
     {

@@ -16,6 +16,7 @@
     NSString *fileId;
     NSString *fileName;
     NSString *fileExtension;
+    NSString *displayName;
     SystemSoundID soundId;
 }
 
@@ -23,6 +24,7 @@
 @property (nonatomic, readonly) NSString *fileId;
 @property (nonatomic, readonly) NSString *fileName;
 @property (nonatomic, readonly) NSString *fileExtension;
+@property (nonatomic, retain) NSString *displayName;
 
 - (id)initWithId:(NSString *)aSoundId fileName:(NSString *)aFileName fileExtension:(NSString *)aFileExtension;
 - (void)play;

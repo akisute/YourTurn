@@ -12,6 +12,8 @@
 #import "YTSetIntervalViewController.h"
 #import "YTSelectionCell.h"
 #import "YTUserDefaults.h"
+#import "YTSound.h"
+#import "YTSoundTypes.h"
 #import "NSString+YourTurn.h"
 
 #define _REUSE_IDENTIFIER_SELECTION @"YTSelectionCell"
@@ -33,7 +35,7 @@
 {
     [super viewDidLoad];
     self.tableView.scrollEnabled = NO;
-    self.title = @"Settings";
+    self.title = NSLocalizedString(@"Settings", @"Title of the settings view");
     soundSettingsCell = [[YTSelectionCell alloc] initWithFrame:CGRectZero
                                                reuseIdentifier:_REUSE_IDENTIFIER_SELECTION];
     intermissionSettingsCell = [[YTSelectionCell alloc] initWithFrame:CGRectZero
@@ -75,7 +77,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return @"General";
+    return NSLocalizedString(@"General", @"Section header of the settings view");
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -86,13 +88,15 @@
     switch (indexPath.row) {
         case _CELL_INTERMISSION_SETTINGS:
             enabled = [defaults boolForKey:USERDEFAULTS_INTERMISSION_ENABLED_KEY];
-            string = (enabled) ? [NSString stringHMSFormatWithAllottedTime:[defaults integerForKey:USERDEFAULTS_INTERMISSION_DURATION_KEY]] : @"OFF";
-            intermissionSettingsCell.label = @"Intermission";
+            string = (enabled)
+            ? [NSString stringHMSFormatWithAllottedTime:[defaults integerForKey:USERDEFAULTS_INTERMISSION_DURATION_KEY]]
+            : NSLocalizedString(@"OFF", @"On / Off.");
+            intermissionSettingsCell.label = NSLocalizedString(@"Intermission", @"Cell text of the settings view");
             intermissionSettingsCell.selectionLabel = string;
             return intermissionSettingsCell;
         case _CELL_SOUND_SETTINGS:
-            string = [defaults stringForKey:USERDEFAULTS_SOUND_TURNEND_KEY];
-            soundSettingsCell.label = @"Sound";
+            string = [[YTSoundTypes instance] soundForId:[defaults stringForKey:USERDEFAULTS_SOUND_TURNEND_KEY]].displayName;
+            soundSettingsCell.label = NSLocalizedString(@"Sound", @"Cell text of the settings view");
             soundSettingsCell.selectionLabel = string;
             return soundSettingsCell;
         default:

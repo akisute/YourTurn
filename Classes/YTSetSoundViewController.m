@@ -28,7 +28,7 @@
 {
     [super viewDidLoad];
     self.tableView.scrollEnabled = NO;
-    self.title = @"Sound settings";
+    self.title = NSLocalizedString(@"Sound settings", @"Title of the sound settings view");
 }
 
 - (void)dealloc
@@ -50,7 +50,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return @"Sound when turn ends";
+    return NSLocalizedString(@"Sound when turn ends", @"Section header of the sound settings view");
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -62,7 +62,7 @@
     }
     NSString *currentSoundId = [[NSUserDefaults standardUserDefaults] stringForKey:USERDEFAULTS_SOUND_TURNEND_KEY];
     YTSound *sound = [[YTSoundTypes instance] soundForIndex:indexPath.row];
-    cell.text = sound.fileId;
+    cell.text = sound.displayName;
     if ([sound.fileId isEqualToString:currentSoundId])
     {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;

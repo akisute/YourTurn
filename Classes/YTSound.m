@@ -14,10 +14,21 @@ static NSUInteger _instanceCount = 0;
 
 @implementation YTSound
 
+#pragma mark properties
+
 @synthesize instanceId;
 @synthesize fileId;
 @synthesize fileName;
 @synthesize fileExtension;
+@synthesize displayName;
+
+- (NSString *)displayName
+{
+    // Use fileId instead of displayName if no displayName is available
+    return (displayName) ? displayName : fileId;
+}
+
+#pragma mark init, dealloc, memory management
 
 - (id)initWithId:(NSString *)aFileId fileName:(NSString *)aFileName fileExtension:(NSString *)aFileExtension
 {
@@ -46,6 +57,8 @@ static NSUInteger _instanceCount = 0;
     [fileExtension release];
     [super dealloc];
 }
+
+#pragma mark other methods
 
 - (void)play
 {

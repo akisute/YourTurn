@@ -29,11 +29,11 @@
 {
     [super viewDidLoad];
     self.tableView.scrollEnabled = NO;
-    self.title = @"Intermission settings";
+    self.title = NSLocalizedString(@"Intermission settings", @"Title of the intermission settings view");
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     enableCell = [[YTSwitchCell alloc] initWithFrame:CGRectZero reuseIdentifier:nil];
-    enableCell.label = @"Enable intermission";
+    enableCell.label = NSLocalizedString(@"Enable intermission", @"Label of the cell in the intermission settings view");
     enableCell.switchCondition = [defaults boolForKey:USERDEFAULTS_INTERMISSION_ENABLED_KEY];
     
     // Initialize time picker with a previously selected value
@@ -85,9 +85,11 @@
     switch (section)
     {
         case _SECTION_INPUT_ENABLE:
-            return @"Intermission between attendees";
+            return NSLocalizedString(@"Intermission between attendees",
+                                     @"Section header of the intermission settings view");
         case _SECTION_INPUT_TIME:
-            return @"Intermission duration";
+            return NSLocalizedString(@"Intermission duration",
+                                     @"Section header of the intermission settings view");
         default:
             return nil;
     }

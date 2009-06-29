@@ -27,7 +27,8 @@
     if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier])
     {
         message = [[UILabel alloc] initWithFrame:CGRectZero];
-        message.text = @"Add new attendee";
+        message.text = NSLocalizedString(@"Add new attendee",
+                                         @"Text of the cell of Attendee view to add new attendee");
         message.font = [UIFont boldSystemFontOfSize:20.0];
         message.textColor = [UIColor blueColor];
         message.backgroundColor = [UIColor clearColor];

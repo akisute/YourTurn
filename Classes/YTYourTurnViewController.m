@@ -223,9 +223,11 @@
 {
     YTQueue *queue = [YTQueue instance];
     YTAttendee *attendee = queue.nextTurnAttendee;
-    self.title = @"Intermission";
+    self.title = NSLocalizedString(@"Intermission", @"Title of the YourTurn view when in intermission");
     self.displayLabel.numberOfLines = 2;
-    self.displayLabel.text = [NSString stringWithFormat:@"Next person:\n%@", attendee.name];
+    self.displayLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Next person:\n%@",
+                                                                          @"Text of the display label on the YourTurn view"),
+                              attendee.name];
     self.displayLabel.textColor = [UIColor whiteColor];
     self.timerLabel.textColor = [UIColor whiteColor];
     allottedTime = [[NSUserDefaults standardUserDefaults] integerForKey:USERDEFAULTS_INTERMISSION_DURATION_KEY];

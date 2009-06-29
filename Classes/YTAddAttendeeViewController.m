@@ -39,7 +39,9 @@
                                                                                             target:self
                                                                                             action:@selector(done:)] autorelease];
     self.navigationItem.rightBarButtonItem.enabled = (editingAttendee) ? YES : NO;
-    self.title = (editingAttendee) ? @"Edit attendee" : @"Add attendee";
+    self.title = (editingAttendee)
+    ? NSLocalizedString(@"Edit attendee", @"Title of the add attendee view")
+    : NSLocalizedString(@"Add attendee", @"Title of the add attendee view");
     
     NSString *nameCellValue = (editingAttendee) ? editingAttendee.name : @"";
     NSInteger initialValue = (editingAttendee) ? editingAttendee.allottedTime :
@@ -47,9 +49,9 @@
     
     // Initialize name input cell
     nameCell = [[YTTextFieldCell alloc] initWithFrame:CGRectZero reuseIdentifier:nil];
-    nameCell.label = @"Name";
+    nameCell.label = NSLocalizedString(@"Name", @"Label of the name input cell");
     nameCell.value = nameCellValue;
-    nameCell.placeholder = @"Required";
+    nameCell.placeholder = NSLocalizedString(@"Required", @"Placeholder for the name input cell");
     nameCell.delegate = self;
     (editingAttendee) ? nil : [nameCell focus:self];
     
@@ -94,9 +96,9 @@
     switch (section)
     {
         case _SECTION_INPUT_NAME:
-            return @"Attendee information";
+            return NSLocalizedString(@"Attendee information", @"Section title of the add attendee view");
         case _SECTION_INPUT_TIME:
-            return @"Allotted time";
+            return NSLocalizedString(@"Allotted time", @"Section title of the add attendee view");
         default:
             return nil;
     }

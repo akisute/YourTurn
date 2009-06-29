@@ -72,20 +72,26 @@ static YTSoundTypes *_instance;
 - (void)load
 {
     YTSound *sound = nil;
+    
     //None
     sound = [[[YTSound alloc] initWithId:@"None"
                                 fileName:nil
                            fileExtension:nil] autorelease];
+    sound.displayName = NSLocalizedString(@"None", @"Display name of a sound object");
     [sounds setObject:sound forKey:sound.fileId];
+    
     //bell.aif
     sound = [[[YTSound alloc] initWithId:@"Bell"
                                 fileName:@"bell"
                            fileExtension:@"aif"] autorelease];
+    sound.displayName = NSLocalizedString(@"Bell", @"Display name of a sound object");
     [sounds setObject:sound forKey:sound.fileId];
+    
     //gong.aif
     sound = [[[YTSound alloc] initWithId:@"Gong"
                                 fileName:@"gong"
                            fileExtension:@"aif"] autorelease];
+    sound.displayName = NSLocalizedString(@"Gong", @"Display name of a sound object");
     [sounds setObject:sound forKey:sound.fileId];
 }
 
