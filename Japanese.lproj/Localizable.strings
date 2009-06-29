@@ -1,0 +1,110 @@
+﻿/* Section name of the main view */
+"  1. Setup attendees of the session" = "  1. セッションへの参加者を設定します";
+
+/* Section name of the main view */
+"  2. Configure the session" = "  2. セッションの設定を行います";
+
+/* Section name of the main view */
+"  3. Let's begin!" = "  3. それでは始めましょう！";
+
+/* Time format string (Colon) */
+"%d:%02d" = "%1$d:%2$02d";
+
+/* Time format string (Colon) */
+"%d:%02d:%02d" = "%1$d:%2$02d:%3$02d";
+
+/* Time format string (HMS) */
+"%dh %dm %ds" = "%1$d時間%2$d分%3$d秒";
+
+/* Time format string (HMS) */
+"%dm %ds" = "%1$d分%2$d秒";
+
+/* Time format string (HMS) */
+"%ds" = "%d秒";
+
+/* Title of the add attendee view */
+"Add attendee" = "参加者を追加";
+
+/* Text of the cell of Attendee view to add new attendee */
+"Add new attendee" = "新規参加者を追加";
+
+/* Section title of the add attendee view */
+"Allotted time" = "持ち時間";
+
+/* Section title of the add attendee view */
+"Attendee information" = "参加者の情報";
+
+/* Title of the attendees queue table view */
+"Attendees" = "参加者一覧";
+
+/* Display name of a sound object */
+"Bell" = "ベル";
+
+/* Title of the add attendee view */
+"Edit attendee" = "参加者を編集";
+
+/* Label of the cell in the intermission settings view */
+"Enable intermission" = "幕間を有効にする";
+
+/* Section header of the settings view */
+"General" = "一般";
+
+/* Display name of a sound object */
+"Gong" = "銅鑼";
+
+/* Title of the YourTurn view when in intermission
+   Cell text of the settings view */
+"Intermission" = "幕間";
+
+/* Section header of the intermission settings view */
+"Intermission between attendees" = "各参加者間の幕間";
+
+/* Section header of the intermission settings view */
+"Intermission duration" = "幕間の長さ";
+
+/* Title of the intermission settings view */
+"Intermission settings" = "幕間の設定";
+
+/* Cell text of the main view */
+"Manage attendees (%d)" = "参加者を管理する (%d)";
+
+/* Label of the name input cell */
+"Name" = "名前";
+
+/* Footer message of the main view */
+"Next person: %@" = "次の人: %@";
+
+/* Text of the display label on the YourTurn view */
+"Next person:\n%@" = "次の人:\n%@";
+
+/* Display name of a sound object */
+"None" = "なし";
+
+/* On / Off. */
+"OFF" = "オフ";
+
+/* Placeholder for the name input cell */
+"Required" = "必須項目";
+
+/* Title of the settings view
+   Cell text of the main view */
+"Settings" = "設定";
+
+/* Cell text of the settings view */
+"Sound" = "サウンド";
+
+/* Title of the sound settings view */
+"Sound settings" = "サウンド設定";
+
+/* Section header of the sound settings view */
+"Sound when turn ends" = "ターン終了時の音";
+
+/* Cell text of the main view */
+"Start session" = "セッションを開始";
+
+/* Footer message of the main view */
+"You must have at least 1 person to start the session." = "セッションを開始するためには、最低でも一人の参加者が必要です。";
+
+/* Application name. DO NOT TRANSLATE */
+"YourTurn" = "YourTurn";
+
