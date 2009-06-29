@@ -170,7 +170,6 @@
 {
     // setEditing is called when user presses "Edit" button.
     [super setEditing:flag animated:animated];
-    [self.tableView reloadData];
 }
 
 #pragma mark IBAction
