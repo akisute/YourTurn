@@ -72,21 +72,21 @@ static YTSoundTypes *_instance;
 - (void)load
 {
     YTSound *sound = nil;
+    //None
+    sound = [[[YTSound alloc] initWithId:@"None"
+                                fileName:nil
+                           fileExtension:nil] autorelease];
+    [sounds setObject:sound forKey:sound.fileId];
     //bell.aif
     sound = [[[YTSound alloc] initWithId:@"Bell"
                                 fileName:@"bell"
                            fileExtension:@"aif"] autorelease];
     [sounds setObject:sound forKey:sound.fileId];
-//    //gong.aif
-//    sound = [[[YTSound alloc] initWithId:@"Gong"
-//                                fileName:@"gong"
-//                           fileExtension:@"aif"] autorelease];
-//    [sounds setObject:sound forKey:sound.fileId];
-//    //MyTurn.wav
-//    sound = [[[YTSound alloc] initWithId:@"\"My Turn!\""
-//                                fileName:@"MyTurn"
-//                           fileExtension:@"wav"] autorelease];
-//    [sounds setObject:sound forKey:sound.fileId];
+    //gong.aif
+    sound = [[[YTSound alloc] initWithId:@"Gong"
+                                fileName:@"gong"
+                           fileExtension:@"aif"] autorelease];
+    [sounds setObject:sound forKey:sound.fileId];
 }
 
 @end

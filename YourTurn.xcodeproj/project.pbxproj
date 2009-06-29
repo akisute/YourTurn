@@ -56,6 +56,7 @@
 		0ECF5C960FAB3CE3000D2116 /* YTQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF5BF80FAB2BFB000D2116 /* YTQueue.m */; };
 		0ECF5C990FAB3D11000D2116 /* YTQueueTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECF5C980FAB3D11000D2116 /* YTQueueTest.m */; };
 		0ED089A10FF193B900C2FF7C /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ED089A00FF193B900C2FF7C /* Entitlements.plist */; };
+		0ED2E4480FF8F6D40013CACC /* gong.aif in Resources */ = {isa = PBXBuildFile; fileRef = 0ED2E4470FF8F6D40013CACC /* gong.aif */; };
 		0EDF02D70FF043070055F1D6 /* YTAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDF02D50FF043070055F1D6 /* YTAboutViewController.m */; };
 		0EDF02DE0FF044230055F1D6 /* about.html in Resources */ = {isa = PBXBuildFile; fileRef = 0EDF02DD0FF044230055F1D6 /* about.html */; };
 		0EEFFE9C0FB185A200D86C0E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EEFFE9B0FB185A200D86C0E /* AudioToolbox.framework */; };
@@ -136,6 +137,7 @@
 		0ECF5C970FAB3D11000D2116 /* YTQueueTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTQueueTest.h; sourceTree = "<group>"; };
 		0ECF5C980FAB3D11000D2116 /* YTQueueTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTQueueTest.m; sourceTree = "<group>"; };
 		0ED089A00FF193B900C2FF7C /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		0ED2E4470FF8F6D40013CACC /* gong.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = gong.aif; sourceTree = "<group>"; };
 		0EDF02D40FF043070055F1D6 /* YTAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTAboutViewController.h; sourceTree = "<group>"; };
 		0EDF02D50FF043070055F1D6 /* YTAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTAboutViewController.m; sourceTree = "<group>"; };
 		0EDF02DD0FF044230055F1D6 /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 			children = (
 				0EDF02DD0FF044230055F1D6 /* about.html */,
 				0E4157F00FB9B3D200D8ED78 /* bell.aif */,
+				0ED2E4470FF8F6D40013CACC /* gong.aif */,
 				0EC7C95F0FB138A300CDD62D /* icon.png */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				0ECF5C650FAB3AD0000D2116 /* Unit Test-Info.plist */,
@@ -419,6 +422,7 @@
 				0E4157F10FB9B3D200D8ED78 /* bell.aif in Resources */,
 				0EDF02DE0FF044230055F1D6 /* about.html in Resources */,
 				0ED089A10FF193B900C2FF7C /* Entitlements.plist in Resources */,
+				0ED2E4480FF8F6D40013CACC /* gong.aif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

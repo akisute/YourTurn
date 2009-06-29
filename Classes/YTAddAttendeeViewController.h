@@ -11,12 +11,15 @@
 
 @class YTTextFieldCell;
 @class YTTimePickerView;
+@class YTAttendee;
 
 @interface YTAddAttendeeViewController : UITableViewController {
     YTTextFieldCell *nameCell;
     YTTimePickerView *timePicker;
+    YTAttendee *editingAttendee;
 }
 
+- (id)initWithNibName:(NSString *)nibNameOrNill bundle:(NSBundle *)nibBundleOrNill attendee:(YTAttendee *)anAttendeeOrNil;
 - (IBAction)done:(id)sender;
 
 @end

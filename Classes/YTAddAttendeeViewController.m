@@ -22,6 +22,15 @@
 
 #pragma mark init, dealloc, memory management
 
+- (id)initWithNibName:(NSString *)nibNameOrNill bundle:(NSBundle *)nibBundleOrNill attendee:(YTAttendee *)anAttendeeOrNil
+{
+    if (self = [super initWithNibName:nibNameOrNill bundle:nibBundleOrNill])
+    {
+        editingAttendee = [anAttendeeOrNil retain];
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -29,21 +38,24 @@
     self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
                                                                                             target:self
                                                                                             action:@selector(done:)] autorelease];
-    self.navigationItem.rightBarButtonItem.enabled = NO;
-    self.title = @"Add attendee";
+    self.navigationItem.rightBarButtonItem.enabled = (editingAttendee) ? YES : NO;
+    self.title = (editingAttendee) ? @"Edit attendee" : @"Add attendee";
+    
+    NSString *nameCellValue = (editingAttendee) ? editingAttendee.name : @"";
+    NSInteger initialValue = (editingAttendee) ? editingAttendee.allottedTime :
+    [[NSUserDefaults standardUserDefaults] integerForKey:USERDEFAULTS_TIMEPICKER_INITIALVALUE_KEY];
     
     // Initialize name input cell
     nameCell = [[YTTextFieldCell alloc] initWithFrame:CGRectZero reuseIdentifier:nil];
     nameCell.label = @"Name";
-    nameCell.value = @"";
+    nameCell.value = nameCellValue;
     nameCell.placeholder = @"Required";
     nameCell.delegate = self;
-    [nameCell focus:self];
+    (editingAttendee) ? nil : [nameCell focus:self];
     
     // Initialize time picker with a previously selected value
     timePicker = [[YTTimePickerView alloc] initWithFrame:CGRectZero];
-    NSInteger initialValue = [[NSUserDefaults standardUserDefaults] integerForKey:USERDEFAULTS_TIMEPICKER_INITIALVALUE_KEY];
-    timePicker.time = (initialValue == 0) ? 300 : initialValue;
+    timePicker.time = initialValue;
     timePicker.timePickerViewDelegate = self;
     [timePicker selectRowWithCurrentTime];
     self.tableView.tableFooterView = timePicker;
@@ -53,6 +65,7 @@
 {
     [timePicker release];
     [nameCell release];
+    [editingAttendee release];
     [super dealloc];
 }
 
@@ -131,11 +144,20 @@
 
 - (IBAction)done:(id)sender
 {
-    // Create a new attendee object from inputted data and push it into the YTQueue
-    YTAttendee *attendee = [[[YTAttendee alloc] init] autorelease];
-    attendee.name = nameCell.value;
-    attendee.allottedTime = timePicker.time;
-    [[YTQueue instance] addAttendee:attendee];
+    if (editingAttendee)
+    {
+        // Update editing attendee
+        editingAttendee.name = nameCell.value;
+        editingAttendee.allottedTime = timePicker.time;
+    }
+    else
+    {
+        // Create a new attendee object from inputted data and push it into the YTQueue
+        YTAttendee *attendee = [[[YTAttendee alloc] init] autorelease];
+        attendee.name = nameCell.value;
+        attendee.allottedTime = timePicker.time;
+        [[YTQueue instance] addAttendee:attendee];
+    }
     
     // Save current value of the time picker into user default
     [[NSUserDefaults standardUserDefaults] setInteger:timePicker.time forKey:USERDEFAULTS_TIMEPICKER_INITIALVALUE_KEY];

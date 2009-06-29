@@ -115,9 +115,16 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Open up an AddAttendeeView if "add atendee" cell is touched
-    if (indexPath.row == [YTQueue instance].count)
+    
+    if (indexPath.row < [YTQueue instance].count)
     {
+        // Open up an AddAttendeeView with an editing object
+        YTAttendee *attendee = [[YTQueue instance] attendeeAtIndex:indexPath.row];
+        [self editAttendee:attendee];
+    }
+    else if (indexPath.row == [YTQueue instance].count)
+    {
+        // Open up an AddAttendeeView if "add atendee" cell is touched
         [self addAttendee:self];
     }
 }
@@ -170,18 +177,27 @@
 
 - (IBAction)addAttendee:(id)sender
 {
-    // Open up a new view to add a new attendee
     YTAddAttendeeViewController *addAttendeeViewController = [[[YTAddAttendeeViewController alloc] initWithNibName:@"YTAddAttendeeView"
-                                                                                                            bundle:nil] autorelease];
+                                                                bundle:nil
+                                                                attendee:nil] autorelease];
     [self.navigationController pushViewController:addAttendeeViewController animated:YES];
 }
 
 - (IBAction)openYourTurnView:(id)sender
 {
-    // Open up the YourTurn view
     YTYourTurnViewController *yourTurnViewController = [[[YTYourTurnViewController alloc] initWithNibName:@"YTYourTurnView"
                                                                                                    bundle:nil] autorelease];
     [self.navigationController pushViewController:yourTurnViewController animated:YES];
+}
+
+#pragma mark other methods
+
+- (void)editAttendee:(YTAttendee *)anAttendee
+{
+    YTAddAttendeeViewController *addAttendeeViewController = [[[YTAddAttendeeViewController alloc] initWithNibName:@"YTAddAttendeeView"
+                                                                                                            bundle:nil
+                                                                                                          attendee:anAttendee] autorelease];
+    [self.navigationController pushViewController:addAttendeeViewController animated:YES];
 }
 
 @end

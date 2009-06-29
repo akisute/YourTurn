@@ -10,8 +10,11 @@
 #import "YTSound.h"
 
 
+static NSUInteger _instanceCount = 0;
+
 @implementation YTSound
 
+@synthesize instanceId;
 @synthesize fileId;
 @synthesize fileName;
 @synthesize fileExtension;
@@ -20,14 +23,18 @@
 {
     if (self = [super init])
     {
+        instanceId = _instanceCount++;
         fileId = [aFileId retain];
         fileName = [aFileName retain];
         fileExtension = [aFileExtension retain];
-        NSString *audioPath = [[NSBundle mainBundle] pathForResource:fileName ofType:fileExtension];
-        NSURL *audioURL = [NSURL fileURLWithPath:audioPath];
-        LOG(@"Creating the sound object from file: %d", audioURL);
-        OSStatus status = AudioServicesCreateSystemSoundID((CFURLRef)audioURL, &soundId);
-        LOG(@"AudioServicesCreateSystemSoundID result=%d", status);
+        if (fileName && fileExtension)
+        {
+            NSString *audioPath = [[NSBundle mainBundle] pathForResource:fileName ofType:fileExtension];
+            NSURL *audioURL = [NSURL fileURLWithPath:audioPath];
+            LOG(@"Creating the sound object from file: %d", audioURL);
+            OSStatus status = AudioServicesCreateSystemSoundID((CFURLRef)audioURL, &soundId);
+            LOG(@"AudioServicesCreateSystemSoundID result=%d", status);
+        }
     }
     return self;
 }
@@ -43,6 +50,22 @@
 - (void)play
 {
     AudioServicesPlaySystemSound(soundId);
+}
+
+- (NSComparisonResult)compare:(YTSound *)aSound
+{
+    if (self.instanceId < aSound.instanceId)
+    {
+        return NSOrderedAscending;
+    }
+    else if (self.instanceId == aSound.instanceId)
+    {
+        return NSOrderedSame;
+    }
+    else
+    {
+        return NSOrderedDescending;
+    }
 }
 
 @end

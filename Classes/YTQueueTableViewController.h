@@ -9,11 +9,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class YTAttendee;
 
 @interface YTQueueTableViewController : UITableViewController {
 }
 
 - (IBAction)addAttendee:(id)sender;
 - (IBAction)openYourTurnView:(id)sender;
+- (void)editAttendee:(YTAttendee *)anAttendee;
 
 @end

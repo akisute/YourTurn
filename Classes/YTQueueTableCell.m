@@ -38,7 +38,7 @@
         [self.contentView addSubview:nameLabel];
         [self.contentView addSubview:indexLabel];
         [self.contentView addSubview:timeLabel];
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.selectionStyle = UITableViewCellSelectionStyleBlue;
     }
     return self;
 }
