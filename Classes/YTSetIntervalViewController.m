@@ -56,8 +56,9 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSInteger time = (timePicker.time == 0) ? 1 : timePicker.time;
     [defaults setBool:enableCell.switchCondition forKey:USERDEFAULTS_INTERMISSION_ENABLED_KEY];
-    [defaults setInteger:timePicker.time forKey:USERDEFAULTS_INTERMISSION_DURATION_KEY];
+    [defaults setInteger:time forKey:USERDEFAULTS_INTERMISSION_DURATION_KEY];
 }
 
 #pragma mark Table view methods

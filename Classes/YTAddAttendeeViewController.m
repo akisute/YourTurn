@@ -150,14 +150,14 @@
     {
         // Update editing attendee
         editingAttendee.name = nameCell.value;
-        editingAttendee.allottedTime = timePicker.time;
+        editingAttendee.allottedTime = (timePicker.time == 0) ? 1 : timePicker.time;
     }
     else
     {
         // Create a new attendee object from inputted data and push it into the YTQueue
         YTAttendee *attendee = [[[YTAttendee alloc] init] autorelease];
         attendee.name = nameCell.value;
-        attendee.allottedTime = timePicker.time;
+        attendee.allottedTime = (timePicker.time == 0) ? 1 : timePicker.time;
         [[YTQueue instance] addAttendee:attendee];
     }
     
