@@ -129,31 +129,21 @@
     }
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    UILabel *label = [[[UILabel alloc] initWithFrame:CGRectZero] autorelease];
-    label.font = [UIFont boldSystemFontOfSize:15.0];
-    label.textColor = [UIColor colorWithHue:0.136 saturation:0.68 brightness:0.42 alpha:1.0];
-    label.shadowColor = [UIColor colorWithHue:0.125 saturation:0.85 brightness:0.90 alpha:0.5];
-    label.shadowOffset = CGSizeMake(1.0, 1.0);
-    label.backgroundColor = [UIColor clearColor];
     switch (section) {
         case _SECTION_ATTENDEE:
-            label.text = NSLocalizedString(@"  1. Setup attendees of the session",
-                                           @"Section name of the main view");
-            break;
+            return NSLocalizedString(@"1. Setup attendees of the session",
+                                     @"Section name of the main view");
         case _SECTION_SETTINGS:
-            label.text = NSLocalizedString(@"  2. Configure the session",
-                                           @"Section name of the main view");
-            break;
+            return NSLocalizedString(@"2. Configure the session",
+                                     @"Section name of the main view");
         case _SECTION_START:
-            label.text = NSLocalizedString(@"  3. Let's begin!",
-                                           @"Section name of the main view");
-            break;
+            return NSLocalizedString(@"3. Let's begin!",
+                                     @"Section name of the main view");
         default:
-            break;
+            return nil;
     }
-    return label;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
