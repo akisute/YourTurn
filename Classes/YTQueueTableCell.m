@@ -28,6 +28,8 @@
     {
         nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         nameLabel.font = [UIFont boldSystemFontOfSize:26.0];
+        nameLabel.backgroundColor = [UIColor clearColor];
+        nameLabel.opaque = NO;
         indexLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         indexLabel.font = [UIFont systemFontOfSize:16.0];
         indexLabel.textColor = [UIColor colorWithHue:0.33 saturation:1.0 brightness:0.5 alpha:1.0];
@@ -66,41 +68,19 @@
 - (void)drawRect:(CGRect)rect
 {
     CGContextRef context = UIGraphicsGetCurrentContext();
-    UIColor *textColor = [UIColor blackColor];
-    UIColor *backgroundColor = [UIColor redColor];
-    CGRect contentRect = self.contentView.frame;
-    CGFloat boundsX = contentRect.origin.x;
-    CGFloat boundsY = contentRect.origin.y;
-    CGPoint point;
+    CGGradientRef gradient;
+    CGColorSpaceRef colorSpace;
+    size_t num_locations = 2;
+    CGFloat locations[2] = { 0.0, 1.0 };
+    CGFloat components[8] = { 1.0, 0.5, 0.4, 1.0,  // Start color
+    0.8, 0.8, 0.3, 1.0 }; // End color
     
-    [textColor set];
-    if (self.editing)
-    {
-        // editing
-        point = CGPointMake(boundsX, boundsY);
-        [@"editing" drawAtPoint:point
-                       forWidth:150.0
-                       withFont:[UIFont systemFontOfSize:12.0]
-                    minFontSize:12.0
-                 actualFontSize:NULL
-                  lineBreakMode:UILineBreakModeCharacterWrap
-             baselineAdjustment:UIBaselineAdjustmentAlignBaselines];
-    }
-    else
-    {
-        // normal
-        point = CGPointMake(boundsX, boundsY);
-        [@"normal" drawAtPoint:point
-                      forWidth:150.0
-                      withFont:[UIFont systemFontOfSize:12.0]
-                   minFontSize:12.0
-                actualFontSize:NULL
-                 lineBreakMode:UILineBreakModeCharacterWrap
-            baselineAdjustment:UIBaselineAdjustmentAlignBaselines];
-    }
-    
-    [backgroundColor set];
-    CGContextFillRect(context, rect);
+    colorSpace = CGColorSpaceCreateDeviceRGB();
+    gradient = CGGradientCreateWithColorComponents(colorSpace, components,
+                                                   locations, num_locations);
+    CGPoint startPoint = CGPointMake(self.frame.size.width/2, 0.0);
+    CGPoint endPoint = CGPointMake(self.frame.size.width/2, self.frame.size.height);
+    CGContextDrawLinearGradient(context, gradient, startPoint, endPoint, 0);
 }
 
 #pragma mark other method
