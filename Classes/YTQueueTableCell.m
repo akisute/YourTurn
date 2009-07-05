@@ -63,6 +63,46 @@
     timeLabel.frame = CGRectMake(bounds.size.width - 140.0, 50.0, 120.0, 22.0 - 1.0); // Leave a space for sparator
 }
 
+- (void)drawRect:(CGRect)rect
+{
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    UIColor *textColor = [UIColor blackColor];
+    UIColor *backgroundColor = [UIColor redColor];
+    CGRect contentRect = self.contentView.frame;
+    CGFloat boundsX = contentRect.origin.x;
+    CGFloat boundsY = contentRect.origin.y;
+    CGPoint point;
+    
+    [textColor set];
+    if (self.editing)
+    {
+        // editing
+        point = CGPointMake(boundsX, boundsY);
+        [@"editing" drawAtPoint:point
+                       forWidth:150.0
+                       withFont:[UIFont systemFontOfSize:12.0]
+                    minFontSize:12.0
+                 actualFontSize:NULL
+                  lineBreakMode:UILineBreakModeCharacterWrap
+             baselineAdjustment:UIBaselineAdjustmentAlignBaselines];
+    }
+    else
+    {
+        // normal
+        point = CGPointMake(boundsX, boundsY);
+        [@"normal" drawAtPoint:point
+                      forWidth:150.0
+                      withFont:[UIFont systemFontOfSize:12.0]
+                   minFontSize:12.0
+                actualFontSize:NULL
+                 lineBreakMode:UILineBreakModeCharacterWrap
+            baselineAdjustment:UIBaselineAdjustmentAlignBaselines];
+    }
+    
+    [backgroundColor set];
+    CGContextFillRect(context, rect);
+}
+
 #pragma mark other method
 
 - (void)setLabelsWithIndex:(NSUInteger)index andAttendee:(YTAttendee *)attendee
