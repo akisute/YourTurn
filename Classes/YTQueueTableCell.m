@@ -33,9 +33,13 @@
         indexLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         indexLabel.font = [UIFont systemFontOfSize:16.0];
         indexLabel.textColor = [UIColor colorWithHue:0.33 saturation:1.0 brightness:0.5 alpha:1.0];
+        indexLabel.backgroundColor = [UIColor clearColor];
+        indexLabel.opaque = NO;
         timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         timeLabel.font = [UIFont fontWithName:@"Courier New" size:16.0];
         timeLabel.textAlignment = UITextAlignmentRight;
+        timeLabel.backgroundColor = [UIColor clearColor];
+        timeLabel.opaque = NO;
 
         [self.contentView addSubview:nameLabel];
         [self.contentView addSubview:indexLabel];
@@ -72,8 +76,8 @@
     CGColorSpaceRef colorSpace;
     size_t num_locations = 2;
     CGFloat locations[2] = { 0.0, 1.0 };
-    CGFloat components[8] = { 1.0, 0.5, 0.4, 1.0,  // Start color
-    0.8, 0.8, 0.3, 1.0 }; // End color
+    CGFloat components[8] = { 1.0, 1.0, 1.0, 1.0,  // Start color
+    0.79, 0.79, 0.79, 1.0 }; // End color
     
     colorSpace = CGColorSpaceCreateDeviceRGB();
     gradient = CGGradientCreateWithColorComponents(colorSpace, components,

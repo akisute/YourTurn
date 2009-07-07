@@ -8,6 +8,7 @@
 //
 
 #import "YTQueueTableAddAttendeeCell.h"
+#import "YTCellBackgroundView.h"
 
 
 @implementation YTQueueTableAddAttendeeCell
@@ -38,8 +39,9 @@
         [self addSubview:message];
         
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        self.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
-        self.backgroundView.backgroundColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.94 alpha:1.0];
+        self.backgroundView = [[[YTCellBackgroundView alloc] initWithFrame:CGRectZero] autorelease];
+//        self.backgroundView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+//        self.backgroundView.backgroundColor = [UIColor colorWithHue:0.0 saturation:0.0 brightness:0.94 alpha:1.0];
     }
     return self;
 }
