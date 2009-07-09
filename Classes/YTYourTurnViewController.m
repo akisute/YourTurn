@@ -9,6 +9,7 @@
 
 #import <AudioToolbox/AudioToolbox.h>
 #import "YTYourTurnViewController.h"
+#import "YTYourTurnBackgroundView.h"
 #import "YTQueue.h"
 #import "YTAttendee.h"
 #import "YTSound.h"
@@ -31,6 +32,7 @@
 
 @implementation YTYourTurnViewController
 
+@synthesize backgroundView;
 @synthesize displayLabel;
 @synthesize timerLabel;
 @synthesize initialBackgroundColorHSBA;
@@ -57,6 +59,7 @@
 
 - (void)dealloc
 {
+    [backgroundView release];
     [displayLabel release];
     [timerLabel release];
     free(initialBackgroundColorHSBA);

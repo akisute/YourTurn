@@ -9,8 +9,11 @@
 
 #import <UIKit/UIKit.h>
 
+@class YTYourTurnBackgroundView;
+
 
 @interface YTYourTurnViewController : UIViewController {
+    YTYourTurnBackgroundView *backgroundView;
     UILabel *displayLabel;
     UILabel *timerLabel;
     NSTimer *timer;
@@ -23,6 +26,7 @@
     CGFloat *deltaBackgroundColorHSBA;   // [hue, satulation, brightness, alpha]  0.0~1.0
 }
 
+@property (nonatomic, retain) IBOutlet YTYourTurnBackgroundView *backgroundView;
 @property (nonatomic, retain) IBOutlet UILabel *displayLabel;
 @property (nonatomic, retain) IBOutlet UILabel *timerLabel;
 @property (nonatomic) CGFloat *initialBackgroundColorHSBA;
