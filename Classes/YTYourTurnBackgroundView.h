@@ -22,9 +22,10 @@
 }
 
 - (void)setTimerWithAllottedTime:(int)time
-                   initialColor:(CGFloat *)initialColor
-                       endColor:(CGFloat *)endColor
-                       gradient:(BOOL)grad;
+                            wait:(NSTimeInterval)wait
+                    initialColor:(CGFloat *)initialColor
+                        endColor:(CGFloat *)endColor
+                        gradient:(BOOL)grad;
 - (void)timerFired;
 - (void)releaseTimer;
 

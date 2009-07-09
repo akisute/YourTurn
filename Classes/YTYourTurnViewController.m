@@ -26,8 +26,6 @@
 - (void)loadCurrentAttendee;
 /*! Loads intermission settings from NSUserDefaults if set, and set up the view for it. */
 - (void)loadIntermission;
-/*! Calculate the delta between start hue and end hue. Takes as small delta as possible. */
-- (CGFloat)calculateHueDeltaWithStartHue:(CGFloat)s endHue:(CGFloat)e time:(CGFloat)t;
 @end
 
 @implementation YTYourTurnViewController
@@ -35,18 +33,12 @@
 @synthesize backgroundView;
 @synthesize displayLabel;
 @synthesize timerLabel;
-@synthesize initialBackgroundColorHSBA;
-@synthesize endBackgroundColorHSBA;
 
 #pragma mark init, dealloc, memory management
 
 - (void)viewDidLoad
 {
     self.title = @"";
-    initialBackgroundColorHSBA = malloc(4 * sizeof(CGFloat));
-    endBackgroundColorHSBA = malloc(4 * sizeof(CGFloat));
-    currentBackgroundColorHSBA = malloc(4 * sizeof(CGFloat));
-    deltaBackgroundColorHSBA = malloc(4 * sizeof(CGFloat));
     intermission = NO;
     [self loadCurrentAttendee];
     [self setTimerWithInterval:TIME_INTERVAL_TIMER];
@@ -59,13 +51,10 @@
 
 - (void)dealloc
 {
+    [backgroundView releaseTimer];
     [backgroundView release];
     [displayLabel release];
     [timerLabel release];
-    free(initialBackgroundColorHSBA);
-    free(endBackgroundColorHSBA);
-    free(currentBackgroundColorHSBA);
-    free(deltaBackgroundColorHSBA);
     [super dealloc];
 }
 
@@ -130,17 +119,8 @@
                                                userInfo:nil
                                                 repeats:YES];
     }
-    
     time = allottedTime;
     self.timerLabel.text = [NSString stringColonFormatWithAllottedTime:time];
-    currentBackgroundColorHSBA[0] = initialBackgroundColorHSBA[0];
-    currentBackgroundColorHSBA[1] = initialBackgroundColorHSBA[1];
-    currentBackgroundColorHSBA[2] = initialBackgroundColorHSBA[2];
-    currentBackgroundColorHSBA[3] = initialBackgroundColorHSBA[3];
-    self.view.backgroundColor = [UIColor colorWithHue:currentBackgroundColorHSBA[0]
-                                           saturation:currentBackgroundColorHSBA[1]
-                                           brightness:currentBackgroundColorHSBA[2]
-                                                alpha:currentBackgroundColorHSBA[3]];
 }
 
 - (void)timerFired
@@ -153,14 +133,6 @@
     else
     {
         self.timerLabel.text = [NSString stringColonFormatWithAllottedTime:time];
-        currentBackgroundColorHSBA[0] = currentBackgroundColorHSBA[0] + deltaBackgroundColorHSBA[0];
-        currentBackgroundColorHSBA[1] = currentBackgroundColorHSBA[1] + deltaBackgroundColorHSBA[1];
-        currentBackgroundColorHSBA[2] = currentBackgroundColorHSBA[2] + deltaBackgroundColorHSBA[2];
-        currentBackgroundColorHSBA[3] = currentBackgroundColorHSBA[3] + deltaBackgroundColorHSBA[3];
-        self.view.backgroundColor = [UIColor colorWithHue:currentBackgroundColorHSBA[0]
-                                               saturation:currentBackgroundColorHSBA[1]
-                                               brightness:currentBackgroundColorHSBA[2]
-                                                    alpha:currentBackgroundColorHSBA[3]];
     }
 }
 
@@ -201,25 +173,17 @@
     self.title = attendee.name;
     self.displayLabel.numberOfLines = 1;
     self.displayLabel.text = attendee.name;
-    self.displayLabel.textColor = [UIColor blackColor];
-    self.timerLabel.textColor = [UIColor blackColor];
+    self.displayLabel.textColor = [UIColor whiteColor];
+    self.timerLabel.textColor = [UIColor whiteColor];
     allottedTime = attendee.allottedTime;
     intermission = NO;
-    initialBackgroundColorHSBA[0] = 0.33;
-    initialBackgroundColorHSBA[1] = 0.5;
-    initialBackgroundColorHSBA[2] = 1.0;
-    initialBackgroundColorHSBA[3] = 1.0;
-    endBackgroundColorHSBA[0] = 0.0;
-    endBackgroundColorHSBA[1] = 0.5;
-    endBackgroundColorHSBA[2] = 1.0;
-    endBackgroundColorHSBA[3] = 1.0;
-    deltaBackgroundColorHSBA[0] = [self calculateHueDeltaWithStartHue:initialBackgroundColorHSBA[0]
-                                                               endHue:endBackgroundColorHSBA[0]
-                                                                 time:(CGFloat)allottedTime];
-    deltaBackgroundColorHSBA[1] = (endBackgroundColorHSBA[1] - initialBackgroundColorHSBA[1]) / allottedTime;
-    deltaBackgroundColorHSBA[2] = (endBackgroundColorHSBA[2] - initialBackgroundColorHSBA[2]) / allottedTime;
-    deltaBackgroundColorHSBA[3] = (endBackgroundColorHSBA[3] - initialBackgroundColorHSBA[3]) / allottedTime;
-    LOG(@"[color delta]hue=%f, saturation=%f, brightness=%f alpha=%f", deltaBackgroundColorHSBA[0], deltaBackgroundColorHSBA[1], deltaBackgroundColorHSBA[2]);
+    CGFloat initialColor[4] = {0.33, 0.8, 0.6, 1.0};
+    CGFloat endColor[4] = {0.00, 0.8, 0.6, 1.0};
+    [backgroundView setTimerWithAllottedTime:allottedTime
+                                        wait:TIME_INTERVAL_ANIMATION
+                                initialColor:initialColor
+                                    endColor:endColor
+                                    gradient:YES];
 }
 
 - (void)loadIntermission
@@ -235,37 +199,13 @@
     self.timerLabel.textColor = [UIColor whiteColor];
     allottedTime = [[NSUserDefaults standardUserDefaults] integerForKey:USERDEFAULTS_INTERMISSION_DURATION_KEY];
     intermission = YES;
-    initialBackgroundColorHSBA[0] = 0.0;
-    initialBackgroundColorHSBA[1] = 0.0;
-    initialBackgroundColorHSBA[2] = 0.0;
-    initialBackgroundColorHSBA[3] = 1.0;
-    endBackgroundColorHSBA[0] = 0.0;
-    endBackgroundColorHSBA[1] = 0.0;
-    endBackgroundColorHSBA[2] = 0.0;
-    endBackgroundColorHSBA[3] = 1.0;
-    deltaBackgroundColorHSBA[0] = [self calculateHueDeltaWithStartHue:initialBackgroundColorHSBA[0]
-                                                               endHue:endBackgroundColorHSBA[0]
-                                                                 time:(CGFloat)allottedTime];
-    deltaBackgroundColorHSBA[1] = (endBackgroundColorHSBA[1] - initialBackgroundColorHSBA[1]) / allottedTime;
-    deltaBackgroundColorHSBA[2] = (endBackgroundColorHSBA[2] - initialBackgroundColorHSBA[2]) / allottedTime;
-    deltaBackgroundColorHSBA[3] = (endBackgroundColorHSBA[3] - initialBackgroundColorHSBA[3]) / allottedTime;
-}
-
-- (CGFloat)calculateHueDeltaWithStartHue:(CGFloat)s endHue:(CGFloat)e time:(CGFloat)t
-{
-    LOG(@"[hue calculation]start=%f, end=%f, time=%f", s, e, t);
-    CGFloat end = (e < s) ? e + 1.0 : e;
-    CGFloat diff = end - s;
-    if (diff < 0.5)
-    {
-        LOG(@"[hue calculation]diff=%f - Clockwise rotation", diff);
-        return diff / t;
-    }
-    else
-    {
-        LOG(@"[hue calculation]diff=%f - Counter-Clockwise rotation", diff);
-        return (diff - 1.0) / t;
-    }
+    CGFloat initialColor[4] = {0.00, 1.0, 0.0, 1.0};
+    CGFloat endColor[4] = {0.00, 1.0, 0.0, 1.0};
+    [backgroundView setTimerWithAllottedTime:allottedTime
+                                        wait:TIME_INTERVAL_ANIMATION
+                                initialColor:initialColor
+                                    endColor:endColor
+                                    gradient:NO];
 }
 
 @end

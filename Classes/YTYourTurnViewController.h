@@ -20,17 +20,11 @@
     int allottedTime;
     int time;
     BOOL intermission;
-    CGFloat *initialBackgroundColorHSBA; // [hue, satulation, brightness, alpha]  0.0~1.0
-    CGFloat *endBackgroundColorHSBA;     // [hue, satulation, brightness, alpha]  0.0~1.0
-    CGFloat *currentBackgroundColorHSBA; // [hue, satulation, brightness, alpha]  0.0~1.0
-    CGFloat *deltaBackgroundColorHSBA;   // [hue, satulation, brightness, alpha]  0.0~1.0
 }
 
 @property (nonatomic, retain) IBOutlet YTYourTurnBackgroundView *backgroundView;
 @property (nonatomic, retain) IBOutlet UILabel *displayLabel;
 @property (nonatomic, retain) IBOutlet UILabel *timerLabel;
-@property (nonatomic) CGFloat *initialBackgroundColorHSBA;
-@property (nonatomic) CGFloat *endBackgroundColorHSBA;
 
 - (void)setTimerWithInterval:(NSTimeInterval)interval;
 - (void)timerFired;
