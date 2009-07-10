@@ -19,6 +19,11 @@
 
 #define TIME_INTERVAL_ANIMATION 1.0
 #define TIME_INTERVAL_TIMER 1.0
+#define SWIPE_HORIZONTAL 50.0
+#define SWIPE_VERTICAL 20.0
+#define SWIPE_NO 0
+#define SWIPE_LEFT 1
+#define SWIPE_RIGHT 2
 
 
 @interface YTYourTurnViewController (Private)
@@ -26,6 +31,10 @@
 - (void)loadCurrentAttendee;
 /*! Loads intermission settings from NSUserDefaults if set, and set up the view for it. */
 - (void)loadIntermission;
+/*! Enter full screen mode, hiding status bar and navigation bar. */
+- (void)enterFullScreenModeAnimated:(BOOL)animated;
+/*! Leave full screen mode, showing status bar and navigation bar again. */
+- (void)exitFullScreenModeAnimated:(BOOL)animated;
 @end
 
 @implementation YTYourTurnViewController
@@ -63,6 +72,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackTranslucent;
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
+    [self enterFullScreenModeAnimated:YES];
     // disable idle timer while session is going
     [UIApplication sharedApplication].idleTimerDisabled = YES;
 }
@@ -70,6 +82,9 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    [self exitFullScreenModeAnimated:NO];
     // enable idle timer again since session is finished
     [UIApplication sharedApplication].idleTimerDisabled = NO;
     // invalidate the current timer
@@ -86,17 +101,41 @@
 {
     UITouch *touch = [touches anyObject];
     NSUInteger numTaps = [touch tapCount];
-    if (numTaps < 2)
+    if (numTaps == 1)
     {
-        [self.nextResponder touchesBegan:touches withEvent:event];
+        swipeStartPoint = [touch locationInView:backgroundView];
+        swipeDirection = SWIPE_NO;
     }
-    else if (numTaps == 2)
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch *touch = [touches anyObject];
+    CGPoint currentPoint = [touch locationInView:backgroundView];
+    if (fabsf(currentPoint.x - swipeStartPoint.x) > SWIPE_HORIZONTAL
+        && abs(currentPoint.y - swipeStartPoint.y) < SWIPE_VERTICAL)
     {
-        [self endTurn:self];
+        swipeDirection = (currentPoint.x > swipeStartPoint.x) ? SWIPE_RIGHT : SWIPE_LEFT;
+    }
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if (swipeDirection == SWIPE_NO)
+    {
+        if (self.navigationController.navigationBarHidden)
+        {
+            [self exitFullScreenModeAnimated:YES];
+        }
+        else
+        {
+            [self enterFullScreenModeAnimated:YES];
+        }
     }
     else
     {
-        // Just ignore too many touches
+        [self endTurn:self];
+        swipeDirection = SWIPE_NO;
     }
 }
 
@@ -156,7 +195,10 @@
     // Animations
     [UIView beginAnimations:@"endTurn" context:NULL];
     [UIView setAnimationDuration:TIME_INTERVAL_ANIMATION];
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
+    UIViewAnimationTransition transition = (swipeDirection == SWIPE_LEFT)
+    ? UIViewAnimationTransitionFlipFromRight : UIViewAnimationTransitionFlipFromLeft;
+    swipeDirection = SWIPE_NO;
+    [UIView setAnimationTransition:transition forView:self.view cache:YES];
     [UIView commitAnimations];
     
     // Sounds
@@ -206,6 +248,30 @@
                                 initialColor:initialColor
                                     endColor:endColor
                                     gradient:NO];
+}
+
+- (void)enterFullScreenModeAnimated:(BOOL)animated
+{
+    [[UIApplication sharedApplication]  setStatusBarHidden:YES animated:animated];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+    // Workaround code to avoid white stripe drawn on where status bar was
+    CGRect frame = [[UIScreen mainScreen] bounds];
+    self.navigationController.view.frame = frame;
+    CGRect r = self.navigationController.navigationBar.frame;
+    r.origin.y = 20;
+    self.navigationController.navigationBar.frame = r;
+}
+
+- (void)exitFullScreenModeAnimated:(BOOL)animated
+{
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO  animated:animated];
+    // Workaround code to avoid white stripe drawn on where status bar was
+    CGRect frame = [[UIScreen mainScreen] bounds];
+    self.navigationController.view.frame = frame;
+    CGRect r = self.navigationController.navigationBar.frame;
+    r.origin.y = 20;
+    self.navigationController.navigationBar.frame = r;
 }
 
 @end

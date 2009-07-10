@@ -9,7 +9,7 @@
 
 #import "YTYourTurnBackgroundView.h"
 
-#define TIME_INTERVAL_REDRAW 0.1
+#define TIME_INTERVAL_REDRAW (1.0 / 30)
 #define HEIGHT_GRADIENT 220.0
 
 
@@ -127,7 +127,7 @@
     currentBackgroundColorHSBA[3] = initialBackgroundColorHSBA[3];
     deltaBackgroundColorHSBA[0] = [self calculateHueDeltaWithStartHue:initialBackgroundColorHSBA[0]
                                                                endHue:endBackgroundColorHSBA[0]
-                                                                 time:(CGFloat)allottedTime / TIME_INTERVAL_REDRAW];
+                                                                 time:(CGFloat)(allottedTime / TIME_INTERVAL_REDRAW)];
     deltaBackgroundColorHSBA[1] = (endBackgroundColorHSBA[1] - initialBackgroundColorHSBA[1]) / allottedTime;
     deltaBackgroundColorHSBA[2] = (endBackgroundColorHSBA[2] - initialBackgroundColorHSBA[2]) / allottedTime;
     deltaBackgroundColorHSBA[3] = (endBackgroundColorHSBA[3] - initialBackgroundColorHSBA[3]) / allottedTime;

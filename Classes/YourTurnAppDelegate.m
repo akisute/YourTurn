@@ -16,6 +16,8 @@
 
 @implementation YourTurnAppDelegate
 
+@synthesize window;
+
 - (void)applicationDidFinishLaunching:(UIApplication *)application
 {
     [[YTQueue newInstance] load];

@@ -20,6 +20,8 @@
     int allottedTime;
     int time;
     BOOL intermission;
+    CGPoint swipeStartPoint;
+    int swipeDirection;
 }
 
 @property (nonatomic, retain) IBOutlet YTYourTurnBackgroundView *backgroundView;
