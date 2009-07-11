@@ -16,7 +16,7 @@
     UILabel *selectionLabel;
 }
 
-@property (nonatomic, retain) NSString *label;
-@property (nonatomic, retain) NSString *selectionLabel;
+@property (nonatomic, readonly, retain) UILabel *label;
+@property (nonatomic, readonly, retain) UILabel *selectionLabel;
 
 @end

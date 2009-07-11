@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.03">
 	<data>
-		<int key="IBDocument.SystemTarget">544</int>
+		<int key="IBDocument.SystemTarget">768</int>
 		<string key="IBDocument.SystemVersion">9J61</string>
 		<string key="IBDocument.InterfaceBuilderVersion">677</string>
 		<string key="IBDocument.AppKitVersion">949.46</string>
@@ -192,11 +192,9 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>addAttendee:</string>
 							<string>openYourTurnView:</string>
-							<string>segmentedControlClicked:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 						</object>
@@ -219,5 +217,6 @@
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.LastKnownRelativeProjectPath">YourTurn.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
+		<string key="IBCocoaTouchPluginVersion">3.0</string>
 	</data>
 </archive>

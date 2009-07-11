@@ -30,20 +30,18 @@
 {
     if (self = [super initWithStyle:style])
     {
-        // FIXME: initWithFrame:reuseIdentifier is deprecated in OS 3.0. use initWithStyle instead.
-        // FIXME: cell.textColor is deprecated in OS 3.0. Use textLabel.textColor instead
-        manageAttendeesCell = [[UITableViewCell alloc] initWithFrame:CGRectZero
+        manageAttendeesCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                      reuseIdentifier:_REUSE_IDENTIFIER_STANDARD];
         manageAttendeesCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        settingsCell = [[UITableViewCell alloc] initWithFrame:CGRectZero
+        settingsCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                               reuseIdentifier:_REUSE_IDENTIFIER_STANDARD];
         settingsCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        settingsCell.text = NSLocalizedString(@"Settings", @"Cell text of the main view");
-        startCell = [[UITableViewCell alloc] initWithFrame:CGRectZero
+        settingsCell.textLabel.text = NSLocalizedString(@"Settings", @"Cell text of the main view");
+        startCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                  reuseIdentifier:_REUSE_IDENTIFIER_START];
-        startCell.textAlignment = UITextAlignmentCenter;
+        startCell.textLabel.textAlignment = UITextAlignmentCenter;
         startCell.accessoryType = UITableViewCellAccessoryNone;
-        startCell.text = NSLocalizedString(@"Start session", @"Cell text of the main view");
+        startCell.textLabel.text = NSLocalizedString(@"Start session", @"Cell text of the main view");
     }
     return self;
 }
@@ -51,7 +49,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView.scrollEnabled = NO;
+    self.tableView.allowsSelection = YES;
+    self.tableView.allowsSelectionDuringEditing = NO;
+    // TODO: Selection will be broken up when scrollEnabled = NO due to the bug of the OS 3.0.
+//    self.tableView.scrollEnabled = NO;
+//    self.tableView.canCancelContentTouches = NO;
+//    self.tableView.delaysContentTouches = NO;
     self.title = NSLocalizedString(@"YourTurn", @"Application name. DO NOT TRANSLATE");
     UIButton *infoButton = [UIButton buttonWithType:UIButtonTypeInfoLight];
     [infoButton addTarget:self action:@selector(openAboutView) forControlEvents:UIControlEventTouchUpInside];
@@ -105,22 +108,21 @@
 {
     switch (indexPath.section) {
         case _SECTION_ATTENDEE:
-            manageAttendeesCell.text = [NSString stringWithFormat:NSLocalizedString(@"Manage attendees (%d)",
-                                                                                    @"Cell text of the main view"),
-                                        [YTQueue instance].count];
+            manageAttendeesCell.textLabel.text = [NSString stringWithFormat:NSLocalizedString(@"Manage attendees (%d)",
+                                                                                              @"Cell text of the main view"),
+                                                  [YTQueue instance].count];
             return manageAttendeesCell;
         case _SECTION_SETTINGS:
             return settingsCell;
         case _SECTION_START:
-            // FIXME: cell.textColor is deprecated in OS 3.0. Use textLabel instead
             if ([YTQueue instance].currentTurnAttendee)
             {
-                startCell.textColor = [UIColor blueColor];
+                startCell.textLabel.textColor = [UIColor blueColor];
                 startCell.selectionStyle = UITableViewCellSelectionStyleBlue;
             }
             else
             {
-                startCell.textColor = [UIColor grayColor];
+                startCell.textLabel.textColor = [UIColor grayColor];
                 startCell.selectionStyle = UITableViewCellSelectionStyleNone;
             }
             return startCell;

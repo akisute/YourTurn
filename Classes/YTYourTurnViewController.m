@@ -31,10 +31,8 @@
 - (void)loadCurrentAttendee;
 /*! Loads intermission settings from NSUserDefaults if set, and set up the view for it. */
 - (void)loadIntermission;
-/*! Enter full screen mode, hiding status bar and navigation bar. */
-- (void)enterFullScreenModeAnimated:(BOOL)animated;
-/*! Leave full screen mode, showing status bar and navigation bar again. */
-- (void)exitFullScreenModeAnimated:(BOOL)animated;
+/*! Set current view mode to full screen (YES) or normal (NO) with animation. */
+- (void)fullScreenMode:(BOOL)mode animated:(BOOL)animated;
 @end
 
 @implementation YTYourTurnViewController
@@ -71,20 +69,22 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackTranslucent;
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-    [self enterFullScreenModeAnimated:YES];
+    [self fullScreenMode:YES animated:animated];
     // disable idle timer while session is going
     [UIApplication sharedApplication].idleTimerDisabled = YES;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
-    [self exitFullScreenModeAnimated:NO];
+    [self fullScreenMode:NO animated:NO];
     // enable idle timer again since session is finished
     [UIApplication sharedApplication].idleTimerDisabled = NO;
     // invalidate the current timer
@@ -123,14 +123,7 @@
 {
     if (swipeDirection == SWIPE_NO)
     {
-        if (self.navigationController.navigationBarHidden)
-        {
-            [self exitFullScreenModeAnimated:YES];
-        }
-        else
-        {
-            [self enterFullScreenModeAnimated:YES];
-        }
+        [self fullScreenMode:!fullScreenMode animated:YES];
     }
     else
     {
@@ -250,28 +243,22 @@
                                     gradient:NO];
 }
 
-- (void)enterFullScreenModeAnimated:(BOOL)animated
+- (void)fullScreenMode:(BOOL)mode animated:(BOOL)animated
 {
-    [[UIApplication sharedApplication]  setStatusBarHidden:YES animated:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:animated];
-    // Workaround code to avoid white stripe drawn on where status bar was
-    CGRect frame = [[UIScreen mainScreen] bounds];
-    self.navigationController.view.frame = frame;
-    CGRect r = self.navigationController.navigationBar.frame;
-    r.origin.y = 20;
-    self.navigationController.navigationBar.frame = r;
-}
-
-- (void)exitFullScreenModeAnimated:(BOOL)animated
-{
-    [self.navigationController setNavigationBarHidden:NO animated:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO  animated:animated];
-    // Workaround code to avoid white stripe drawn on where status bar was
-    CGRect frame = [[UIScreen mainScreen] bounds];
-    self.navigationController.view.frame = frame;
-    CGRect r = self.navigationController.navigationBar.frame;
-    r.origin.y = 20;
-    self.navigationController.navigationBar.frame = r;
+    fullScreenMode = mode;
+    // Show/Hide statusbar
+    [[UIApplication sharedApplication]  setStatusBarHidden:mode animated:animated];
+    // Show/Hide navigationbar (using zero alpha value)
+    if (animated)
+    {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.3];
+    }
+    self.navigationController.navigationBar.alpha = mode ? 0 : 1;
+    if (animated)
+    {
+        [UIView commitAnimations];
+    }
 }
 
 @end

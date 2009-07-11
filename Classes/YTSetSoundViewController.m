@@ -27,7 +27,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView.scrollEnabled = NO;
+    self.tableView.allowsSelection = YES;
+    self.tableView.allowsSelectionDuringEditing = NO;
+    // TODO: Selection will be broken up when scrollEnabled = NO due to the bug of the OS 3.0.
+    //    self.tableView.scrollEnabled = NO;
+    //    self.tableView.canCancelContentTouches = NO;
+    //    self.tableView.delaysContentTouches = NO;
     self.title = NSLocalizedString(@"Sound settings", @"Title of the sound settings view");
 }
 
@@ -62,7 +67,7 @@
     }
     NSString *currentSoundId = [[NSUserDefaults standardUserDefaults] stringForKey:USERDEFAULTS_SOUND_TURNEND_KEY];
     YTSound *sound = [[YTSoundTypes instance] soundForIndex:indexPath.row];
-    cell.text = sound.displayName;
+    cell.textLabel.text = sound.displayName;
     if ([sound.fileId isEqualToString:currentSoundId])
     {
         cell.accessoryType = UITableViewCellAccessoryCheckmark;

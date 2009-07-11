@@ -16,7 +16,7 @@
     UISwitch *uiSwitch;
 }
 
-@property (nonatomic, retain) NSString *label;
+@property (nonatomic, readonly, retain) UILabel *label;
 @property (nonatomic, assign) BOOL switchCondition;
 
 @end

@@ -18,7 +18,7 @@
 }
 
 @property (nonatomic, assign) id delegate;
-@property (nonatomic, retain) NSString *label;
+@property (nonatomic, readonly, retain) UILabel *label;
 @property (nonatomic, retain) NSString *value;
 @property (nonatomic, retain) NSString *placeholder;
 

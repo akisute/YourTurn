@@ -14,22 +14,9 @@
 
 #pragma mark property
 
-- (NSString *)label
-{
-    return label.text;
-}
-- (void)setLabel:(NSString *)aLabel
-{
-    label.text = aLabel;
-}
-- (NSString *)selectionLabel;
-{
-    return selectionLabel.text;
-}
-- (void)setSelectionLabel:(NSString *)aSelectionLabel
-{
-    selectionLabel.text = aSelectionLabel;
-}
+@synthesize label;
+@synthesize selectionLabel;
+
 - (CGFloat)height
 {
     return 44.0;

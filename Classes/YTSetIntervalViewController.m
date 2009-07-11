@@ -28,12 +28,17 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tableView.allowsSelection = YES;
+    self.tableView.allowsSelectionDuringEditing = NO;
+    // TODO: Selection will be broken up when scrollEnabled = NO due to the bug of the OS 3.0.
     self.tableView.scrollEnabled = NO;
+    self.tableView.canCancelContentTouches = NO;
+    self.tableView.delaysContentTouches = NO;
     self.title = NSLocalizedString(@"Intermission settings", @"Title of the intermission settings view");
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     enableCell = [[YTSwitchCell alloc] initWithFrame:CGRectZero reuseIdentifier:nil];
-    enableCell.label = NSLocalizedString(@"Enable intermission", @"Label of the cell in the intermission settings view");
+    enableCell.label.text = NSLocalizedString(@"Enable intermission", @"Label of the cell in the intermission settings view");
     enableCell.switchCondition = [defaults boolForKey:USERDEFAULTS_INTERMISSION_ENABLED_KEY];
     
     // Initialize time picker with a previously selected value

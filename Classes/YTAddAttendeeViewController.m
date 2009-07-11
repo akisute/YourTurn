@@ -49,7 +49,7 @@
     
     // Initialize name input cell
     nameCell = [[YTTextFieldCell alloc] initWithFrame:CGRectZero reuseIdentifier:nil];
-    nameCell.label = NSLocalizedString(@"Name", @"Label of the name input cell");
+    nameCell.label.text = NSLocalizedString(@"Name", @"Label of the name input cell");
     nameCell.value = nameCellValue;
     nameCell.placeholder = NSLocalizedString(@"Required", @"Placeholder for the name input cell");
     nameCell.delegate = self;

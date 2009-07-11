@@ -15,16 +15,7 @@
 #pragma mark property
 
 @synthesize delegate;
-
-- (NSString *)label
-{
-    return label.text;
-}
-
-- (void)setLabel:(NSString *)aLabel
-{
-    label.text = aLabel;
-}
+@synthesize label;
 
 - (NSString *)value
 {

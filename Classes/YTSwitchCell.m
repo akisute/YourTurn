@@ -14,14 +14,8 @@
 
 #pragma mark properties
 
-- (NSString *)label
-{
-    return label.text;
-}
-- (void)setLabel:(NSString *)aLabel
-{
-    label.text = aLabel;
-}
+@synthesize label;
+
 - (BOOL)switchCondition
 {
     return uiSwitch.on;
@@ -46,7 +40,7 @@
         [self addSubview:label];
         uiSwitch = [[UISwitch alloc] initWithFrame:CGRectZero];
         [self addSubview:uiSwitch];
-        self.selectionStyle = UITableViewCellSelectionStyleBlue;
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }

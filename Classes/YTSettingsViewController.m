@@ -34,7 +34,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.tableView.scrollEnabled = NO;
+    self.tableView.allowsSelection = YES;
+    self.tableView.allowsSelectionDuringEditing = NO;
+    // TODO: Selection will be broken up when scrollEnabled = NO due to the bug of the OS 3.0.
+    //    self.tableView.scrollEnabled = NO;
+    //    self.tableView.canCancelContentTouches = NO;
+    //    self.tableView.delaysContentTouches = NO;
     self.title = NSLocalizedString(@"Settings", @"Title of the settings view");
     soundSettingsCell = [[YTSelectionCell alloc] initWithFrame:CGRectZero
                                                reuseIdentifier:_REUSE_IDENTIFIER_SELECTION];
@@ -91,13 +96,13 @@
             string = (enabled)
             ? [NSString stringHMSFormatWithAllottedTime:[defaults integerForKey:USERDEFAULTS_INTERMISSION_DURATION_KEY]]
             : NSLocalizedString(@"OFF", @"On / Off.");
-            intermissionSettingsCell.label = NSLocalizedString(@"Intermission", @"Cell text of the settings view");
-            intermissionSettingsCell.selectionLabel = string;
+            intermissionSettingsCell.label.text = NSLocalizedString(@"Intermission", @"Cell text of the settings view");
+            intermissionSettingsCell.selectionLabel.text = string;
             return intermissionSettingsCell;
         case _CELL_SOUND_SETTINGS:
             string = [[YTSoundTypes instance] soundForId:[defaults stringForKey:USERDEFAULTS_SOUND_TURNEND_KEY]].displayName;
-            soundSettingsCell.label = NSLocalizedString(@"Sound", @"Cell text of the settings view");
-            soundSettingsCell.selectionLabel = string;
+            soundSettingsCell.label.text = NSLocalizedString(@"Sound", @"Cell text of the settings view");
+            soundSettingsCell.selectionLabel.text = string;
             return soundSettingsCell;
         default:
             return nil;

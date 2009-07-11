@@ -20,6 +20,7 @@
     int allottedTime;
     int time;
     BOOL intermission;
+    BOOL fullScreenMode;
     CGPoint swipeStartPoint;
     int swipeDirection;
 }
