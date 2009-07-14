@@ -19,8 +19,8 @@
 
 #define TIME_INTERVAL_ANIMATION 1.0
 #define TIME_INTERVAL_TIMER 1.0
-#define SWIPE_HORIZONTAL 50.0
-#define SWIPE_VERTICAL 20.0
+#define SWIPE_HORIZONTAL 100.0
+#define SWIPE_VERTICAL 100.0
 #define SWIPE_NO 0
 #define SWIPE_LEFT 1
 #define SWIPE_RIGHT 2
@@ -71,7 +71,8 @@
 {
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleBlackTranslucent;
     self.navigationController.navigationBar.barStyle = UIBarStyleBlackTranslucent;
-    [self fullScreenMode:YES animated:animated];
+    self.wantsFullScreenLayout = YES;
+    [self fullScreenMode:NO animated:animated];
     // disable idle timer while session is going
     [UIApplication sharedApplication].idleTimerDisabled = YES;
 }
@@ -93,6 +94,11 @@
         [timer invalidate];
         timer = nil;
     }
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return YES;
 }
 
 #pragma mark UIResponder method
@@ -254,6 +260,9 @@
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3];
     }
+    CGRect frame = self.navigationController.navigationBar.frame;
+    frame.origin.y = [[UIScreen mainScreen] applicationFrame].origin.y;
+    self.navigationController.navigationBar.frame = frame;
     self.navigationController.navigationBar.alpha = mode ? 0 : 1;
     if (animated)
     {
