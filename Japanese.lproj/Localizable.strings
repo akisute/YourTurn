@@ -1,4 +1,4 @@
-﻿/* Section name of the main view */
+/* Section name of the main view */
 "1. Setup attendees of the session" = "1. セッション参加者を設定します";
 
 /* Section name of the main view */
@@ -46,13 +46,17 @@
 /* Label of the cell in the intermission settings view */
 "Enable intermission" = "幕間を有効にする";
 
-/* Section header of the settings view */
-"General" = "一般";
+/* Cell text of the settings view */
+"Enable rotation" = "画面の回転";
 
 /* Display name of a sound object */
 "Gong" = "銅鑼";
 
-/* Title of the YourTurn view when in intermission
+/* Section header of the settings view */
+"Graphics" = "画面";
+
+/* Section header of the settings view
+   Title of the YourTurn view when in intermission
    Cell text of the settings view */
 "Intermission" = "幕間";
 
@@ -90,7 +94,8 @@
    Cell text of the main view */
 "Settings" = "設定";
 
-/* Cell text of the settings view */
+/* Section header of the settings view
+   Cell text of the settings view */
 "Sound" = "サウンド";
 
 /* Title of the sound settings view */

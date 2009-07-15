@@ -127,7 +127,7 @@
     switch (indexPath.section) {
         case _SECTION_GRAPHICS:
             enabled = [defaults boolForKey:USERDEFAULTS_GRAPHIC_LANDSCAPEENABLED_KEY];
-            enableLandscapeModeCell.label.text = NSLocalizedString(@"Enable landscape", @"Cell text of the settings view");
+            enableLandscapeModeCell.label.text = NSLocalizedString(@"Enable rotation", @"Cell text of the settings view");
             enableLandscapeModeCell.switchCondition = enabled;
             return enableLandscapeModeCell;
         case _SECTION_SOUND:
