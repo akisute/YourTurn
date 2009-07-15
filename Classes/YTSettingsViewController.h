@@ -9,11 +9,13 @@
 
 #import <UIKit/UIKit.h>
 
+@class YTSwitchCell;
 @class YTSelectionCell;
 
 
 @interface YTSettingsViewController : UITableViewController {
-    YTSelectionCell *soundSettingsCell;
+    YTSwitchCell *enableLandscapeModeCell;
+    YTSelectionCell *soundTurnEndSettingsCell;
     YTSelectionCell *intermissionSettingsCell;
 }
 

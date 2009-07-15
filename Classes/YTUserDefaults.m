@@ -27,6 +27,18 @@
             [defaults setInteger:USERDEFAULTS_TIMEPICKER_INITIALVALUE_DEFAULT
                           forKey:USERDEFAULTS_TIMEPICKER_INITIALVALUE_KEY];
         }
+        //graphic.landscapeEnabled
+        if (![defaults stringForKey:USERDEFAULTS_GRAPHIC_LANDSCAPEENABLED_KEY])
+        {
+            [defaults setBool:USERDEFAULTS_GRAPHIC_LANDSCAPEENABLED_DEFAULT
+                       forKey:USERDEFAULTS_GRAPHIC_LANDSCAPEENABLED_KEY];
+        }
+        //graphic.YourTurnView
+        if (![defaults stringForKey:USERDEFAULTS_GRAPHIC_YOURTURNVIEW_KEY])
+        {
+            [defaults setObject:USERDEFAULTS_GRAPHIC_YOURTURNVIEW_DEFAULT
+                         forKey:USERDEFAULTS_GRAPHIC_YOURTURNVIEW_KEY];
+        }
         //sound.turnEnd
         if (![defaults stringForKey:USERDEFAULTS_SOUND_TURNEND_KEY])
         {

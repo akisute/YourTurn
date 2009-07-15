@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface YTSetSoundViewController : UITableViewController {
+@interface YTSetSoundTurnEndViewController : UITableViewController {
 
 }
 

@@ -8,8 +8,9 @@
 //
 
 #import "YTSettingsViewController.h"
-#import "YTSetSoundViewController.h"
+#import "YTSetSoundTurnEndViewController.h"
 #import "YTSetIntervalViewController.h"
+#import "YTSwitchCell.h"
 #import "YTSelectionCell.h"
 #import "YTUserDefaults.h"
 #import "YTSound.h"
@@ -17,8 +18,13 @@
 #import "NSString+YourTurn.h"
 
 #define _REUSE_IDENTIFIER_SELECTION @"YTSelectionCell"
-#define _CELL_SOUND_SETTINGS 0
-#define _CELL_INTERMISSION_SETTINGS 1
+#define _REUSE_IDENTIFIER_SWITCH @"YTSwitchCell"
+#define _SECTION_GRAPHICS 0
+#define _SECTION_SOUND 1
+#define _SECTION_INTERMISSION 2
+#define _CELL_GRAPHICS_ENABLELANDSCAPEMODE 0
+#define _CELL_SOUND_TURNEND_SETTINGS 0
+#define _CELL_INTERMISSION_SETTINGS 0
 
 
 @implementation YTSettingsViewController
@@ -41,7 +47,9 @@
     //    self.tableView.canCancelContentTouches = NO;
     //    self.tableView.delaysContentTouches = NO;
     self.title = NSLocalizedString(@"Settings", @"Title of the settings view");
-    soundSettingsCell = [[YTSelectionCell alloc] initWithFrame:CGRectZero
+    enableLandscapeModeCell = [[YTSwitchCell alloc] initWithFrame:CGRectZero
+                                                  reuseIdentifier:_REUSE_IDENTIFIER_SWITCH];
+    soundTurnEndSettingsCell = [[YTSelectionCell alloc] initWithFrame:CGRectZero
                                                reuseIdentifier:_REUSE_IDENTIFIER_SELECTION];
     intermissionSettingsCell = [[YTSelectionCell alloc] initWithFrame:CGRectZero
                                                       reuseIdentifier:_REUSE_IDENTIFIER_SELECTION];
@@ -49,7 +57,8 @@
 
 - (void)dealloc
 {
-    [soundSettingsCell release];
+    [enableLandscapeModeCell release];
+    [soundTurnEndSettingsCell release];
     [intermissionSettingsCell release];
     [super dealloc];
 }
@@ -68,21 +77,46 @@
 	[self.tableView deselectRowAtIndexPath:tableSelection animated:YES];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    // Save current settings of cells
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setBool:enableLandscapeModeCell.switchCondition forKey:USERDEFAULTS_GRAPHIC_LANDSCAPEENABLED_KEY];
+}
+
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    switch (section) {
+        case _SECTION_GRAPHICS:
+            return 1;
+        case _SECTION_SOUND:
+            return 1;
+        case _SECTION_INTERMISSION:
+            return 1;
+        default:
+            return 0;
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return NSLocalizedString(@"General", @"Section header of the settings view");
+    switch (section) {
+        case _SECTION_GRAPHICS:
+            return NSLocalizedString(@"Graphics", @"Section header of the settings view");
+        case _SECTION_SOUND:
+            return NSLocalizedString(@"Sound", @"Section header of the settings view");
+        case _SECTION_INTERMISSION:
+            return NSLocalizedString(@"Intermission", @"Section header of the settings view");
+        default:
+            return nil;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -90,8 +124,18 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     BOOL enabled = NO;
     NSString *string = nil;
-    switch (indexPath.row) {
-        case _CELL_INTERMISSION_SETTINGS:
+    switch (indexPath.section) {
+        case _SECTION_GRAPHICS:
+            enabled = [defaults boolForKey:USERDEFAULTS_GRAPHIC_LANDSCAPEENABLED_KEY];
+            enableLandscapeModeCell.label.text = NSLocalizedString(@"Enable landscape", @"Cell text of the settings view");
+            enableLandscapeModeCell.switchCondition = enabled;
+            return enableLandscapeModeCell;
+        case _SECTION_SOUND:
+            string = [[YTSoundTypes instance] soundForId:[defaults stringForKey:USERDEFAULTS_SOUND_TURNEND_KEY]].displayName;
+            soundTurnEndSettingsCell.label.text = NSLocalizedString(@"Sound", @"Cell text of the settings view");
+            soundTurnEndSettingsCell.selectionLabel.text = string;
+            return soundTurnEndSettingsCell;
+        case _SECTION_INTERMISSION:
             enabled = [defaults boolForKey:USERDEFAULTS_INTERMISSION_ENABLED_KEY];
             string = (enabled)
             ? [NSString stringHMSFormatWithAllottedTime:[defaults integerForKey:USERDEFAULTS_INTERMISSION_DURATION_KEY]]
@@ -99,11 +143,6 @@
             intermissionSettingsCell.label.text = NSLocalizedString(@"Intermission", @"Cell text of the settings view");
             intermissionSettingsCell.selectionLabel.text = string;
             return intermissionSettingsCell;
-        case _CELL_SOUND_SETTINGS:
-            string = [[YTSoundTypes instance] soundForId:[defaults stringForKey:USERDEFAULTS_SOUND_TURNEND_KEY]].displayName;
-            soundSettingsCell.label.text = NSLocalizedString(@"Sound", @"Cell text of the settings view");
-            soundSettingsCell.selectionLabel.text = string;
-            return soundSettingsCell;
         default:
             return nil;
     }
@@ -112,13 +151,13 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIViewController *viewController = nil;
-    switch (indexPath.row) {
-        case _CELL_INTERMISSION_SETTINGS:
+    switch (indexPath.section) {
+        case _SECTION_INTERMISSION:
             viewController = [[YTSetIntervalViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [self.navigationController pushViewController:viewController animated:YES];
             break;
-        case _CELL_SOUND_SETTINGS:
-            viewController = [[YTSetSoundViewController alloc] initWithStyle:UITableViewStyleGrouped];
+        case _SECTION_SOUND:
+            viewController = [[YTSetSoundTurnEndViewController alloc] initWithStyle:UITableViewStyleGrouped];
             [self.navigationController pushViewController:viewController animated:YES];
             break;
         default:

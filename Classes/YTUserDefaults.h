@@ -11,10 +11,14 @@
 
 // Increment USERDEFAULTS_VERSION_VALUE when you add, modify, or remove any
 // NSUserDefaults value for this application.
-#define USERDEFAULTS_VERSION_VALUE 1
+#define USERDEFAULTS_VERSION_VALUE 2
 #define USERDEFAULTS_VERSION_KEY @"userDefaults.version"
 #define USERDEFAULTS_TIMEPICKER_INITIALVALUE_KEY @"timePicker.initialValue"
 #define USERDEFAULTS_TIMEPICKER_INITIALVALUE_DEFAULT 300
+#define USERDEFAULTS_GRAPHIC_LANDSCAPEENABLED_KEY @"graphic.landscapeEnabled"
+#define USERDEFAULTS_GRAPHIC_LANDSCAPEENABLED_DEFAULT YES
+#define USERDEFAULTS_GRAPHIC_YOURTURNVIEW_KEY @"graphic.YourTurnView" //not used yet
+#define USERDEFAULTS_GRAPHIC_YOURTURNVIEW_DEFAULT @"Gradation"        //not used yet
 #define USERDEFAULTS_SOUND_TURNEND_KEY @"sound.turnEnd"
 #define USERDEFAULTS_SOUND_TURNEND_DEFAULT @"Bell"
 #define USERDEFAULTS_INTERMISSION_ENABLED_KEY @"intermission.enabled"

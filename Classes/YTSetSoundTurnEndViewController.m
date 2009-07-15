@@ -7,14 +7,14 @@
 //  All rights reserved.
 //
 
-#import "YTSetSoundViewController.h"
+#import "YTSetSoundTurnEndViewController.h"
 #import "YTSound.h"
 #import "YTSoundTypes.h"
 #import "YTUserDefaults.h"
 
 #define _CELL_STANDARD @"Cell"
 
-@implementation YTSetSoundViewController
+@implementation YTSetSoundTurnEndViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
