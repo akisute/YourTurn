@@ -77,14 +77,11 @@
     [UIApplication sharedApplication].idleTimerDisabled = YES;
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-}
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
     self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
+    self.wantsFullScreenLayout = NO;
     [self fullScreenMode:NO animated:NO];
     // enable idle timer again since session is finished
     [UIApplication sharedApplication].idleTimerDisabled = NO;
@@ -99,6 +96,23 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    // Layout subviews to match the current interface orientation
+    UIInterfaceOrientation interfaceOrientation = [UIDevice currentDevice].orientation;
+    if (UIInterfaceOrientationIsPortrait(interfaceOrientation))
+    {
+        // These values must be same with those of YourTurnView.xib
+        timerLabel.frame = CGRectMake(0.0, 140.0, 320.0, 100.0);
+        displayLabel.frame = CGRectMake(20.0, 248.0, 280.0, 84.0);
+    }
+    else if(UIInterfaceOrientationIsLandscape(interfaceOrientation))
+    {
+        timerLabel.frame = CGRectMake(0.0, 90.0, 480.0, 100.0);
+        displayLabel.frame = CGRectMake(30.0, 198.0, 420.0, 84.0);
+    }
 }
 
 #pragma mark UIResponder method
@@ -252,6 +266,10 @@
 - (void)fullScreenMode:(BOOL)mode animated:(BOOL)animated
 {
     fullScreenMode = mode;
+    // Force set the frame of the navigation bar
+    CGRect frame = self.navigationController.navigationBar.frame;
+    frame.origin.y = 20.0;
+    self.navigationController.navigationBar.frame = frame;
     // Show/Hide statusbar
     [[UIApplication sharedApplication]  setStatusBarHidden:mode animated:animated];
     // Show/Hide navigationbar (using zero alpha value)
@@ -260,9 +278,6 @@
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3];
     }
-    CGRect frame = self.navigationController.navigationBar.frame;
-    frame.origin.y = [[UIScreen mainScreen] applicationFrame].origin.y;
-    self.navigationController.navigationBar.frame = frame;
     self.navigationController.navigationBar.alpha = mode ? 0 : 1;
     if (animated)
     {

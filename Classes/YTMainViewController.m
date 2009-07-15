@@ -73,6 +73,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+    self.navigationController.navigationBar.barStyle = UIBarStyleDefault;
     [self.tableView reloadData];
 }
 
