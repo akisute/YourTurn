@@ -131,12 +131,12 @@
     deltaBackgroundColorHSBA[1] = (endBackgroundColorHSBA[1] - initialBackgroundColorHSBA[1]) / allottedTime;
     deltaBackgroundColorHSBA[2] = (endBackgroundColorHSBA[2] - initialBackgroundColorHSBA[2]) / allottedTime;
     deltaBackgroundColorHSBA[3] = (endBackgroundColorHSBA[3] - initialBackgroundColorHSBA[3]) / allottedTime;
-    LOG(@"[color delta]hue=%f, saturation=%f, brightness=%f alpha=%f",
-        deltaBackgroundColorHSBA[0],
-        deltaBackgroundColorHSBA[1],
-        deltaBackgroundColorHSBA[2],
-        deltaBackgroundColorHSBA[3]
-    );
+//    LOG(@"[color delta]hue=%f, saturation=%f, brightness=%f alpha=%f",
+//        deltaBackgroundColorHSBA[0],
+//        deltaBackgroundColorHSBA[1],
+//        deltaBackgroundColorHSBA[2],
+//        deltaBackgroundColorHSBA[3]
+//    );
     
     if (timer)
     {
@@ -181,17 +181,16 @@
 
 - (CGFloat)calculateHueDeltaWithStartHue:(CGFloat)s endHue:(CGFloat)e time:(CGFloat)t
 {
-    LOG(@"[hue calculation]start=%f, end=%f, time=%f", s, e, t);
     CGFloat end = (e < s) ? e + 1.0 : e;
     CGFloat diff = end - s;
     if (diff < 0.5)
     {
-        LOG(@"[hue calculation]diff=%f - Clockwise rotation", diff);
+//        LOG(@"[hue calculation]diff=%f - Clockwise rotation", diff);
         return diff / t;
     }
     else
     {
-        LOG(@"[hue calculation]diff=%f - Counter-Clockwise rotation", diff);
+//        LOG(@"[hue calculation]diff=%f - Counter-Clockwise rotation", diff);
         return (diff - 1.0) / t;
     }
 }

@@ -170,7 +170,6 @@
     time += [self selectedRowInComponent:_COMPONENT_MINUTE_01] * 60;
     time += [self selectedRowInComponent:_COMPONENT_SECOND_10] * 10;
     time += [self selectedRowInComponent:_COMPONENT_SECOND_01] * 1;
-//    LOG(@"YTTimePickerView.time = %d", time);
     
     // run delegate method
     if ([timePickerViewDelegate respondsToSelector:@selector(pickerView:didSelectRow:inComponent:)])
@@ -188,7 +187,6 @@
     NSInteger hour = (NSInteger)(time / 3600);
     NSInteger minute = (NSInteger)(time % 3600 / 60);
     NSInteger second = (time % 3600 % 60);
-//    LOG(@"YTTimePickerView = %d:%2d:%2d", hour, minute, second);
     
     [self selectRow:hour inComponent:_COMPONENT_HOUR_01 animated:NO];
     [self selectRow:(NSInteger)(minute / 10) inComponent:_COMPONENT_MINUTE_10 animated:NO];

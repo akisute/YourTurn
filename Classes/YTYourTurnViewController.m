@@ -183,7 +183,6 @@
 {
     time -= 1;
     firstBellTime -= 1;
-    LOG(@"firstbell = %d", firstBellTime);
     if (time <= 0)
     {
         [self endTurn:self];
