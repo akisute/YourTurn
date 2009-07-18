@@ -66,7 +66,7 @@
     CGRect bounds = self.contentView.bounds;
     indexLabel.frame = CGRectMake(10.0, 2.0, 40.0, 20.0);
     nameLabel.frame = CGRectMake(40.0, 0, bounds.size.width, 72.0 - 1.0); // Leave a space for sparator
-    timeLabel.frame = CGRectMake(bounds.size.width - 140.0, 50.0, 120.0, 22.0 - 1.0); // Leave a space for sparator
+    timeLabel.frame = CGRectMake(bounds.size.width - 200.0, 50.0, 180.0, 22.0 - 1.0); // Leave a space for sparator
 }
 
 - (void)drawRect:(CGRect)rect

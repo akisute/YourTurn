@@ -156,7 +156,7 @@
 		0ED089A00FF193B900C2FF7C /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		0ED2E4470FF8F6D40013CACC /* gong.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = gong.aif; sourceTree = "<group>"; };
 		0ED2E5190FF9046E0013CACC /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
-		0ED2E5210FF904AA0013CACC /* Japanese */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0ED2E5210FF904AA0013CACC /* Japanese */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = Japanese; path = Japanese.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0EDF02D40FF043070055F1D6 /* YTAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTAboutViewController.h; sourceTree = "<group>"; };
 		0EDF02D50FF043070055F1D6 /* YTAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTAboutViewController.m; sourceTree = "<group>"; };
 		0EDF02DD0FF044230055F1D6 /* about.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = about.html; sourceTree = "<group>"; };
