@@ -54,7 +54,7 @@
 
 - (void)layoutSubviews
 {
-    label.frame = CGRectMake(25, 12, 200, 24);
+    label.frame = CGRectMake(20, 12, 195, 24);
     uiSwitch.frame = CGRectMake(206, 10, 89, 27);
 }
 

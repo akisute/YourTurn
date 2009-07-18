@@ -12,5 +12,6 @@
 
 @interface NSString (YourTurn)
 + (NSString *)stringHMSFormatWithAllottedTime:(NSInteger)allottedTime;
++ (NSString *)stringHMSShortFormatWithAllottedTime:(NSInteger)allottedTime;
 + (NSString *)stringColonFormatWithAllottedTime:(NSInteger)allottedTime;
 @end

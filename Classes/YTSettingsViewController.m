@@ -170,9 +170,16 @@
             switch (indexPath.row) {
                 case _CELL_FIRSTBELL_SETTINGS:
                     enabled = [defaults boolForKey:USERDEFAULTS_FIRSTBELL_ENABLED_KEY];
-                    string = (enabled)
-                    ? [NSString stringHMSFormatWithAllottedTime:[defaults integerForKey:USERDEFAULTS_FIRSTBELL_TIMER_BEFORETURNEND_KEY]]
-                    : NSLocalizedString(@"OFF", @"On / Off.");
+                    if (enabled)
+                    {
+                        string = [NSString stringHMSShortFormatWithAllottedTime:[defaults integerForKey:USERDEFAULTS_FIRSTBELL_TIMER_BEFORETURNEND_KEY]];
+                        string = [NSString stringWithFormat:NSLocalizedString(@"%@ before",
+                                                                              @"Cell text of the settings view"), string];
+                    }
+                    else
+                    {
+                        string = NSLocalizedString(@"OFF", @"On / Off.");
+                    }
                     firstBellSettingsCell.label.text = NSLocalizedString(@"First bell", @"Cell text of the settings view");
                     firstBellSettingsCell.selectionLabel.text = string;
                     return firstBellSettingsCell;

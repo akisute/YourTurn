@@ -63,6 +63,7 @@
         textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         textField.clearButtonMode = UITextFieldViewModeWhileEditing;
         textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+        textField.borderStyle = UITextBorderStyleNone;
         textField.font = [UIFont systemFontOfSize:[UIFont systemFontSize]];
         textField.textColor = [UIColor blackColor];
         [self addSubview:textField];
@@ -83,7 +84,7 @@
 
 - (void)layoutSubviews
 {
-    label.frame = CGRectMake(25, 12, 115, 24);
+    label.frame = CGRectMake(20, 12, 115, 24);
     textField.frame = CGRectMake(120, 12, 180, 24);
 }
 

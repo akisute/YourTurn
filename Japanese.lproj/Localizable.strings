@@ -43,17 +43,27 @@
 /* Title of the add attendee view */
 "Edit attendee" = "参加者を編集";
 
+/* Label of the cell in the first bell settings view */
+"Enable first bell" = "予鈴を有効にする";
+
 /* Label of the cell in the intermission settings view */
 "Enable intermission" = "幕間を有効にする";
 
 /* Cell text of the settings view */
 "Enable rotation" = "画面の回転";
 
+/* Section header of the settings view
+   Cell text of the settings view */
+"First bell" = "予鈴";
+
+/* Title of the first bell settings view */
+"First bell settings" = "予鈴の設定";
+
+/* Cell text of the settings view */
+"First bell sound" = "予鈴の音";
+
 /* Display name of a sound object */
 "Gong" = "銅鑼";
-
-/* Section header of the settings view */
-"Graphics" = "画面";
 
 /* Section header of the settings view
    Title of the YourTurn view when in intermission
@@ -90,13 +100,24 @@
 /* Placeholder for the name input cell */
 "Required" = "必須項目";
 
+/* Display name of a sound object */
+"Ring (double)" = "学会ベル (2回)";
+
+/* Display name of a sound object */
+"Ring (single)" = "学会ベル (1回)";
+
+/* Section header of the first bell settings view */
+"Ring first bell" = "予鈴を鳴らす";
+
+/* Section header of the settings view */
+"Session" = "セッション";
+
 /* Title of the settings view
    Cell text of the main view */
 "Settings" = "設定";
 
-/* Section header of the settings view
-   Cell text of the settings view */
-"Sound" = "サウンド";
+/* Section header of the sound settings view */
+"Sound of first bell" = "予鈴の音";
 
 /* Title of the sound settings view */
 "Sound settings" = "サウンド設定";
@@ -106,6 +127,15 @@
 
 /* Cell text of the main view */
 "Start session" = "セッションを開始";
+
+/* Section header of the first bell settings view */
+"Time before turn ends" = "予鈴を鳴らすタイミング";
+
+/* Cell text of the settings view */
+"Turn end sound" = "ターン終了時の音";
+
+/* Display name of a sound object */
+"Vibration" = "バイブレーション";
 
 /* Footer message of the main view */
 "You must have at least 1 person to start the session." = "セッションを開始するためには、最低でも一人の参加者が必要です。";

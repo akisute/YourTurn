@@ -32,6 +32,7 @@
         label.font = [UIFont boldSystemFontOfSize:16.0];
         [self addSubview:label];
         selectionLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+        selectionLabel.font = [UIFont systemFontOfSize:14.0];
         selectionLabel.textAlignment = UITextAlignmentRight;
         [self addSubview:selectionLabel];
         
@@ -53,8 +54,8 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    label.frame = CGRectMake(25, 12, 170, 24);
-    selectionLabel.frame = CGRectMake(170, 12, 110, 24);
+    label.frame = CGRectMake(20, 12, 155, 24);
+    selectionLabel.frame = CGRectMake(160, 12, 120, 24);
 }
 
 @end
