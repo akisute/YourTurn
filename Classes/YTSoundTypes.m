@@ -74,25 +74,42 @@ static YTSoundTypes *_instance;
     YTSound *sound = nil;
     
     //None
-    sound = [[[YTSound alloc] initWithId:@"None"
-                                fileName:nil
-                           fileExtension:nil] autorelease];
+    sound = [[[YTSound alloc] initWithId:@"None"] autorelease];
     sound.displayName = NSLocalizedString(@"None", @"Display name of a sound object");
-    [sounds setObject:sound forKey:sound.fileId];
+    [sounds setObject:sound forKey:sound.soundId];
+    
+    //Vibration
+    sound = [[[YTVibrationSound alloc] initWithId:@"Vibration"] autorelease];
+    sound.displayName = NSLocalizedString(@"Vibration", @"Display name of a sound object");
+    [sounds setObject:sound forKey:sound.soundId];
     
     //bell.aif
-    sound = [[[YTSound alloc] initWithId:@"Bell"
+    sound = [[[YTFileSound alloc] initWithId:@"Bell"
                                 fileName:@"bell"
                            fileExtension:@"aif"] autorelease];
     sound.displayName = NSLocalizedString(@"Bell", @"Display name of a sound object");
-    [sounds setObject:sound forKey:sound.fileId];
+    [sounds setObject:sound forKey:sound.soundId];
     
     //gong.aif
-    sound = [[[YTSound alloc] initWithId:@"Gong"
+    sound = [[[YTFileSound alloc] initWithId:@"Gong"
                                 fileName:@"gong"
                            fileExtension:@"aif"] autorelease];
     sound.displayName = NSLocalizedString(@"Gong", @"Display name of a sound object");
-    [sounds setObject:sound forKey:sound.fileId];
+    [sounds setObject:sound forKey:sound.soundId];
+    
+    //ring.aif
+    sound = [[[YTFileSound alloc] initWithId:@"Ring"
+                                fileName:@"ring"
+                           fileExtension:@"aif"] autorelease];
+    sound.displayName = NSLocalizedString(@"Ring (single)", @"Display name of a sound object");
+    [sounds setObject:sound forKey:sound.soundId];
+    
+    //ring_double.aif
+    sound = [[[YTFileSound alloc] initWithId:@"Double Ring"
+                                fileName:@"ring_double"
+                           fileExtension:@"aif"] autorelease];
+    sound.displayName = NSLocalizedString(@"Ring (double)", @"Display name of a sound object");
+    [sounds setObject:sound forKey:sound.soundId];
 }
 
 @end

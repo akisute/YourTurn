@@ -18,6 +18,7 @@
     UILabel *timerLabel;
     NSTimer *timer;
     int allottedTime;
+    int firstBellTime;
     int time;
     BOOL intermission;
     BOOL fullScreenMode;

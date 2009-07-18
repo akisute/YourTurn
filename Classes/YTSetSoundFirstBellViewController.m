@@ -1,20 +1,20 @@
 //
-//  YTSetSoundViewController.m
+//  YTSetSoundFirstBellViewController.m
 //  YourTurn
 //
-//  Created by Masashi Ono on 09/06/27.
+//  Created by Masashi Ono on 09/07/18.
 //  Copyright (c) 2009, Masashi Ono
 //  All rights reserved.
 //
 
-#import "YTSetSoundTurnEndViewController.h"
+#import "YTSetSoundFirstBellViewController.h"
 #import "YTSound.h"
 #import "YTSoundTypes.h"
 #import "YTUserDefaults.h"
 
 #define _CELL_STANDARD @"Cell"
 
-@implementation YTSetSoundTurnEndViewController
+@implementation YTSetSoundFirstBellViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -55,7 +55,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return NSLocalizedString(@"Sound when turn ends", @"Section header of the sound settings view");
+    return NSLocalizedString(@"Sound of first bell", @"Section header of the sound settings view");
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -65,7 +65,7 @@
     {
         cell = [[[UITableViewCell alloc] initWithFrame:CGRectZero reuseIdentifier:_CELL_STANDARD] autorelease];
     }
-    NSString *currentSoundId = [[NSUserDefaults standardUserDefaults] stringForKey:USERDEFAULTS_SESSION_SOUND_TURNEND_KEY];
+    NSString *currentSoundId = [[NSUserDefaults standardUserDefaults] stringForKey:USERDEFAULTS_FIRSTBELL_SOUND_KEY];
     YTSound *sound = [[YTSoundTypes instance] soundForIndex:indexPath.row];
     cell.textLabel.text = sound.displayName;
     if ([sound.soundId isEqualToString:currentSoundId])
@@ -83,7 +83,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     YTSound *sound = [[YTSoundTypes instance] soundForIndex:indexPath.row];
-    [[NSUserDefaults standardUserDefaults] setObject:sound.soundId forKey:USERDEFAULTS_SESSION_SOUND_TURNEND_KEY];
+    [[NSUserDefaults standardUserDefaults] setObject:sound.soundId forKey:USERDEFAULTS_FIRSTBELL_SOUND_KEY];
     [tableView reloadData];
     
     // Unselect any selections

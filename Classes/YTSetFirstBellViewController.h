@@ -1,8 +1,8 @@
 //
-//  YTSetIntervalViewController.h
+//  YTSetFirstBellViewController.h
 //  YourTurn
 //
-//  Created by Masashi Ono on 09/06/27.
+//  Created by Masashi Ono on 09/07/18.
 //  Copyright (c) 2009, Masashi Ono
 //  All rights reserved.
 //
@@ -12,7 +12,7 @@
 @class YTSwitchCell;
 @class YTTimePickerView;
 
-@interface YTSetIntervalViewController : UITableViewController {
+@interface YTSetFirstBellViewController : UITableViewController {
     YTSwitchCell *enableCell;
     YTTimePickerView *timePicker;
 }

@@ -21,41 +21,57 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if (![YTUserDefaults isCurrentVersionUserDefaults])
     {
-        //timePicker.initialValue
+        
+        // General
+        
         if ([defaults integerForKey:USERDEFAULTS_TIMEPICKER_INITIALVALUE_KEY] == 0)
         {
             [defaults setInteger:USERDEFAULTS_TIMEPICKER_INITIALVALUE_DEFAULT
                           forKey:USERDEFAULTS_TIMEPICKER_INITIALVALUE_KEY];
         }
-        //graphic.landscapeEnabled
-        if (![defaults stringForKey:USERDEFAULTS_GRAPHIC_LANDSCAPEENABLED_KEY])
+        
+        // Session
+        
+        if (![defaults stringForKey:USERDEFAULTS_SESSION_LANDSCAPEENABLED_KEY])
         {
-            [defaults setBool:USERDEFAULTS_GRAPHIC_LANDSCAPEENABLED_DEFAULT
-                       forKey:USERDEFAULTS_GRAPHIC_LANDSCAPEENABLED_KEY];
+            [defaults setBool:USERDEFAULTS_SESSION_LANDSCAPEENABLED_DEFAULT
+                       forKey:USERDEFAULTS_SESSION_LANDSCAPEENABLED_KEY];
         }
-        //graphic.YourTurnView
-        if (![defaults stringForKey:USERDEFAULTS_GRAPHIC_YOURTURNVIEW_KEY])
+        if (![defaults stringForKey:USERDEFAULTS_SESSION_SOUND_TURNEND_KEY])
         {
-            [defaults setObject:USERDEFAULTS_GRAPHIC_YOURTURNVIEW_DEFAULT
-                         forKey:USERDEFAULTS_GRAPHIC_YOURTURNVIEW_KEY];
+            [defaults setObject:USERDEFAULTS_SESSION_SOUND_TURNEND_DEFAULT
+                         forKey:USERDEFAULTS_SESSION_SOUND_TURNEND_KEY];
         }
-        //sound.turnEnd
-        if (![defaults stringForKey:USERDEFAULTS_SOUND_TURNEND_KEY])
-        {
-            [defaults setObject:USERDEFAULTS_SOUND_TURNEND_DEFAULT
-                         forKey:USERDEFAULTS_SOUND_TURNEND_KEY];
-        }
-        //intermission.enabled
+        
+        // Intermission
+        
         if (![defaults stringForKey:USERDEFAULTS_INTERMISSION_ENABLED_KEY])
         {
             [defaults setBool:USERDEFAULTS_INTERMISSION_ENABLED_DEFAULT
                        forKey:USERDEFAULTS_INTERMISSION_ENABLED_KEY];
         }
-        //intermission.duration
         if ([defaults integerForKey:USERDEFAULTS_INTERMISSION_DURATION_KEY] == 0)
         {
             [defaults setInteger:USERDEFAULTS_INTERMISSION_DURATION_DEFAULT
                           forKey:USERDEFAULTS_INTERMISSION_DURATION_KEY];
+        }
+        
+        // First bell
+        
+        if (![defaults stringForKey:USERDEFAULTS_FIRSTBELL_ENABLED_KEY])
+        {
+            [defaults setBool:USERDEFAULTS_FIRSTBELL_ENABLED_DEFAULT
+                       forKey:USERDEFAULTS_FIRSTBELL_ENABLED_KEY];
+        }
+        if ([defaults integerForKey:USERDEFAULTS_FIRSTBELL_TIMER_BEFORETURNEND_KEY] == 0)
+        {
+            [defaults setInteger:USERDEFAULTS_FIRSTBELL_TIMER_BEFORETURNEND_DEFAULT
+                          forKey:USERDEFAULTS_FIRSTBELL_TIMER_BEFORETURNEND_KEY];
+        }
+        if (![defaults stringForKey:USERDEFAULTS_FIRSTBELL_SOUND_KEY])
+        {
+            [defaults setObject:USERDEFAULTS_FIRSTBELL_SOUND_DEFAULT
+                         forKey:USERDEFAULTS_FIRSTBELL_SOUND_KEY];
         }
     }
 }

@@ -1,13 +1,13 @@
 //
-//  YTSetIntervalViewController.m
+//  YTSetFirstBellViewController.m
 //  YourTurn
 //
-//  Created by Masashi Ono on 09/06/27.
+//  Created by Masashi Ono on 09/07/18.
 //  Copyright (c) 2009, Masashi Ono
 //  All rights reserved.
 //
 
-#import "YTSetIntervalViewController.h"
+#import "YTSetFirstBellViewController.h"
 #import "YTSwitchCell.h"
 #import "YTTimePickerView.h"
 #import "YTUserDefaults.h"
@@ -15,7 +15,7 @@
 #define _SECTION_INPUT_ENABLE 0
 #define _SECTION_INPUT_TIME 1
 
-@implementation YTSetIntervalViewController
+@implementation YTSetFirstBellViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -34,16 +34,16 @@
     self.tableView.scrollEnabled = NO;
     self.tableView.canCancelContentTouches = NO;
     self.tableView.delaysContentTouches = NO;
-    self.title = NSLocalizedString(@"Intermission settings", @"Title of the intermission settings view");
+    self.title = NSLocalizedString(@"First bell settings", @"Title of the first bell settings view");
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
     enableCell = [[YTSwitchCell alloc] initWithFrame:CGRectZero reuseIdentifier:nil];
-    enableCell.label.text = NSLocalizedString(@"Enable intermission", @"Label of the cell in the intermission settings view");
-    enableCell.switchCondition = [defaults boolForKey:USERDEFAULTS_INTERMISSION_ENABLED_KEY];
+    enableCell.label.text = NSLocalizedString(@"Enable first bell", @"Label of the cell in the first bell settings view");
+    enableCell.switchCondition = [defaults boolForKey:USERDEFAULTS_FIRSTBELL_ENABLED_KEY];
     
     // Initialize time picker with a previously selected value
     timePicker = [[YTTimePickerView alloc] initWithFrame:CGRectZero];
-    timePicker.time = [defaults integerForKey:USERDEFAULTS_INTERMISSION_DURATION_KEY];
+    timePicker.time = [defaults integerForKey:USERDEFAULTS_FIRSTBELL_TIMER_BEFORETURNEND_KEY];
     timePicker.timePickerViewDelegate = self;
     [timePicker selectRowWithCurrentTime];
     self.tableView.tableFooterView = timePicker;
@@ -62,8 +62,8 @@
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSInteger time = (timePicker.time == 0) ? 1 : timePicker.time;
-    [defaults setBool:enableCell.switchCondition forKey:USERDEFAULTS_INTERMISSION_ENABLED_KEY];
-    [defaults setInteger:time forKey:USERDEFAULTS_INTERMISSION_DURATION_KEY];
+    [defaults setBool:enableCell.switchCondition forKey:USERDEFAULTS_FIRSTBELL_ENABLED_KEY];
+    [defaults setInteger:time forKey:USERDEFAULTS_FIRSTBELL_TIMER_BEFORETURNEND_KEY];
 }
 
 #pragma mark Table view methods
@@ -91,11 +91,11 @@
     switch (section)
     {
         case _SECTION_INPUT_ENABLE:
-            return NSLocalizedString(@"Intermission between attendees",
-                                     @"Section header of the intermission settings view");
+            return NSLocalizedString(@"Ring first bell",
+                                     @"Section header of the first bell settings view");
         case _SECTION_INPUT_TIME:
-            return NSLocalizedString(@"Intermission duration",
-                                     @"Section header of the intermission settings view");
+            return NSLocalizedString(@"Time before turn ends",
+                                     @"Section header of the first bell settings view");
         default:
             return nil;
     }

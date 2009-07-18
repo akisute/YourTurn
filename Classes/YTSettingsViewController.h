@@ -14,9 +14,16 @@
 
 
 @interface YTSettingsViewController : UITableViewController {
+    // Session section cells
     YTSwitchCell *enableLandscapeModeCell;
     YTSelectionCell *soundTurnEndSettingsCell;
+    
+    // Intermission section cells
     YTSelectionCell *intermissionSettingsCell;
+    
+    // First bell section cells
+    YTSelectionCell *firstBellSettingsCell;
+    YTSelectionCell *soundFirstBellSettingsCell;
 }
 
 @end

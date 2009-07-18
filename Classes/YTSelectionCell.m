@@ -53,8 +53,8 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
-    label.frame = CGRectMake(25, 12, 140, 24);
-    selectionLabel.frame = CGRectMake(140, 12, 130, 24);
+    label.frame = CGRectMake(25, 12, 170, 24);
+    selectionLabel.frame = CGRectMake(170, 12, 110, 24);
 }
 
 @end

@@ -53,7 +53,7 @@
     nameCell.value = nameCellValue;
     nameCell.placeholder = NSLocalizedString(@"Required", @"Placeholder for the name input cell");
     nameCell.delegate = self;
-    (editingAttendee) ? nil : [nameCell focus:self];
+    (editingAttendee) ? nil : [nameCell performSelector:@selector(focus:) withObject:self afterDelay:0.5];
     
     // Initialize time picker with a previously selected value
     timePicker = [[YTTimePickerView alloc] initWithFrame:CGRectZero];

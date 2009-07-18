@@ -12,57 +12,39 @@
 
 static NSUInteger _instanceCount = 0;
 
+
 @implementation YTSound
 
-#pragma mark properties
-
 @synthesize instanceId;
-@synthesize fileId;
-@synthesize fileName;
-@synthesize fileExtension;
+@synthesize soundId;
 @synthesize displayName;
 
 - (NSString *)displayName
 {
-    // Use fileId instead of displayName if no displayName is available
-    return (displayName) ? displayName : fileId;
+    return (displayName) ? displayName : soundId;
 }
 
-#pragma mark init, dealloc, memory management
-
-- (id)initWithId:(NSString *)aFileId fileName:(NSString *)aFileName fileExtension:(NSString *)aFileExtension
+- (id)initWithId:(NSString *)aSoundId
 {
     if (self = [super init])
     {
         instanceId = _instanceCount++;
-        fileId = [aFileId retain];
-        fileName = [aFileName retain];
-        fileExtension = [aFileExtension retain];
-        if (fileName && fileExtension)
-        {
-            NSString *audioPath = [[NSBundle mainBundle] pathForResource:fileName ofType:fileExtension];
-            NSURL *audioURL = [NSURL fileURLWithPath:audioPath];
-            LOG(@"Creating the sound object from file: %d", audioURL);
-            OSStatus status = AudioServicesCreateSystemSoundID((CFURLRef)audioURL, &soundId);
-            LOG(@"AudioServicesCreateSystemSoundID result=%d", status);
-        }
+        soundId = [aSoundId retain];
+        displayName = nil;
     }
     return self;
 }
 
 - (void)dealloc
 {
-    [fileId release];
-    [fileName release];
-    [fileExtension release];
+    [displayName release];
+    [soundId release];
     [super dealloc];
 }
 
-#pragma mark other methods
-
+/*! Override this method to play the sound */
 - (void)play
 {
-    AudioServicesPlaySystemSound(soundId);
 }
 
 - (NSComparisonResult)compare:(YTSound *)aSound
@@ -79,6 +61,54 @@ static NSUInteger _instanceCount = 0;
     {
         return NSOrderedDescending;
     }
+}
+
+@end
+
+
+@implementation YTFileSound
+
+@synthesize fileName;
+@synthesize fileExtension;
+
+- (id)initWithId:(NSString *)aSoundId fileName:(NSString *)aFileName fileExtension:(NSString *)aFileExtension
+{
+    if (self = [super initWithId:aSoundId])
+    {
+        fileName = [aFileName retain];
+        fileExtension = [aFileExtension retain];
+        if (fileName && fileExtension)
+        {
+            NSString *audioPath = [[NSBundle mainBundle] pathForResource:fileName ofType:fileExtension];
+            NSURL *audioURL = [NSURL fileURLWithPath:audioPath];
+            LOG(@"Creating the sound object from file: %d", audioURL);
+            OSStatus status = AudioServicesCreateSystemSoundID((CFURLRef)audioURL, &systemSoundId);
+            LOG(@"AudioServicesCreateSystemSoundID result=%d", status);
+        }
+    }
+    return self;
+}
+
+- (void)dealloc
+{
+    [fileName release];
+    [fileExtension release];
+    [super dealloc];
+}
+
+- (void)play
+{
+    AudioServicesPlaySystemSound(systemSoundId);
+}
+
+@end
+
+
+@implementation YTVibrationSound
+
+- (void)play
+{
+    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
 }
 
 @end

@@ -17,7 +17,8 @@
 #import "YTUserDefaults.h"
 #import "NSString+YourTurn.h"
 
-#define TIME_INTERVAL_ANIMATION 1.0
+#define TIME_INTERVAL_ANIMATION_TURNEND 1.0
+#define TIME_INTERVAL_ANIMATION_PULSE 0.3
 #define TIME_INTERVAL_TIMER 1.0
 #define SWIPE_HORIZONTAL 100.0
 #define SWIPE_VERTICAL 100.0
@@ -33,6 +34,8 @@
 - (void)loadIntermission;
 /*! Set current view mode to full screen (YES) or normal (NO) with animation. */
 - (void)fullScreenMode:(BOOL)mode animated:(BOOL)animated;
+/*! Rings first bell, if first bell is enabled in settings. */
+- (void)ringFirstBell;
 @end
 
 @implementation YTYourTurnViewController
@@ -96,7 +99,7 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    return [defaults boolForKey:USERDEFAULTS_GRAPHIC_LANDSCAPEENABLED_KEY];
+    return [defaults boolForKey:USERDEFAULTS_SESSION_LANDSCAPEENABLED_KEY];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -179,12 +182,18 @@
 - (void)timerFired
 {
     time -= 1;
+    firstBellTime -= 1;
+    LOG(@"firstbell = %d", firstBellTime);
     if (time <= 0)
     {
         [self endTurn:self];
     }
     else
     {
+        if (firstBellTime == 0)
+        {
+            [self ringFirstBell];
+        }
         self.timerLabel.text = [NSString stringColonFormatWithAllottedTime:time];
     }
 }
@@ -204,11 +213,11 @@
         [queue endCurrentTurn];
         [self loadCurrentAttendee];
     }
-    [self setTimerWithInterval:TIME_INTERVAL_ANIMATION + TIME_INTERVAL_TIMER];
+    [self setTimerWithInterval:TIME_INTERVAL_ANIMATION_TURNEND + TIME_INTERVAL_TIMER];
     
     // Animations
     [UIView beginAnimations:@"endTurn" context:NULL];
-    [UIView setAnimationDuration:TIME_INTERVAL_ANIMATION];
+    [UIView setAnimationDuration:TIME_INTERVAL_ANIMATION_TURNEND];
     UIViewAnimationTransition transition = (swipeDirection == SWIPE_LEFT)
     ? UIViewAnimationTransitionFlipFromRight : UIViewAnimationTransitionFlipFromLeft;
     swipeDirection = SWIPE_NO;
@@ -216,7 +225,7 @@
     [UIView commitAnimations];
     
     // Sounds
-    YTSound *sound = [[YTSoundTypes instance] soundForId:[defaults stringForKey:USERDEFAULTS_SOUND_TURNEND_KEY]];
+    YTSound *sound = [[YTSoundTypes instance] soundForId:[defaults stringForKey:USERDEFAULTS_SESSION_SOUND_TURNEND_KEY]];
     [sound play];
 }
 
@@ -236,10 +245,15 @@
     CGFloat initialColor[4] = {0.33, 0.8, 0.6, 1.0};
     CGFloat endColor[4] = {0.00, 0.8, 0.6, 1.0};
     [backgroundView setTimerWithAllottedTime:allottedTime
-                                        wait:TIME_INTERVAL_ANIMATION
+                                        wait:TIME_INTERVAL_ANIMATION_TURNEND
                                 initialColor:initialColor
                                     endColor:endColor
                                     gradient:YES];
+    
+    // first bell settings
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    firstBellTime = ([defaults boolForKey:USERDEFAULTS_FIRSTBELL_ENABLED_KEY])
+    ? (allottedTime - [defaults integerForKey:USERDEFAULTS_FIRSTBELL_TIMER_BEFORETURNEND_KEY]) : -1;
 }
 
 - (void)loadIntermission
@@ -258,10 +272,13 @@
     CGFloat initialColor[4] = {0.00, 1.0, 0.0, 1.0};
     CGFloat endColor[4] = {0.00, 1.0, 0.0, 1.0};
     [backgroundView setTimerWithAllottedTime:allottedTime
-                                        wait:TIME_INTERVAL_ANIMATION
+                                        wait:TIME_INTERVAL_ANIMATION_TURNEND
                                 initialColor:initialColor
                                     endColor:endColor
                                     gradient:NO];
+    
+    // first bell settings, Don't ring first bell while in intermission
+    firstBellTime = -1;
 }
 
 - (void)fullScreenMode:(BOOL)mode animated:(BOOL)animated
@@ -284,6 +301,41 @@
     {
         [UIView commitAnimations];
     }
+}
+
+- (void)ringFirstBell
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    // Ring only if enabled
+    if ([defaults stringForKey:USERDEFAULTS_FIRSTBELL_ENABLED_KEY])
+    {
+        // Animate the timer label (hop!)
+        [UIView beginAnimations:@"ringFirstBell" context:NULL];
+        [UIView setAnimationDuration:TIME_INTERVAL_ANIMATION_PULSE];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        [UIView setAnimationDelegate:self];
+        [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
+        CGRect frame = timerLabel.frame;
+        frame.origin.y -= 30.0;
+        timerLabel.frame = frame;
+        [UIView commitAnimations];
+        
+        // Play the specified sound
+        YTSound *sound = [[YTSoundTypes instance] soundForId:[defaults stringForKey:USERDEFAULTS_FIRSTBELL_SOUND_KEY]];
+        [sound play];
+    }
+}
+
+- (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context
+{
+    // Animate the timer label back to the original position
+    [UIView beginAnimations:@"ringFirstBellEnd" context:NULL];
+    [UIView setAnimationDuration:TIME_INTERVAL_ANIMATION_PULSE];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    CGRect frame = timerLabel.frame;
+    frame.origin.y += 30.0;
+    timerLabel.frame = frame;
+    [UIView commitAnimations];
 }
 
 @end

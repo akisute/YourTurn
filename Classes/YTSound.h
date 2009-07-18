@@ -13,21 +13,36 @@
 
 @interface YTSound : NSObject {
     NSUInteger instanceId;
-    NSString *fileId;
-    NSString *fileName;
-    NSString *fileExtension;
+    NSString *soundId;
     NSString *displayName;
-    SystemSoundID soundId;
 }
 
 @property (nonatomic, readonly) NSUInteger instanceId;
-@property (nonatomic, readonly) NSString *fileId;
-@property (nonatomic, readonly) NSString *fileName;
-@property (nonatomic, readonly) NSString *fileExtension;
+@property (nonatomic, readonly) NSString *soundId;
 @property (nonatomic, retain) NSString *displayName;
 
-- (id)initWithId:(NSString *)aSoundId fileName:(NSString *)aFileName fileExtension:(NSString *)aFileExtension;
+- (id)initWithId:(NSString *)aSoundId;
 - (void)play;
 - (NSComparisonResult)compare:(YTSound *)aSound;
 
+@end
+
+
+@interface YTFileSound : YTSound {
+    NSString *fileId;
+    NSString *fileName;
+    NSString *fileExtension;
+    SystemSoundID systemSoundId;
+}
+
+@property (nonatomic, readonly) NSString *fileName;
+@property (nonatomic, readonly) NSString *fileExtension;
+
+- (id)initWithId:(NSString *)aSoundId fileName:(NSString *)aFileName fileExtension:(NSString *)aFileExtension;
+
+@end
+
+
+@interface YTVibrationSound : YTSound {
+}
 @end
