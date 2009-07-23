@@ -20,6 +20,7 @@
 @property (nonatomic, readonly) NSUInteger instanceId;
 @property (nonatomic, readonly) NSString *soundId;
 @property (nonatomic, retain) NSString *displayName;
+@property (nonatomic, readonly) BOOL available;
 
 - (id)initWithId:(NSString *)aSoundId;
 - (void)play;
@@ -33,6 +34,7 @@
     NSString *fileName;
     NSString *fileExtension;
     SystemSoundID systemSoundId;
+    OSStatus status;
 }
 
 @property (nonatomic, readonly) NSString *fileName;

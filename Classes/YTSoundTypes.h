@@ -22,6 +22,7 @@
 + (YTSoundTypes *)newInstance;
 - (YTSound *)soundForIndex:(NSUInteger)index;
 - (YTSound *)soundForId:(NSString *)fileId;
+- (void)addSound:(YTSound *)aSound;
 - (void)load;
 
 @end

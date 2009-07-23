@@ -24,6 +24,12 @@ static NSUInteger _instanceCount = 0;
     return (displayName) ? displayName : soundId;
 }
 
+- (BOOL)available
+{
+    // YTSound instance is always available to play
+    return YES;
+}
+
 - (id)initWithId:(NSString *)aSoundId
 {
     if (self = [super init])
@@ -71,6 +77,12 @@ static NSUInteger _instanceCount = 0;
 @synthesize fileName;
 @synthesize fileExtension;
 
+- (BOOL)available
+{
+    // if OSStatus != 0, some errors must be happen
+    return (status == 0);
+}
+
 - (id)initWithId:(NSString *)aSoundId fileName:(NSString *)aFileName fileExtension:(NSString *)aFileExtension
 {
     if (self = [super initWithId:aSoundId])
@@ -81,9 +93,7 @@ static NSUInteger _instanceCount = 0;
         {
             NSString *audioPath = [[NSBundle mainBundle] pathForResource:fileName ofType:fileExtension];
             NSURL *audioURL = [NSURL fileURLWithPath:audioPath];
-            LOG(@"Creating the sound object from file: %d", audioURL);
-            OSStatus status = AudioServicesCreateSystemSoundID((CFURLRef)audioURL, &systemSoundId);
-            LOG(@"AudioServicesCreateSystemSoundID result=%d", status);
+            status = AudioServicesCreateSystemSoundID((CFURLRef)audioURL, &systemSoundId);
         }
     }
     return self;
@@ -91,6 +101,7 @@ static NSUInteger _instanceCount = 0;
 
 - (void)dealloc
 {
+    AudioServicesDisposeSystemSoundID(systemSoundId);
     [fileName release];
     [fileExtension release];
     [super dealloc];
@@ -105,6 +116,14 @@ static NSUInteger _instanceCount = 0;
 
 
 @implementation YTVibrationSound
+
+- (BOOL)available
+{
+    // Unavailable for iPod Touch
+    NSString *deviceModel = [UIDevice currentDevice].model;
+    NSRange range = [deviceModel rangeOfString:@"iPod touch" options:NSCaseInsensitiveSearch];
+    return range.location == NSNotFound;
+}
 
 - (void)play
 {
